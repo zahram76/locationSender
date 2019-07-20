@@ -1,14 +1,26 @@
 import React from "react";
-import {StyleSheet, View, Text, TouchableOpacity, Platform, PermissionsAndroid, AppRegistry} from "react-native";
+import {StyleSheet,
+  View, 
+  Text, 
+  TouchableOpacity, 
+  Platform, 
+  PermissionsAndroid, 
+  AppRegistry, 
+  ImageBackground,
+  Dimensions,
+  TextInput} from "react-native";
 import SmsAndroid  from 'react-native-get-sms-android';
 import SmsListener from 'react-native-android-sms-listener';
 import MapView, {Marker, AnimatedRegion, Polyline} from "react-native-maps";
 import haversine from "haversine";
+import Login from './login.js';
 
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = 0.01;
 const LATITUDE = 0;
 const LONGITUDE = 0;
+//
+const {width : WIDTH} = Dimensions.get('window'); 
 
 export async function requestPermission() {
   try {
@@ -137,7 +149,29 @@ class AnimatedMarkers extends React.Component {
  
   render() {
     return (
-      <View style={styles.container}>
+      <ImageBackground source={require('./images/background.png')} style={styles.backcontainer}>
+        <View>
+          <TextInput 
+            style={styles.input}
+            placeholder={'username'}
+            placeholderTextColor={'rgba(255,255,255,255)'}
+            underlineColorAndroid='transparent'
+            >
+          </TextInput>
+          <TextInput 
+            style={styles.input}
+            placeholder={'password'}
+            placeholderTextColor={'rgba(255,255,255,255)'}
+            underlineColorAndroid='transparent'
+            >
+          </TextInput>
+        </View>
+      </ImageBackground>
+    );
+  }
+}
+
+/* <View style={styles.container}>
         <MapView
           style={styles.map}
           loadingEnabled
@@ -162,12 +196,16 @@ class AnimatedMarkers extends React.Component {
              <Text> latitude : {this.state.coords.latitude} </Text> 
              <Text> longitude : {this.state.coords.longitude} </Text> 
         </View> 
-      </View>
-    );
-  }
-}
-
+      </View>*/
 const styles = StyleSheet.create({
+  backcontainer:{
+    flex: 1,
+        alignItems: "center",
+        width: null,
+        height: null,
+        justifyContent: "center",
+        backgroundColor: '#ffffff',
+  },
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
@@ -197,6 +235,17 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginVertical: 20,
     backgroundColor: "transparent"
+  },
+  input:{
+    width: WIDTH-55,
+    height: 45,
+    borderRadius: 25,
+    fontSize: 16,
+    paddingLeft: 45,
+    backgroundColor: 'rgba(0,0,0,0.25)',
+    color: 'rgba(255,255,255,255)',
+    marginBottom: 7,
+    marginHorizontal: 25
   }
 });
 
