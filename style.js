@@ -13,7 +13,7 @@ import {StyleSheet,
 const {width : WIDTH} = Dimensions.get('window'); 
 const {height : HEIGHT} = Dimensions.get('window'); 
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
     container: {
         ...StyleSheet.absoluteFillObject,
         justifyContent: "flex-end",

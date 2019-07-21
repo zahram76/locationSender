@@ -1,31 +1,31 @@
-import React from "react";
-import {StyleSheet,
-  View, 
-  Text, 
-  TouchableOpacity, 
-  Platform, 
-  PermissionsAndroid, 
-  //AppRegistry, 
-  Dimensions,
-  TextInput,
-  Image,
-  ScrollView} from "react-native";
-import SmsListener from 'react-native-android-sms-listener';
-import MapView, {Marker, AnimatedRegion, Polyline} from "react-native-maps";
-import haversine from "haversine";
-
+import{AppRegistry} from "react-native";
 import {
   createStackNavigator,
   createAppContainer
 } from 'react-navigation';
-import Login from './Login.js';
-import ShowOnMap from './ShowOnMap.js';
+import Home from './Home.js';
+import Map from './Map.js';
+import SignUp from './SignUp.js';
 
 const AppNavigator = createStackNavigator({
-  Login: { screen: Login },
-  ShowOnMap: { screen: ShowOnMap},
+  Home: { screen: Home ,
+    navigationOptions: {
+      header: null, //this will hide the header
+    },
+  },
+  SignUp: { screen: SignUp ,
+    navigationOptions: {
+      header: null,
+    },
+  },
+  Map: { screen: Map,
+    navigationOptions: {
+      title: 'Map',
+    },
+  },
 });
 
 const App = createAppContainer(AppNavigator);
 export default App;
+AppRegistry.registerComponent('sender', () => App);
 

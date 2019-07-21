@@ -5,7 +5,6 @@ import {StyleSheet,
   TouchableOpacity, 
   Platform, 
   PermissionsAndroid, 
-  //AppRegistry, 
   Dimensions,
   TextInput,
   Image,
@@ -48,7 +47,7 @@ export async function requestPermission() {
   }
 };
 
-export default class ShowOnMap extends React.Component {
+export default class Map  extends React.Component {
   constructor(props) {
     super(props);
 
@@ -152,6 +151,7 @@ export default class ShowOnMap extends React.Component {
             <MapView
             style={styles.map}
             loadingEnabled
+            enableZoomControl={true}
             region={this.getMapRegion()}
             >
                 <Polyline coordinates={this.state.routeCoordinates} strokeWidth={5} />
@@ -160,7 +160,9 @@ export default class ShowOnMap extends React.Component {
                     this.marker = marker;
                     }}
                     coordinate= {this.state.coordinate}
-                />
+                >
+                  <Image style={styles.MarkerImage} source={require('./images/cartoon-marker-48.png')}/>
+                </Marker.Animated>
             </MapView>
             <View style={styles.buttonContainer}>
             <TouchableOpacity style={[styles.bubble, styles.button]}
@@ -210,7 +212,8 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     backgroundColor: "transparent"
   },
+  MarkerImage: {
+    width: 40,
+    height: 50,
+  }
 });
-
-//export default AnimatedMarkers;
-//AppRegistry.registerComponent('sender', () => App);
