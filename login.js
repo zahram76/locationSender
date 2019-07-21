@@ -1,5 +1,3 @@
-'use strict';
-
 import React, {Component} from "react";
 import {StyleSheet,
     View, 
@@ -9,8 +7,10 @@ import {StyleSheet,
     Dimensions,
     TextInput,
     Image,
-    ScrollView} from "react-native";
+    ScrollView,
+    Button} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+//import styles from './style.js';
 
 const {width : WIDTH} = Dimensions.get('window'); 
 const {height : HEIGHT} = Dimensions.get('window'); 
@@ -34,50 +34,50 @@ export default class Login extends Component {
       }
 
     render() {
-        return (
-            <View style={styles.scrolStyle}>
-                <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
-                    <ImageBackground source={require('./images/background.png')} style={styles.backcontainer}>
-                        
-                        <View style={styles.logoContainer}>
-                        <Image source={require('./images/logo.png')} style={styles.logo}/>
-                        </View>
-                        <View style={styles.inputContainer}>
-                        <Icon name={'ios-person'} size={18} color={'gray'}
-                            style={styles.inputIcon}/>
-                        <TextInput 
-                            style={styles.input}
-                            placeholder={'Username'}
-                            placeholderTextColor={'rgba(255,255,255,255)'}
-                            underlineColorAndroid='transparent'
-                            />
-                        </View>
-                        <View style={styles.inputContainer}>
-                        <Icon name={'ios-lock'} size={18} color={'gray'}
-                            style={styles.inputIcon}/>
-                        <TextInput 
-                            style={styles.input}
-                            placeholder={'Password'}
-                            secureTextEntry={this.state.showPass}
-                            placeholderTextColor={'rgba(255,255,255,255)'}
-                            underlineColorAndroid='transparent'
-                            />
-                            <TouchableOpacity style={styles.btnEye}
-                            onPress={this.showPass.bind(this)}>
-                            <Icon name={this.state.press==false ? 'ios-eye' : 'ios-eye-off'} 
-                                size={28} color={'gray'}/>
-                            </TouchableOpacity>
-                        </View>
-                        <TouchableOpacity style={styles.btnLogin}>
-                        <Text style={styles.text}>Login</Text>
-                        </TouchableOpacity>
-                        <View style={styles.imageContainer}>
-                        <Image source={require('./images/gmother.png')} style={styles.grandmother}/>
-                        <Image source={require('./images/gfather.png')} style={styles.grandfather}/>
-                        </View>
-                    </ImageBackground>
+        return ( 
+          <View style={styles.scrolStyle}>
+            <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
+              <ImageBackground source={require('./images/background.png')} style={styles.backcontainer}> 
+                <View style={styles.logoContainer}>
+                  <Image source={require('./images/logo.png')} style={styles.logo}/>
+                </View>
+                  <View style={styles.inputContainer}>
+                    <Icon name={'ios-person'} size={18} color={'gray'}
+                      style={styles.inputIcon}/>
+                    <TextInput 
+                      style={styles.input}
+                      placeholder={'Username'}
+                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      underlineColorAndroid='transparent'
+                     />
+                  </View>
+                    <View style={styles.inputContainer}>
+                      <Icon name={'ios-lock'} size={18} color={'gray'}
+                        style={styles.inputIcon}/>
+                      <TextInput 
+                        style={styles.input}
+                        placeholder={'Password'}
+                        secureTextEntry={this.state.showPass}
+                        placeholderTextColor={'rgba(255,255,255,255)'}
+                        underlineColorAndroid='transparent'
+                      />
+                      <TouchableOpacity style={styles.btnEye}
+                        onPress={this.showPass.bind(this)}>
+                        <Icon name={this.state.press==false ? 'ios-eye' : 'ios-eye-off'} 
+                          size={28} color={'gray'}/>
+                      </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity style={styles.btnLogin}
+                      onPress={()=> this.props.navigation.navigate('ShowOnMap')}>
+                      <Text style={styles.text}>Login</Text>
+                    </TouchableOpacity>
+                    <View style={styles.imageContainer}>
+                      <Image source={require('./images/gmother.png')} style={styles.grandmother}/>
+                      <Image source={require('./images/gfather.png')} style={styles.grandfather}/>
+                    </View>
+                  </ImageBackground>
                 </ScrollView>
-            </View>
+             </View>
         );
     }
 }
