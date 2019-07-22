@@ -1,14 +1,33 @@
+import React, {Component} from "react";
 import{AppRegistry} from "react-native";
 import {
   createStackNavigator,
-  createAppContainer
+  createAppContainer,
+  createSwitchNavigator
 } from 'react-navigation';
-import Home from './Home.js';
-import Map from './Map.js';
-import SignUp from './SignUp.js';
+import SignIn from './screens/SignIn.js';
+import Map from './screens/Map.js';
+import SignUp from './screens/SignUp.js';
+import Profile from './screens/Profile.js';
+import ForgotPass from './screens/ForgotPass.js';
+import AuthLoadingScreen from './screens/AuthLoading.js';
 
-const AppNavigator = createStackNavigator({
-  Home: { screen: Home ,
+const AppStack = createStackNavigator({
+  Profile: {
+    screen: Profile,
+    navigationOptions: {
+      title: 'Profile',
+    },
+   },
+  Map: {
+    screen: Map,
+    navigationOptions: {
+      title: 'Map',
+    },
+  },
+});
+const AuthStack = createStackNavigator({ 
+  SignIn: { screen: SignIn ,
     navigationOptions: {
       header: null, //this will hide the header
     },
@@ -18,14 +37,22 @@ const AppNavigator = createStackNavigator({
       header: null,
     },
   },
-  Map: { screen: Map,
+  ForgotPass: { screen: ForgotPass ,
     navigationOptions: {
-      title: 'Map',
+      title: 'ForgotPass',
     },
   },
-});
+ });
 
-const App = createAppContainer(AppNavigator);
-export default App;
+export default createAppContainer(createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: AppStack,
+    Auth: AuthStack,
+  },
+  {
+    initialRouteName: 'AuthLoading',
+  }
+));
+
 AppRegistry.registerComponent('sender', () => App);
-

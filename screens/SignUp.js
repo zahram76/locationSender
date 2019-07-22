@@ -10,6 +10,7 @@ import {StyleSheet,
     ScrollView,
     Button} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import AsyncStorage from '@react-native-community/async-storage';
 //import styles from './style.js';
 
 const {width : WIDTH} = Dimensions.get('window'); 
@@ -22,6 +23,11 @@ export default class SignUp extends Component {
         this.state={
             showPass: true,
             press: false,
+            username: '',
+            password: '',
+            rePassword: '',
+            src_phone: '',
+            dest_phone: '',
         };
     }
 
@@ -34,21 +40,27 @@ export default class SignUp extends Component {
       }
 
     render() {
+      // const { navigation } = this.props;
+      // this.setState.username = navigation.getParam('username', '');
+      // this.setState.password = navigation.getParam('password', '');
+      // for get param from another page
         return ( 
           <View style={styles.scrolStyle}>
             <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
-              <ImageBackground source={require('./images/background.png')} style={styles.backcontainer}> 
+              <ImageBackground source={require('../images/background.png')} style={styles.backcontainer}> 
                 <View style={styles.logoContainer}>
-                  <Image source={require('./images/logo.png')} style={styles.logo}/>
+                  <Image source={require('../images/logo.png')} style={styles.logo}/>
                 </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-person'} size={18} color={'gray'}
                       style={styles.inputIcon}/>
                     <TextInput 
                       style={styles.input}
+                      value={this.state.username}
                       placeholder={'Username'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
+                      onChangeText={(txt => this.setState({username: txt}))}
                      />
                   </View>
                   <View style={styles.inputContainer}>
@@ -59,7 +71,8 @@ export default class SignUp extends Component {
                       placeholder={'Password'}
                       secureTextEntry={this.state.showPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
-                      underlineColorAndroid='transparent'
+                      underlineColorAndroid='transparent' 
+                      onChangeText={(txt => this.setState({password: txt}))}
                     />
                     <TouchableOpacity style={styles.btnEye}
                       onPress={this.showPass.bind(this)}>
@@ -67,19 +80,75 @@ export default class SignUp extends Component {
                         size={28} color={'gray'}/>
                     </TouchableOpacity>
                   </View>
+                  <View style={styles.inputContainer}>
+                    <Icon name={'ios-lock'} size={18} color={'gray'}
+                      style={styles.inputIcon}/>
+                    <TextInput 
+                      style={styles.input}
+                      placeholder={'Re Password'}
+                      secureTextEntry={this.state.showPass}
+                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      underlineColorAndroid='transparent'
+                      onChangeText={txt => this.setState({rePassword: txt})}
+                    />
+                    <TouchableOpacity style={styles.btnEye}
+                      onPress={this.showPass.bind(this)}>
+                      <Icon name={this.state.press==false ? 'ios-eye' : 'ios-eye-off'} 
+                        size={28} color={'gray'}/>
+                    </TouchableOpacity>
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <Icon name={'md-phone-portrait'} size={18} color={'gray'}
+                      style={styles.inputIcon}/>
+                    <TextInput 
+                      style={styles.input}
+                      placeholder={'src phone number'}
+                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      underlineColorAndroid='transparent'
+                      onChangeText={txt => this.setState({src_phone: txt})}
+                     />
+                  </View>
+                  <View style={styles.inputContainer}>
+                    <Icon name={'md-phone-portrait'} size={18} color={'gray'}
+                      style={styles.inputIcon}/>
+                    <TextInput 
+                      style={styles.input}
+                      placeholder={'dest phone number'}
+                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      underlineColorAndroid='transparent'
+                      onChangeText={txt => this.setState({dest_phone: txt})}
+                     />
+                  </View>
                   <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnLogin}
-                      onPress={()=> this.props.navigation.navigate('Map')}>
-                      <Text style={styles.text}>SIGN IN</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnLogin}
-                      onPress={()=> this.props.navigation.navigate('Map')}>
+                      onPress={()=> {
+                        if (this.state.password == ''
+                          || this.state.rePassword == ''
+                          || this.state.username == ''
+                          || this.state.src_phone == ''
+                          || this.state.dest_phone == ''){
+                            alert("Please fill the blanks!")
+                        }
+                        else if (this.state.rePassword != this.state.password) {
+                          alert("Does not match!")
+                        } else {
+                          alert("you signed up! :))")
+                          try {
+                             AsyncStorage.setItem('username', this.state.username)
+                             AsyncStorage.setItem('pasword', this.state.password)
+                          } catch (e) {
+                            // saving error
+                            alert("can not to save item.");
+                          }
+                          this.props.navigation.navigate('Profile')
+                        }
+                       }}>
                       <Text style={styles.text}>SIGN UP</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={styles.imageContainer}>
-                    <Image source={require('./images/gmother.png')} style={styles.grandmother}/>
-                    <Image source={require('./images/gfather.png')} style={styles.grandfather}/>
+                    <Image source={require('../images/gmother.png')} style={styles.grandmother}/>
+                    <Image source={require('../images/gfather.png')} style={styles.grandfather}/>
                   </View>
                 </ImageBackground>
               </ScrollView>
@@ -152,20 +221,20 @@ const styles = StyleSheet.create({
         marginBottom: 30
       },
       imageContainer: {
-        marginTop: 60,
+        marginTop: 10,
         justifyContent: "flex-end",
         flexDirection: "row-reverse",
         alignContent: "space-between",
       },
       grandmother: {
         marginTop: 26,
-        width: 150,
-        height: 225,
+        width: 90,
+        height: 165,
         position: "relative",
       },
       grandfather: {
-        width: 170,
-        height: 255,
+        width: 110,
+        height: 195,
         position: "relative",
       },
 });

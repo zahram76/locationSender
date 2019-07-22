@@ -10,19 +10,25 @@ import {StyleSheet,
     ScrollView,
     Button} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import AsyncStorage from '@react-native-community/async-storage';
+
 //import styles from './style.js';
 
 const {width : WIDTH} = Dimensions.get('window'); 
 const {height : HEIGHT} = Dimensions.get('window'); 
 
-export default class Home extends Component {
+export default class SignIn extends Component {
     constructor(props) {
         super(props);
 
         this.state={
             showPass: true,
             press: false,
-        };
+            TextInput_Username: '',
+            TextInput_Pass: '',
+            username: '',     
+            password: ''  
+          };
     }
 
     showPass = () => {
@@ -33,19 +39,39 @@ export default class Home extends Component {
         }
       }
 
+    // setUserPass = () => {
+
+    // }
+
+    // signInAsync = async () => {
+    //   await AsyncStorage.setItem('userToken', 'abc');
+    //   this.props.navigation.navigate('App');
+    // };
+
+    // storeData = async () => {
+    //   try {
+    //     await AsyncStorage.setItem('@username', TextInput.name)
+    //   } catch (e) {
+    //     // saving error
+    //     alert("can not to save item.");
+    //   }
+    // }
+
+
     render() {
         return ( 
           <View style={styles.scrolStyle}>
             <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
-              <ImageBackground source={require('./images/background.png')} style={styles.backcontainer}> 
+              <ImageBackground source={require('../images/background.png')} style={styles.backcontainer}> 
                 <View style={styles.logoContainer}>
-                  <Image source={require('./images/logo.png')} style={styles.logo}/>
+                  <Image source={require('../images/logo.png')} style={styles.logo}/>
                 </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-person'} size={18} color={'gray'}
                       style={styles.inputIcon}/>
                     <TextInput 
                       style={styles.input}
+                      onChangeText={txt => this.setState({ TextInput_Username: txt })}
                       placeholder={'Username'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
@@ -57,6 +83,7 @@ export default class Home extends Component {
                     <TextInput 
                       style={styles.input}
                       placeholder={'Password'}
+                      onChangeText={txt => this.setState({ TextInput_Pass: txt })}
                       secureTextEntry={this.state.showPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
@@ -69,17 +96,36 @@ export default class Home extends Component {
                   </View>
                   <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnLogin}
-                      onPress={()=> this.props.navigation.navigate('Map')}>
+                      onPress={()=> {
+                        if (this.state.TextInput_Username == ''
+                        || this.state.TextInput_Pass == ''){
+                          alert("Please fill the blanks!")
+                      } else {
+                        this.setState({ username : this.state.TextInput_Username})
+                        this.setState({ pass : this.state.TextInput_Pass})
+                        try {
+                           AsyncStorage.setItem('username', this.state.username)
+                           AsyncStorage.setItem('pasword', this.state.password)
+                        } catch (e) {
+                          // saving error
+                          alert("can not to save item.");
+                        }
+                        alert("you signed in! :))")
+                        this.props.navigation.navigate('App')}}}>
                       <Text style={styles.text}>SIGN IN</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnLogin}
-                      onPress={()=> this.props.navigation.navigate('Map')}>
+                      onPress={()=> {
+                        this.props.navigation.navigate('SignUp'),  {
+                          username: this.state.TextInput_Username,
+                          password: this.state.TextInput_Pass,
+                        }}}>
                       <Text style={styles.text}>SIGN UP</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={styles.imageContainer}>
-                    <Image source={require('./images/gmother.png')} style={styles.grandmother}/>
-                    <Image source={require('./images/gfather.png')} style={styles.grandfather}/>
+                    <Image source={require('../images/gmother.png')} style={styles.grandmother}/>
+                    <Image source={require('../images/gfather.png')} style={styles.grandfather}/>
                   </View>
                 </ImageBackground>
               </ScrollView>
@@ -87,6 +133,7 @@ export default class Home extends Component {
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     backcontainer:{

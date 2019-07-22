@@ -161,12 +161,12 @@ export default class Map  extends React.Component {
                     }}
                     coordinate= {this.state.coordinate}
                 >
-                  <Image style={styles.MarkerImage} source={require('./images/cartoon-marker-48.png')}/>
+                  <Image style={styles.MarkerImage} source={require('../images/cartoon-marker-48.png')}/>
                 </Marker.Animated>
             </MapView>
             <View style={styles.buttonContainer}>
             <TouchableOpacity style={[styles.bubble, styles.button]}
-                onPress={()=> this.props.navigation.navigate('Login')}>
+                onPress={()=> this.props.navigation.navigate('Profile')}>
                 <Text style={styles.bottomBarContent}>
                 {parseFloat(this.state.distanceTravelled).toFixed(2)} km
                 </Text>
