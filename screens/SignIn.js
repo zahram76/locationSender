@@ -39,24 +39,27 @@ export default class SignIn extends Component {
         }
       }
 
-    // setUserPass = () => {
-
-    // }
-
-    // signInAsync = async () => {
-    //   await AsyncStorage.setItem('userToken', 'abc');
-    //   this.props.navigation.navigate('App');
-    // };
-
-    // storeData = async () => {
-    //   try {
-    //     await AsyncStorage.setItem('@username', TextInput.name)
-    //   } catch (e) {
-    //     // saving error
-    //     alert("can not to save item.");
-    //   }
-    // }
-
+    signInOnPress() {
+        if (this.state.TextInput_Username == ''
+        || this.state.TextInput_Pass == ''){
+          alert("Please fill the blanks!")
+      } else {
+        const uname = AsyncStorage.getItem('username')
+        alert(uname)
+        alert(this.state.TextInput_Username)
+        if (this.state.TextInput_Username == uname){
+          this.setState({ username : this.state.TextInput_Username})
+          this.setState({ pass : this.state.TextInput_Pass})
+          alert("you signed in! :))")
+          this.props.navigation.navigate('App')
+        } else {
+          const uname = AsyncStorage.getItem('username');
+        alert(uname)
+        alert(this.state.TextInput_Username)
+          //alert(":( username in incorrect.")
+        }
+      }
+    }
 
     render() {
         return ( 
@@ -96,22 +99,7 @@ export default class SignIn extends Component {
                   </View>
                   <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnLogin}
-                      onPress={()=> {
-                        if (this.state.TextInput_Username == ''
-                        || this.state.TextInput_Pass == ''){
-                          alert("Please fill the blanks!")
-                      } else {
-                        this.setState({ username : this.state.TextInput_Username})
-                        this.setState({ pass : this.state.TextInput_Pass})
-                        try {
-                           AsyncStorage.setItem('username', this.state.username)
-                           AsyncStorage.setItem('pasword', this.state.password)
-                        } catch (e) {
-                          // saving error
-                          alert("can not to save item.");
-                        }
-                        alert("you signed in! :))")
-                        this.props.navigation.navigate('App')}}}>
+                      onPress={this.signInOnPress.bind(this) }>
                       <Text style={styles.text}>SIGN IN</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnLogin}

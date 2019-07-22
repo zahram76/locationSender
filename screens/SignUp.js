@@ -39,6 +39,35 @@ export default class SignUp extends Component {
         }
       }
 
+    sighUpOnPress() {
+        if (this.state.password == ''
+          || this.state.rePassword == ''
+          || this.state.username == ''
+          || this.state.src_phone == ''
+          || this.state.dest_phone == ''){
+            alert("Please fill the blanks!")
+        }
+        else if (this.state.rePassword != this.state.password) {
+          alert("Does not match!")
+        } else {
+          const uname = AsyncStorage.getItem('username')
+          alert(uname)
+          if (this.state.username != uname){
+            try {
+              AsyncStorage.setItem('username', this.state.username)
+              AsyncStorage.setItem('pasword', this.state.password)
+              alert("you signed up! :))")
+              this.props.navigation.navigate('Profile')
+            } catch (e) {
+              // saving error
+              alert("can not to save item.");
+            }
+          } else {
+            alert(":( This username is not available. ")
+          }
+        }
+    }
+
     render() {
       // const { navigation } = this.props;
       // this.setState.username = navigation.getParam('username', '');
@@ -121,28 +150,7 @@ export default class SignUp extends Component {
                   </View>
                   <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnLogin}
-                      onPress={()=> {
-                        if (this.state.password == ''
-                          || this.state.rePassword == ''
-                          || this.state.username == ''
-                          || this.state.src_phone == ''
-                          || this.state.dest_phone == ''){
-                            alert("Please fill the blanks!")
-                        }
-                        else if (this.state.rePassword != this.state.password) {
-                          alert("Does not match!")
-                        } else {
-                          alert("you signed up! :))")
-                          try {
-                             AsyncStorage.setItem('username', this.state.username)
-                             AsyncStorage.setItem('pasword', this.state.password)
-                          } catch (e) {
-                            // saving error
-                            alert("can not to save item.");
-                          }
-                          this.props.navigation.navigate('Profile')
-                        }
-                       }}>
+                      onPress={this.sighUpOnPress.bind(this)}>
                       <Text style={styles.text}>SIGN UP</Text>
                     </TouchableOpacity>
                   </View>
