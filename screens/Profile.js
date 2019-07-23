@@ -4,11 +4,16 @@ import {StyleSheet,
   Text, 
   Button,
 TouchableOpacity} from "react-native";
-//import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Profile  extends React.Component {
   constructor(props) {
     super(props);
+    const { navigation } = this.props;
+    const data = navigation.getParam('saveSession', true);
+    this.state ={
+        saveSession : data,
+    };
   }
 
   render() {
@@ -19,12 +24,13 @@ export default class Profile  extends React.Component {
                 onPress={()=> this.props.navigation.navigate('Map')}>
                     <Text style={styles.text}> Map </Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            <TouchableOpacity style={styles.button}
                 onPress={()=> {
-                    this.props.navigation.navigate('Auth')}}
-                style={styles.button}>
+                    AsyncStorage.clear()
+                    this.props.navigation.navigate('Auth')
+                   }}>
                     <Text style={styles.text}> sign out </Text>
-            </TouchableOpacity>    
+            </TouchableOpacity>   
         </View>
     );
   }

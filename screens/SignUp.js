@@ -19,6 +19,12 @@ const {height : HEIGHT} = Dimensions.get('window');
 export default class SignUp extends Component {
     constructor(props) {
         super(props);
+        // const { navigation } = this.props;
+        // const uname = navigation.getParam('username', '');
+        // const pass = navigation.getParam('password', '');
+        // username: uname,
+        // password: pass,
+      // for get param from another page
 
         this.state={
             showPass: true,
@@ -50,29 +56,19 @@ export default class SignUp extends Component {
         else if (this.state.rePassword != this.state.password) {
           alert("Does not match!")
         } else {
-          const uname = AsyncStorage.getItem('username')
-          alert(uname)
-          if (this.state.username != uname){
-            try {
-              AsyncStorage.setItem('username', this.state.username)
-              AsyncStorage.setItem('pasword', this.state.password)
-              alert("you signed up! :))")
-              this.props.navigation.navigate('Profile')
-            } catch (e) {
-              // saving error
-              alert("can not to save item.");
-            }
-          } else {
-            alert(":( This username is not available. ")
-          }
+          // if this username is not in database
+            // try {
+            //   AsyncStorage.setItem('username', this.state.username)
+            //   this.props.navigation.navigate('App')
+            // } catch (e) {
+            //   alert(e);
+            // } ooooooooorrrrrrr
+            this.props.navigation.push('SignIn')
+            this.props.navigation.navigate('Auth')
         }
     }
 
     render() {
-      // const { navigation } = this.props;
-      // this.setState.username = navigation.getParam('username', '');
-      // this.setState.password = navigation.getParam('password', '');
-      // for get param from another page
         return ( 
           <View style={styles.scrolStyle}>
             <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
@@ -85,11 +81,9 @@ export default class SignUp extends Component {
                       style={styles.inputIcon}/>
                     <TextInput 
                       style={styles.input}
-                      value={this.state.username}
                       placeholder={'Username'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
-                      onChangeText={(txt => this.setState({username: txt}))}
                      />
                   </View>
                   <View style={styles.inputContainer}>

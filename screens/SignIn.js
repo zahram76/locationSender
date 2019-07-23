@@ -11,6 +11,7 @@ import {StyleSheet,
     Button} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from '@react-native-community/async-storage';
+import { CheckBox } from 'react-native-elements'
 
 //import styles from './style.js';
 
@@ -27,7 +28,8 @@ export default class SignIn extends Component {
             TextInput_Username: '',
             TextInput_Pass: '',
             username: '',     
-            password: ''  
+            password: ''  ,
+            checked: true
           };
     }
 
@@ -44,20 +46,18 @@ export default class SignIn extends Component {
         || this.state.TextInput_Pass == ''){
           alert("Please fill the blanks!")
       } else {
-        const uname = AsyncStorage.getItem('username')
-        alert(uname)
-        alert(this.state.TextInput_Username)
-        if (this.state.TextInput_Username == uname){
-          this.setState({ username : this.state.TextInput_Username})
-          this.setState({ pass : this.state.TextInput_Pass})
-          alert("you signed in! :))")
-          this.props.navigation.navigate('App')
-        } else {
-          const uname = AsyncStorage.getItem('username');
-        alert(uname)
-        alert(this.state.TextInput_Username)
-          //alert(":( username in incorrect.")
-        }
+        // if this username and password is in database
+          // this.setState({ username : this.state.TextInput_Username})
+          // this.setState({ password : this.state.TextInput_Pass})
+          if(this.state.checked == true){
+            try {
+              AsyncStorage.setItem('username', this.state.TextInput_Username)// ba thid.state.username kar nemikone
+            }
+            catch(e){
+              alert(e)
+            }
+          }
+          this.props.navigation.navigate('App')       
       }
     }
 
@@ -97,6 +97,16 @@ export default class SignIn extends Component {
                         size={28} color={'gray'}/>
                     </TouchableOpacity>
                   </View>
+                  <View style={styles.checkboxContainer}>
+                  <CheckBox
+                    title='Do you want to save this session ?'
+                    checked={this.state.checked}
+                    checkedColor='#16A085'
+                    containerStyle={styles.checkboxContainer}
+                    onIconPress={() => this.setState({checked: !this.state.checked})}
+                    onPress={() => this.setState({checked: !this.state.checked})}
+                    />
+                  </View>
                   <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnLogin}
                       onPress={this.signInOnPress.bind(this) }>
@@ -104,10 +114,7 @@ export default class SignIn extends Component {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnLogin}
                       onPress={()=> {
-                        this.props.navigation.navigate('SignUp'),  {
-                          username: this.state.TextInput_Username,
-                          password: this.state.TextInput_Pass,
-                        }}}>
+                        this.props.navigation.navigate('SignUp')}}>
                       <Text style={styles.text}>SIGN UP</Text>
                     </TouchableOpacity>
                   </View>
@@ -168,7 +175,7 @@ const styles = StyleSheet.create({
         borderRadius: 25,
         backgroundColor: '#16A085',
         justifyContent: "center",
-        marginTop: 20,
+        marginTop: 10,
         alignItems: "center",
         marginHorizontal: 7
       },
@@ -187,7 +194,7 @@ const styles = StyleSheet.create({
         marginBottom: 30
       },
       imageContainer: {
-        marginTop: 60,
+        marginTop: 40,
         justifyContent: "flex-end",
         flexDirection: "row-reverse",
         alignContent: "space-between",
@@ -203,4 +210,8 @@ const styles = StyleSheet.create({
         height: 255,
         position: "relative",
       },
+      checkboxContainer:{
+        backgroundColor: '#ffffff',
+        borderColor: '#ffffff'
+      }
 });
