@@ -15,8 +15,10 @@ import MapView, {Marker, AnimatedRegion, Polyline} from "react-native-maps";
 import haversine from "haversine";
 //import styles from './style.js';
 
-const LATITUDE_DELTA = 0.01;
-const LONGITUDE_DELTA = 0.01;
+let { width, height } = Dimensions.get('window')
+const ASPECT_RATIO = width / height
+const LATITUDE_DELTA = 0.01 
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 const LATITUDE = 0; //326651473;
 const LONGITUDE = 0;// 51.7088392;
 
@@ -147,10 +149,6 @@ export default class Map  extends React.Component {
     return haversine(prevLatLng, newLatLng) || 0;
   };
 
-  changeRegion= () =>{
-     this.setState({coordinate : {latitude: this.coordinate.latitude, longitude: this.coordinate.longitude,
-      latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta}})
-  }
 
   render() {
     return (
@@ -160,10 +158,9 @@ export default class Map  extends React.Component {
             mapType={"standard"} //{"hybrid"} khuneh ha ro neshun mide
             loadingEnabled
             //SenableZoomControl={true}
-            onRegionChange={region => 
-              { 
-                this.setState.latitudeDelta = region.latitudeDelta
-                this.setState.longitudeDelta = region.longitudeDelta
+            onRegionChangeComplete ={ (region) => {
+              this.state.latitudeDelta = region.latitudeDelta
+              this.state.longitudeDelta = region.longitudeDelta
               }}
             region={this.getMapRegion()}
             >
