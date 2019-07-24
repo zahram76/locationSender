@@ -17,8 +17,8 @@ import haversine from "haversine";
 
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = 0.01;
-const LATITUDE = 0;
-const LONGITUDE = 0;
+const LATITUDE = 0; //326651473;
+const LONGITUDE = 0;// 51.7088392;
 
 export async function requestPermission() {
   try {
@@ -60,13 +60,15 @@ export default class Map  extends React.Component {
       coordinate: new AnimatedRegion({
         latitude: LATITUDE,
         longitude: LONGITUDE,
-        latitudeDelta: 0,
-        longitudeDelta: 0
+        latitudeDelta: 0.0,
+        longitudeDelta: 0.0
       }),
       coords: {
         latitude : LATITUDE,
         longitude : LONGITUDE
       },
+      latitudeDelta: LATITUDE_DELTA,
+      longitudeDelta: LONGITUDE_DELTA,
     };
   }
 
@@ -107,7 +109,7 @@ export default class Map  extends React.Component {
             distanceTravelled + this.calcDistance(newCoordinate),
           prevLatLng: newCoordinate
         });
-    }); // vaghti sms biad mige 
+    }); // vaghti sms biad mire to in rabe
   }
 
   componentWillUnmount() {
@@ -136,22 +138,33 @@ export default class Map  extends React.Component {
   getMapRegion = () => ({
     latitude: this.state.latitude,
     longitude: this.state.longitude,
-    latitudeDelta: LATITUDE_DELTA,
-    longitudeDelta: LONGITUDE_DELTA
+    latitudeDelta: this.state.latitudeDelta,
+    longitudeDelta: this.state.longitudeDelta
   });
 
   calcDistance = newLatLng => {
     const { prevLatLng } = this.state;
     return haversine(prevLatLng, newLatLng) || 0;
   };
- 
+
+  changeRegion= () =>{
+     this.setState({coordinate : {latitude: this.coordinate.latitude, longitude: this.coordinate.longitude,
+      latitudeDelta: region.latitudeDelta, longitudeDelta: region.longitudeDelta}})
+  }
+
   render() {
     return (
         <View style={styles.container}>
             <MapView
             style={styles.map}
+            mapType={"standard"} //{"hybrid"} khuneh ha ro neshun mide
             loadingEnabled
-            enableZoomControl={true}
+            //SenableZoomControl={true}
+            onRegionChange={region => 
+              { 
+                this.setState.latitudeDelta = region.latitudeDelta
+                this.setState.longitudeDelta = region.longitudeDelta
+              }}
             region={this.getMapRegion()}
             >
                 <Polyline coordinates={this.state.routeCoordinates} strokeWidth={5} />
@@ -174,7 +187,9 @@ export default class Map  extends React.Component {
             </View>
             <View>
                 <Text> latitude : {this.state.coords.latitude} </Text> 
-                <Text> longitude : {this.state.coords.longitude} </Text> 
+                <Text> longitude : {this.state.coords.longitude} </Text>
+                <Text> latitudeDelta : {this.state.latitudeDelta}</Text>
+                <Text> lonitudeDelta : {this.state.longitudeDelta}</Text> 
             </View> 
         </View>    
     );
@@ -213,7 +228,7 @@ const styles = StyleSheet.create({
     backgroundColor: "transparent"
   },
   MarkerImage: {
-    width: 40,
-    height: 50,
+    width: 35,
+    height: 45,
   }
 });
