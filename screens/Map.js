@@ -6,14 +6,12 @@ import {StyleSheet,
   Platform, 
   PermissionsAndroid, 
   Dimensions,
-  TextInput,
   Image,
-  ScrollView,
-  Button} from "react-native";
+} from "react-native";
 import SmsListener from 'react-native-android-sms-listener';
 import MapView, {Marker, AnimatedRegion, Polyline} from "react-native-maps";
 import haversine from "haversine";
-//import styles from './style.js';
+import AsyncStorage from "@react-native-community/async-storage";
 
 let { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
@@ -76,21 +74,24 @@ export default class Map  extends React.Component {
 
   async componentDidMount() {
     await requestPermission();
-    const { coordinate } = this.state;
-
+  
+    const lat = Number(await AsyncStorage.getItem('latitude'));
+    const long = Number(await AsyncStorage.getItem('longitude'));
+    let coords = {...this.state.coord, latitude: lat, longitude:long};
+    this.setState({coords});
+    let coordinate = {...this.state.coordinate, latitude: lat, longitude:long};
+    this.setState({coordinate});
+    this.setState({latitude: lat, longitude: long});
+    
     SmsListener.addListener(message => {
-      console.log(message.originatingAddress);
-      console.log(message.body + 'message');
       this.showmassage(message);
       
       const { routeCoordinates, distanceTravelled } = this.state;
         const { latitude, longitude } = this.state.coords;
-        console.log(latitude,longitude);
         const newCoordinate = {
           latitude,
           longitude
         };
-        console.log({ newCoordinate });
 
         if (Platform.OS === "android") {
           if (this.marker) {
@@ -114,25 +115,18 @@ export default class Map  extends React.Component {
     }); // vaghti sms biad mire to in rabe
   }
 
-  componentWillUnmount() {
-
-  }
-
   showmassage(message){
     if(message.originatingAddress == '+989336812618'){
       const res = message.body.split(' ');
       if (res[0] == 'hello'){
-        console.log('hello');
         const long = res[1].split('long:')[1];
         const lat = res[2].split('lat:')[1];
-        console.log(lat);
         const la = parseFloat( parseFloat(lat.split('.'[1])));
         const lo =  parseFloat( parseFloat(long.split('.'[1])));
-        console.log(la + 'lat');
-        console.log(lo + 'long');
         let coords = {...this.state.coord, latitude: la, longitude:lo};
-        console.log(coords);
         this.setState({coords});
+        AsyncStorage.setItem('latitude', JSON.stringify(la));
+        AsyncStorage.setItem('longitude', JSON.stringify(lo));
       }
     }
   }
@@ -155,9 +149,8 @@ export default class Map  extends React.Component {
         <View style={styles.container}>
             <MapView
             style={styles.map}
-            mapType={"standard"} //{"hybrid"} khuneh ha ro neshun mide
+            mapType={"standard"}
             loadingEnabled
-            //SenableZoomControl={true}
             onRegionChangeComplete ={ (region) => {
               this.state.latitudeDelta = region.latitudeDelta
               this.state.longitudeDelta = region.longitudeDelta
