@@ -82,11 +82,17 @@ export default class Map  extends React.Component {
     let coordinate = {...this.state.coordinate, latitude: lat, longitude:long};
     this.setState({coordinate});
     this.setState({latitude: lat, longitude: long});
-    
+
+    this.animateMarker();
+
     SmsListener.addListener(message => {
-      this.showmassage(message);
-      
-      const { routeCoordinates, distanceTravelled } = this.state;
+      this.parseMessage(message);
+      this.animateMarker();
+    });
+  }
+
+  animateMarker (){
+    const { routeCoordinates, distanceTravelled } = this.state;
         const { latitude, longitude } = this.state.coords;
         const newCoordinate = {
           latitude,
@@ -112,10 +118,9 @@ export default class Map  extends React.Component {
             distanceTravelled + this.calcDistance(newCoordinate),
           prevLatLng: newCoordinate
         });
-    }); // vaghti sms biad mire to in rabe
   }
 
-  showmassage(message){
+  parseMessage(message){
     if(message.originatingAddress == '+989336812618'){
       const res = message.body.split(' ');
       if (res[0] == 'hello'){

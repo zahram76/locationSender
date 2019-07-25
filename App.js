@@ -55,4 +55,5 @@ export default createAppContainer(createSwitchNavigator(
   }
 ));
 
+//AppRegistry.registerHeadlessTask('backgroundTask', () => require('backgroundTask'));
 AppRegistry.registerComponent('sender', () => App);
