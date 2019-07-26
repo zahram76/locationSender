@@ -83,7 +83,7 @@ export default class Map  extends React.Component {
     this.setState({coordinate});
     this.setState({latitude: lat, longitude: long});
 
-    this.animateMarker();
+   // this.animateMarker();
 
     SmsListener.addListener(message => {
       this.parseMessage(message);
