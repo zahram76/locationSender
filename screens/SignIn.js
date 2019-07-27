@@ -23,6 +23,7 @@ export default class SignIn extends Component {
         super(props);
 
         this.state={
+            imageLogo: require('../images/user.gif'),
             showPass: true,
             press: false,
             TextInput_Username: '',
@@ -67,14 +68,19 @@ export default class SignIn extends Component {
             <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
               <ImageBackground source={require('../images/background.png')} style={styles.backcontainer}> 
                 <View style={styles.logoContainer}>
-                  <Image source={require('../images/logo.png')} style={styles.logo}/>
+                  <Image source={this.state.imageLogo} style={styles.logo}/>
                 </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-person'} size={18} color={'gray'}
                       style={styles.inputIcon}/>
                     <TextInput 
                       style={styles.input}
-                      onChangeText={txt => this.setState({ TextInput_Username: txt })}
+                      onChangeText={txt => {
+                        this.setState({ TextInput_Username: txt });
+                        if(this.state.imageLogo != require('../images/user.gif')){
+                          this.setState({imageLogo: require('../images/user.gif')});
+                        }
+                      }}
                       placeholder={'Username'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
@@ -86,7 +92,10 @@ export default class SignIn extends Component {
                     <TextInput 
                       style={styles.input}
                       placeholder={'Password'}
-                      onChangeText={txt => this.setState({ TextInput_Pass: txt })}
+                      onChangeText={txt => {
+                        this.setState({ TextInput_Pass: txt });
+                        this.setState({imageLogo: require('../images/pass.gif')});
+                      }}
                       secureTextEntry={this.state.showPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
@@ -185,13 +194,13 @@ const styles = StyleSheet.create({
         textAlign: "center"
       },
       logo: {
-        width: 100,
-        height: 100
+        width: 130,
+        height: 130
       },
       logoContainer: {
         alignItems: "center",
-        marginTop: 50,
-        marginBottom: 30
+        marginTop: 40,
+        marginBottom: 20
       },
       imageContainer: {
         marginTop: 40,
