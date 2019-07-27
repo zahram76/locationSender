@@ -1,5 +1,6 @@
 package com.locationsender;
 
+import com.marianhello.bgloc.react.BackgroundGeolocationPackage;
 import android.app.Application;
 import android.util.Log;
 
