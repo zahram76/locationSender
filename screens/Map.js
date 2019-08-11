@@ -12,6 +12,7 @@ import SmsListener from 'react-native-android-sms-listener';
 import MapView, {Marker, AnimatedRegion, Polyline, Circle} from "react-native-maps";
 import haversine from "haversine";
 import AsyncStorage from "@react-native-community/async-storage";
+//import { openDatabase } from 'react-native-sqlite-storage';
 
 let { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
@@ -122,7 +123,7 @@ export default class Map  extends React.Component {
   }
 
   parseMessage(message){
-    if(message.originatingAddress == '+989336812618'){
+    if(message.originatingAddress == '+989132283157'){
       const res = message.body.split(' ');
       if (res[0] == 'hello'){
         const long = res[1].split('long:')[1];
