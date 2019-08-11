@@ -1,0 +1,7 @@
+#Internal package file, do not edit.
+#Mon Jul 15 23:06:36 IRDT 2019
+0.baseType=DIRECTORY
+0.base=C\:\\Users\\Zahra\\reactproject\\sender\\android\\app\\build\\intermediates\\merged_assets\\debug\\out
+0.path=ula.kml
+0.set=ASSET
+count=1

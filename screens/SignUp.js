@@ -29,6 +29,8 @@ export default class SignUp extends Component {
         this.state={
             showPass: true,
             press: false,
+            reshowPass: true,
+            repress: false,
             username: '',
             password: '',
             rePassword: '',
@@ -42,6 +44,14 @@ export default class SignUp extends Component {
           this.setState({showPass:false, press:true});
         } else {
           this.setState({showPass:true, press:false});
+        }
+      }
+
+    reshowPass = () => {
+        if(this.state.repress == false){
+          this.setState({reshowPass:false, repress:true});
+        } else {
+          this.setState({reshowPass:true, repress:false});
         }
       }
 
@@ -109,14 +119,14 @@ export default class SignUp extends Component {
                     <TextInput 
                       style={styles.input}
                       placeholder={'Re Password'}
-                      secureTextEntry={this.state.showPass}
+                      secureTextEntry={this.state.reshowPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
                       onChangeText={txt => this.setState({rePassword: txt})}
                     />
                     <TouchableOpacity style={styles.btnEye}
-                      onPress={this.showPass.bind(this)}>
-                      <Icon name={this.state.press==false ? 'ios-eye' : 'ios-eye-off'} 
+                      onPress={this.reshowPass.bind(this)}>
+                      <Icon name={this.state.repress==false ? 'ios-eye' : 'ios-eye-off'} 
                         size={28} color={'gray'}/>
                     </TouchableOpacity>
                   </View>

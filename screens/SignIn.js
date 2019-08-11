@@ -9,9 +9,9 @@ import {StyleSheet,
     Image,
     ScrollView,
     Button} from "react-native";
+import { CheckBox } from 'react-native-elements';
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from '@react-native-community/async-storage';
-import { CheckBox } from 'react-native-elements'
 
 //import styles from './style.js';
 
@@ -23,7 +23,7 @@ export default class SignIn extends Component {
         super(props);
 
         this.state={
-            imageLogo: require('../images/user.gif'),
+            imageLogo: require('../images/logo.png'),
             showPass: true,
             press: false,
             TextInput_Username: '',
@@ -77,9 +77,9 @@ export default class SignIn extends Component {
                       style={styles.input}
                       onChangeText={txt => {
                         this.setState({ TextInput_Username: txt });
-                        if(this.state.imageLogo != require('../images/user.gif')){
-                          this.setState({imageLogo: require('../images/user.gif')});
-                        }
+                        // if(this.state.imageLogo != require('../images/user.gif')){
+                        //   this.setState({imageLogo: require('../images/user.gif')});
+                        //}
                       }}
                       placeholder={'Username'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
@@ -94,7 +94,7 @@ export default class SignIn extends Component {
                       placeholder={'Password'}
                       onChangeText={txt => {
                         this.setState({ TextInput_Pass: txt });
-                        this.setState({imageLogo: require('../images/pass.gif')});
+                        //this.setState({imageLogo: require('../images/pass.gif')});
                       }}
                       secureTextEntry={this.state.showPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
@@ -194,13 +194,13 @@ const styles = StyleSheet.create({
         textAlign: "center"
       },
       logo: {
-        width: 130,
-        height: 130
+        width: 100,
+        height: 100
       },
       logoContainer: {
         alignItems: "center",
-        marginTop: 40,
-        marginBottom: 20
+        marginTop: 50,
+        marginBottom: 30
       },
       imageContainer: {
         marginTop: 40,
