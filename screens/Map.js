@@ -18,7 +18,7 @@ const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.01 
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 const LATITUDE = 0; //326651473;
-const LONGITUDE = 0;// 51.7088392;
+const LONGITUDE = 0; //51.7088392;
 
 export async function requestPermission() {
   try {
@@ -186,6 +186,19 @@ export default class Map  extends React.Component {
                 <Text> latitudeDelta : {this.state.latitudeDelta}</Text>
                 <Text> lonitudeDelta : {this.state.longitudeDelta}</Text> 
             </View> 
+            <View style={styles.btnView}>
+          <TouchableOpacity style={styles.button1}
+              onPress={()=> this.props.navigation.navigate('Profile')}>
+                  <Text style={styles.text}> Setting </Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.button1}
+              onPress={()=> {
+                   AsyncStorage.clear()
+                  this.props.navigation.navigate('Auth')
+                 }}>
+                  <Text style={styles.text}> sign out </Text>
+          </TouchableOpacity> 
+      </View>
         </View>    
     );
   }
@@ -225,5 +238,27 @@ const styles = StyleSheet.create({
   MarkerImage: {
     width: 35,
     height: 45,
-  }
+  },
+  button1: { 
+    width: 100,
+    height: 45,
+    borderRadius: 25,
+    backgroundColor: '#16A085',
+    justifyContent: "center",
+    marginTop: 20,
+    alignItems: "center",
+    marginHorizontal: 7
+  },
+  btnView: {
+    // marginTop: 10,
+     marginBottom: 20,
+     justifyContent: "center",
+     flexDirection: "row-reverse",
+     alignContent: "space-between",
+   },
+   text: {
+    color: 'rgba(255,255,255,255)',
+    fontSize: 16,
+    textAlign: "center"
+  },
 });

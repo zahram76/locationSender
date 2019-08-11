@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import{AppRegistry} from "react-native";
+import{Button, AppRegistry} from "react-native";
 import {
   createStackNavigator,
   createAppContainer,
@@ -13,18 +13,25 @@ import ForgotPass from './screens/ForgotPass.js';
 import AuthLoadingScreen from './screens/AuthLoading.js';
 
 const AppStack = createStackNavigator({
+  Map: {
+    screen: Map,
+    navigationOptions: {
+      title: 'Map',
+      headerRight: (
+        <Button
+          onPress={() => alert('This is a button!')}
+          title="Info"
+          color="#fff"
+        />
+      ),
+    },
+  },
   Profile: {
     screen: Profile,
     navigationOptions: {
       title: 'Profile',
     },
    },
-  Map: {
-    screen: Map,
-    navigationOptions: {
-      title: 'Map',
-    },
-  },
 });
 const AuthStack = createStackNavigator({ 
   SignIn: { screen: SignIn ,
