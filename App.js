@@ -56,12 +56,24 @@ const AppStack = createStackNavigator({
         </View>
       ),
     },
-   // icon={<Icon name={'ios-menu'} size={25} color={'white'}/>}
   },
   Profile: {
     screen: Profile,
     navigationOptions: {
       title: 'Profile',
+      headerStyle: {
+        backgroundColor: '#16A085',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+   },
+   database: {
+    screen: database,
+    navigationOptions: {
+      title: 'Database',
       headerStyle: {
         backgroundColor: '#16A085',
       },

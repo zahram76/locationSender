@@ -96,6 +96,10 @@ export default class Profile  extends React.Component {
                  }}>
                   <Text style={styles.text}> sign out </Text>
           </TouchableOpacity> 
+          <TouchableOpacity style={styles.button}
+              onPress={()=> this.props.navigation.navigate('database')}>
+                  <Text style={styles.text}> Database </Text>
+          </TouchableOpacity>
       </View>
     </View>
     );

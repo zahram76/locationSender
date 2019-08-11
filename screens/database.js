@@ -1,91 +1,67 @@
-import SQLite from "react-native-sqlite-storage";
-import React, {Component} from "react";
-import {StyleSheet,
+import React, { Component } from 'react';
+import {
+    StyleSheet,
     View, 
     Text, 
     TouchableOpacity, 
     ImageBackground,
-    Dimensions,
     TextInput,
-    Image,
-    ScrollView,
-    Button} from "react-native";
+    Button,
+    ToastAndroid } 
+from "react-native";
 
-SQLite.DEBUG(true);
-SQLite.enablePromise(true);
+import SQLite from "react-native-sqlite-storage";
 
-const database_name = "database.db";
-const database_version = "1.0";
-const database_displayname = "SQLite React Database";
-const database_size = 200000;
+var db = SQLite.openDatabase({name: 'database.db', createFromLocation: '~database.db'})
 
-export default class Database extends Component {
-    constructor(){
-        super();
+export default class database extends Component {
+  constructor(props) {
+    super(props)
 
-        this.state = {
-            TrackingUser: {
-                firstName: null,
-                lastName: null,
-                Age: null,
-                PhoneNo: null,
-                userId: null
-            }
-
+    this.state = {
+        TrackingUser: {
+            firstName: null,
+            lastName: null,
+            Age: null,
+            PhoneNo: null,
+            userId: null
         }
     }
+    db.transaction((tx) => {
+      tx.executeSql('SELECT * FROM pet WHERE owner=?', ['Mary'], (tx, results) => {
+          var len = results.rows.length;
+          if(len > 0) {
+            // exists owner name John
+            var row = results.rows.item(0);
+            this.setState({TrackingUser: row});
+          }
+        });
+    });
 
-    initDB() {
-        let db;
-        return new Promise((resolve) => {
-          console.log("Plugin integrity check ...");
-          SQLite.echoTest()
-            .then(() => {
-              console.log("Integrity check passed ...");
-              console.log("Opening database ...");
-              SQLite.openDatabase(
-                database_name,
-                database_version,
-                database_displayname,
-                database_size
-              )
-                .then(DB => {
-                  db = DB;
-                  console.log("Database OPEN");
-                  db.executeSql('SELECT * FROM TrackingUser').then(() => {
-                      console.log("Database is ready ... executing query ...");
-                  }).catch((error) =>{
-                      console.log("Received error: ", error);
-                      console.log("Database not yet ready ... populating data");
-                    //   db.transaction((tx) => {
-                    //       tx.executeSql('CREATE TABLE IF NOT EXISTS Product (prodId, prodName, prodDesc, prodImage, prodPrice)');
-                    //   }).then(() => {
-                    //       console.log("Table created successfully");
-                    //   }).catch(error => {
-                    //       console.log(error);
-                    //   });
-                  });
-                  resolve(db);
-                })
-                .catch(error => {
-                  console.log(error);
-                });
-            })
-            .catch(error => {
-              console.log("echoTest failed - plugin not functional");
-            });
-          });
-      };
+    ToastAndroid.show('Hello!!', ToastAndroid.SHORT);
+  }
 
-      render(){
-          rreturn (
-            <View>
-                <Text>database screen</Text>
-                <Button title="in database. go to map screen" 
-                    onPress={()=> this.props.navigation.navigate('Map')}/>
-                <Button title="in database. show tracking users row" 
-                    onPress={()=> }/>
-            </View>
-        );
-      }
+  render() {
+    return (
+      <View style={styles.container}>
+        <Text>SQLite Example</Text>
+        <Text> first name is {this.state.TrackingUser.firstName}</Text>
+        <Text>database screen</Text>
+        <Button title="in database. go to map screen" 
+            onPress={()=> this.props.navigation.navigate('Map')}/>
+
+      </View>
+    );
+  }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+});
+
+
