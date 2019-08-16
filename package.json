@@ -10,6 +10,7 @@
   "dependencies": {
     "@react-native-community/async-storage": "^1.5.1",
     "haversine": "^1.1.1",
+    "native-base": "^2.13.4",
     "react": "16.8.6",
     "react-native": "0.60.0",
     "react-native-android-sms-listener": "^0.7.0",
@@ -21,6 +22,7 @@
     "react-native-modal-dropdown": "^0.6.2",
     "react-native-settings-list": "^1.8.0",
     "react-native-sqlite-storage": "^3.3.11",
+    "react-native-switch-selector": "^1.1.14",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^3.11.1"
   },

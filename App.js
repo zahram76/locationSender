@@ -1,9 +1,19 @@
 import React, {Component} from "react";
-import{AppRegistry,StyleSheet,View} from "react-native";
+import{
+  AppRegistry,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  SafeAreaView,
+  ScrollView,
+  Image,
+} from "react-native";
 import {
   createStackNavigator,
   createAppContainer,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createDrawerNavigator,
+  DrawerItems,
 } from 'react-navigation';
 import SignIn from './screens/SignIn.js';
 import Map from './screens/Map.js';
@@ -11,54 +21,42 @@ import SignUp from './screens/SignUp.js';
 import Profile from './screens/Profile.js';
 import ForgotPass from './screens/ForgotPass.js';
 import AuthLoadingScreen from './screens/AuthLoading.js';
+import database from './screens/database.js';
 import Icon from "react-native-vector-icons/Ionicons";
 import { Button } from 'react-native-elements';
 
 
-const AppStack = createStackNavigator({
+// const AppDrawerNavigator = createDrawerNavigator({
+//   Map: { screen: Map },
+//   Profile: { screen: Profile },
+//   database: { screen: database },
+// },
+//   {
+//     contentComponent: CustomeDrawerComponent
+//   })
+
+const CustomeDrawerComponent = (props) => (
+  <SafeAreaView style={{ flex: 1 }}>
+    <View style={{
+        height: 150, 
+        backgroundColor: 'white', 
+        alignItems: 'center', 
+        justifyContent: 'center'}}>
+      <Image source={require('./images/logo.png')} 
+        style={{height: 120, width: 120, borderRadius: 20}}/>
+    </View>
+    <ScrollView>
+      <DrawerItems {...props}/>
+    </ScrollView>
+  </SafeAreaView>
+)
+
+const AppDrawerNavigator = createDrawerNavigator({
   Map: {
     screen: Map,
-    navigationOptions: {
-      title: 'Map',
-      headerStyle: {
-        backgroundColor: '#16A085',
-        barStyle: "light-content", // or directly
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-      headerRight: (
-        <View style={{
-          flexDirection: "row-reverse",
-          }}>
-            
-        <Button
-         icon={<Icon name={'ios-menu'} size={25} color={'white'} 
-          style={{
-            paddingLeft: 5,
-            paddingRight: 5,
-          }}/>
-        }
-          onPress={() => alert('This is a button!')}
-          type="clear"
-        />
-        <Button
-         icon={<Icon name={'ios-person-add'} size={24} color={'white'}
-          style={{
-            paddingLeft: 5,
-            paddingRight: 5,
-          }}
-        />}
-          onPress={() => alert('This is a button!')}
-          type="clear"
-        />
-        </View>
-      ),
-    },
   },
   Profile: {
-    screen: Profile,
+    screen: Profile,  
     navigationOptions: {
       title: 'Profile',
       headerStyle: {
@@ -83,7 +81,13 @@ const AppStack = createStackNavigator({
       },
     },
    },
+},
+{
+  contentComponent: CustomeDrawerComponent,
+  drawerPosition: 'Right',
+  drawerLockMode: 'unlocked',
 });
+
 const AuthStack = createStackNavigator({ 
   SignIn: { screen: SignIn ,
     navigationOptions: {
@@ -102,16 +106,28 @@ const AuthStack = createStackNavigator({
   },
  });
 
-export default createAppContainer(createSwitchNavigator(
+const AuthLoading = createAppContainer(createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
-    App: AppStack,
+    App: AppDrawerNavigator,
     Auth: AuthStack,
+    
   },
   {
     initialRouteName: 'AuthLoading',
   }
 ));
+
+export default class App extends Component {
+  render(){
+    return(
+      <AuthLoading>
+         
+      </AuthLoading>
+     
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   menuBtnStyle: {
@@ -119,5 +135,4 @@ const styles = StyleSheet.create({
   }
 });
 
-//AppRegistry.registerHeadlessTask('backgroundTask', () => require('backgroundTask'));
 AppRegistry.registerComponent('sender', () => App);

@@ -78,6 +78,17 @@ export default class SignUp extends Component {
         }
     }
 
+    insertUsersToDatabase(fn, ln, a, pn){
+      SQLite.openDatabase(
+        {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+        console.log("Database OPEN");
+        DB.transaction((tx) => {
+          tx.executeSql('insert into TrackingUser (first name, last name, Age, Phone number) valuse (:first name, :last name, :Age, :Phone number)', [fn, ln, a, pn] )
+          console.log("query executed");            
+       });
+      });
+    }
+
     render() {
         return ( 
           <View style={styles.scrolStyle}>

@@ -19,7 +19,6 @@ export default class Profile  extends React.Component {
         saveSession : data,
         switchValue: false
     };
-
   }
 
   render() {
@@ -98,7 +97,7 @@ export default class Profile  extends React.Component {
           </TouchableOpacity> 
           <TouchableOpacity style={styles.button}
               onPress={()=> this.props.navigation.navigate('database')}>
-                  <Text style={styles.text}> Database </Text>
+              <Text style={styles.text}> Database </Text>
           </TouchableOpacity>
       </View>
     </View>

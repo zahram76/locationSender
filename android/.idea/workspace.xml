@@ -5,11 +5,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b525ec8-2289-4d62-8aa6-644da8e12e02" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/file-input-save-data.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/file-input-save-data.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/assets/database.db" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/Map.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/Profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/SignUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/database.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,37 +43,10 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/../node_modules/react-native-android-sms-listener/android/src/main/java/com/centaurwarchief/smslistener/SmsListenerModule.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/build.gradle">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="1" column="71" selection-start-line="1" selection-start-column="71" selection-end-line="1" selection-end-column="71" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sender/MainApplication.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="255">
               <caret line="26" column="50" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/sender/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="10" column="7" selection-start-line="10" selection-start-column="7" selection-end-line="10" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -97,25 +83,15 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="AndroidView" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
-              <item name="android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
+      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="android.sdk.path" value="$USER_HOME$/AppData/Local/Android/Sdk" />
     <property name="device.picker.selection" value="GBT4C18B06007185" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../locationListener/android" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../test/android" />
     <property name="settings.editor.selected.configurable" value="http.proxy" />
   </component>
   <component name="RunDashboard">
@@ -219,7 +195,7 @@
     <editor active="true" />
     <layout>
       <window_info id="Captures" order="0" side_tool="true" weight="0.25" />
-      <window_info active="true" content_ui="combo" id="Project" order="1" sideWeight="0.4973357" visible="true" weight="0.22348177" />
+      <window_info content_ui="combo" id="Project" order="1" sideWeight="0.4973357" visible="true" weight="0.27449393" />
       <window_info id="Structure" order="2" sideWeight="0.5026643" side_tool="true" weight="0.22348177" />
       <window_info id="Favorites" order="3" sideWeight="0.5026643" side_tool="true" weight="0.22348177" />
       <window_info id="Build Variants" order="4" side_tool="true" />
@@ -227,7 +203,6 @@
       <window_info id="Designer" order="6" />
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
-      <window_info anchor="bottom" id="Find" />
       <window_info anchor="bottom" id="Run" order="0" />
       <window_info anchor="bottom" id="Logcat" order="1" weight="0.3285968" />
       <window_info anchor="bottom" id="TODO" order="2" weight="0.3285968" />
@@ -235,8 +210,9 @@
       <window_info anchor="bottom" id="Terminal" order="4" weight="0.3285968" />
       <window_info anchor="bottom" id="Event Log" order="5" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="6" weight="0.3285968" />
-      <window_info anchor="bottom" id="Build" order="7" visible="true" weight="0.3285968" />
+      <window_info active="true" anchor="bottom" id="Build" order="7" visible="true" weight="0.3285968" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Find" order="9" />
       <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
       <window_info anchor="right" id="Gradle" order="2" />
@@ -266,6 +242,20 @@
                 </list>
               </option>
             </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list />
+          </value>
+        </entry>
+        <entry key="User">
+          <value>
+            <list />
           </value>
         </entry>
       </map>
@@ -326,6 +316,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/sender.iml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/local.properties">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/settings.gradle">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../node_modules/react-native-android-sms-listener/android/src/main/java/com/centaurwarchief/smslistener/SmsListenerModule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="71" selection-start-line="71" selection-end-line="71" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/build.gradle">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -344,26 +354,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
           <caret line="26" column="50" selection-start-line="26" selection-start-column="50" selection-end-line="26" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sender.iml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/local.properties">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/settings.gradle">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../node_modules/react-native-android-sms-listener/android/src/main/java/com/centaurwarchief/smslistener/SmsListenerModule.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="71" lean-forward="true" selection-start-line="71" selection-end-line="71" />
         </state>
       </provider>
     </entry>
