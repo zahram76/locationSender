@@ -8,6 +8,8 @@ import {StyleSheet,
 TouchableOpacity} from "react-native";
 import AsyncStorage from '@react-native-community/async-storage';
 import SettingsList from 'react-native-settings-list';
+import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+import Icon from "react-native-vector-icons/Ionicons";
 
 export default class Profile  extends React.Component {
   constructor(props) {
@@ -20,12 +22,12 @@ export default class Profile  extends React.Component {
         switchValue: false
     };
   }
+  
+  _menu = null;
 
   render() {
     var bgColor = '#DCE3F4';
-    return (
-      <View style={{backgroundColor:'#EFEFF4',flex:1}}>
-     
+    return (     
       <View style={{backgroundColor:'#EFEFF4',flex:1}}>
         <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
           <SettingsList.Header headerStyle={{marginTop:15}}/>
@@ -83,26 +85,53 @@ export default class Profile  extends React.Component {
           />
         </SettingsList>
       </View>
-      <View style={styles.btnView}>
-          <TouchableOpacity style={styles.button}
-              onPress={()=> this.props.navigation.navigate('Map')}>
-                  <Text style={styles.text}> Map </Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.button}
-              onPress={()=> {
-                   AsyncStorage.clear()
-                  this.props.navigation.navigate('Auth')
-                 }}>
-                  <Text style={styles.text}> sign out </Text>
-          </TouchableOpacity> 
-          <TouchableOpacity style={styles.button}
-              onPress={()=> this.props.navigation.navigate('database')}>
-              <Text style={styles.text}> Database </Text>
-          </TouchableOpacity>
-      </View>
-    </View>
     );
   }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+        title: 'Map',
+        headerStyle: {
+          backgroundColor: '#16A085',
+          barStyle: "light-content", // or directly
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerRight: (
+          <View style={{
+            flexDirection: "row-reverse",
+            }}>
+            <Menu
+                ref={(ref) => this._menu = ref}
+                button={<TouchableOpacity onPress={() => this._menu.show()} 
+                  style={{paddingHorizontal:16, height: '100%', alignItems:'center', 
+                  justifyContent: 'center'}}>
+                    <Icon name={'ios-menu'} size={25} color={'white'} 
+                    style={{alignSelf:'center'}} resizeMode='contain'/></TouchableOpacity>}
+            >
+                <MenuItem onPress={() => {
+                  this._menu.hide()
+                  navigation.navigate('Map')
+                  }} textStyle={{color: '#000',fontSize: 16}} >Map</MenuItem>
+                <MenuItem onPress={() => {
+                  this._menu.hide()
+                  }} textStyle={{ fontSize: 16}} disabled>Setting</MenuItem>
+                <MenuItem  onPress={() =>{
+                  this._menu.hide()
+                  navigation.navigate('database')
+                  }} textStyle={{color: '#000',fontSize: 16}}>Database</MenuItem>
+                <MenuItem onPress={() =>{
+                  this._menu.hide()
+                  navigation.navigate('Auth')
+                  }}  textStyle={{color: '#000', fontSize: 16}}>Sign out</MenuItem>
+            </Menu>
+          </View>
+        ),
+      }
+    }
+
   onValueChange(value){
     this.setState({switchValue: value});
   }

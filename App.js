@@ -22,8 +22,7 @@ import Profile from './screens/Profile.js';
 import ForgotPass from './screens/ForgotPass.js';
 import AuthLoadingScreen from './screens/AuthLoading.js';
 import database from './screens/database.js';
-import Icon from "react-native-vector-icons/Ionicons";
-import { Button } from 'react-native-elements';
+import AddPerson from './screens/AddNewPerson';
 
 
 // const AppDrawerNavigator = createDrawerNavigator({
@@ -51,7 +50,7 @@ const CustomeDrawerComponent = (props) => (
   </SafeAreaView>
 )
 
-const AppDrawerNavigator = createDrawerNavigator({
+const AppDrawerNavigator = createStackNavigator({
   Map: {
     screen: Map,
   },
@@ -81,12 +80,26 @@ const AppDrawerNavigator = createDrawerNavigator({
       },
     },
    },
+   AddPerson: {
+    screen: AddPerson,
+    navigationOptions: {
+      title: 'Add Person',
+      headerStyle: {
+        backgroundColor: '#16A085',
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+   }
 },
-{
-  contentComponent: CustomeDrawerComponent,
-  drawerPosition: 'Right',
-  drawerLockMode: 'unlocked',
-});
+// {
+//   contentComponent: CustomeDrawerComponent,
+//   drawerPosition: 'Right',
+//   drawerLockMode: 'unlocked',
+// }
+);
 
 const AuthStack = createStackNavigator({ 
   SignIn: { screen: SignIn ,

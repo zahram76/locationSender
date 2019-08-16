@@ -15,14 +15,6 @@ import haversine from "haversine";
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-community/async-storage";
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
-import {  Container,
-  Header,
-  Title,
-  Footer,
-  FooterTab,
-  Button,
-  Right,
-  Left} from 'native-base';
 
 let { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
@@ -95,44 +87,9 @@ export default class Map  extends React.Component {
     this._menu = ref;
   };
 
-  hideMenu = () => {
-    this._menu.hide();
-  };
-
-  showMenu = () => {
-    this._menu.show();
-  };
-
   render() {
     return (
-      <Container>
-        <Header style={styles.headerStyle}>
-          <Left>
-              <Text style={styles.TitleStyle}>Map</Text>
-          </Left>
-          <Right>
-              <Icon name={'ios-person-add'} size={24} color={'white'}
-                style={{
-                  paddingLeft: 5,
-                  paddingRight: 5,
-                  marginLeft: 10,
-                  marginRight: 10
-                }}
-                onPress={() => alert('This is a button!')}
-              />
-            <Icon name={'ios-menu'} size={25} color={'white'} 
-              style={{
-                paddingLeft: 5,
-                paddingRight: 5,
-                marginLeft: 10,
-                marginRight: 5
-              }}
-              onPress={()=> this.props.navigation.openDrawer()}/>
-          </Right>
-        </Header>
-        
-        <View style={styles.container}>
-        
+      <View style={styles.container}>  
           <MapView
               style={styles.map}
               mapType={this.state.mapType}
@@ -153,20 +110,6 @@ export default class Map  extends React.Component {
                   <Image style={styles.MarkerImage} source={require('../images/cartoon-marker-48.png')}/>
                 </Marker.Animated>
             </MapView>
-            <View style={{alignItems: 'center', justifyContent: 'center' }}>
-        <Menu
-          ref={this.setMenuRef}
-          button={<Text onPress={this.showMenu}>Show menu</Text>}
-        >
-          <MenuItem onPress={this.hideMenu}>Menu item 1</MenuItem>
-          <MenuItem onPress={this.hideMenu}>Menu item 2</MenuItem>
-          <MenuItem onPress={this.hideMenu} disabled>
-            Menu item 3
-          </MenuItem>
-          <MenuDivider />
-          <MenuItem onPress={this.hideMenu}>Menu item 4</MenuItem>
-        </Menu>
-      </View>
             <SwitchSelector
               style={{marginVertical : 20,
                 marginHorizontal : 100}}
@@ -177,18 +120,72 @@ export default class Map  extends React.Component {
             <Text> latitude : {this.state.coords.latitude} </Text> 
             <Text> longitude : {this.state.coords.longitude} </Text> 
             <View style={styles.buttonContainer}>
-            <TouchableOpacity style={[styles.bubble, styles.button]}
-                onPress={()=> this.props.navigation.navigate('Profile')}>
+            <TouchableOpacity style={[styles.bubble, styles.button]}>
                 <Text style={styles.bottomBarContent}>
                 {parseFloat(this.state.distanceTravelled).toFixed(2)} km
                 </Text>
             </TouchableOpacity>
             </View>
           </View>
-      </Container>  
     );
   }
   
+  static navigationOptions = ({ navigation }) => {
+    return {
+        title: 'Map',
+        headerStyle: {
+          backgroundColor: '#16A085',
+          barStyle: "light-content", // or directly
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerRight: (
+          <View style={{
+            flexDirection: "row-reverse",
+            }}>
+            <Menu
+                ref={(ref) => this._menu = ref}
+                button={<TouchableOpacity onPress={() => this._menu.show()} 
+                  style={{paddingHorizontal:16, height: '100%', alignItems:'center', 
+                  justifyContent: 'center'}}>
+                    <Icon name={'ios-menu'} size={25} color={'white'} 
+                    style={{alignSelf:'center'}} resizeMode='contain'/></TouchableOpacity>}
+            >
+                <MenuItem onPress={() => {
+                  this._menu.hide()
+                  }} textStyle={{fontSize: 16}} disabled>Map</MenuItem>
+                <MenuItem onPress={() => {
+                  this._menu.hide()
+                  navigation.navigate('Profile')
+                  }} textStyle={{color: '#000', fontSize: 16}}>Setting</MenuItem>
+                <MenuItem  onPress={() =>{
+                  this._menu.hide()
+                  navigation.navigate('database')
+                  }} textStyle={{color: '#000',fontSize: 16}}>Database</MenuItem>
+                <MenuItem onPress={() =>{
+                  this._menu.hide()
+                  navigation.navigate('Auth')
+                  }}  textStyle={{color: '#000', fontSize: 16}}>Sign out</MenuItem>
+            </Menu>
+            <TouchableOpacity 
+              style={{
+                paddingHorizontal:8, 
+                height: '100%', 
+                alignItems:'center', 
+                justifyContent: 'center',
+               }}
+              onPress={() => navigation.navigate('AddPerson')}
+            >
+              <Icon name={'ios-person-add'} size={24} color={'white'}
+               style={{alignSelf:'center'}} resizeMode='contain'
+              />
+            </TouchableOpacity>
+          </View>
+        ),
+      }
+    }
 
   toggleSwitch = (value) => {
     this.setState({mapType: value})
@@ -197,15 +194,13 @@ export default class Map  extends React.Component {
   async componentDidMount() {
     await requestPermission();
   
-    const lat = Number(await AsyncStorage.getItem('latitude'));
+    const lat = Number(await AsyncStorage.getItem('latitude')); //get first location 
     const long = Number(await AsyncStorage.getItem('longitude'));
     let coords = {...this.state.coord, latitude: lat, longitude:long};
     this.setState({coords});
     let coordinate = {...this.state.coordinate, latitude: lat, longitude:long};
     this.setState({coordinate});
     this.setState({latitude: lat, longitude: long});  
-
-   // this.animateMarker();
 
     SmsListener.addListener(message => {
       this.parseMessage(message);
@@ -242,7 +237,7 @@ export default class Map  extends React.Component {
         });
   }
 
-  parseMessage(message){
+  parseMessage(message){ 
     if(message.originatingAddress == '+989336812618'){
       const res = message.body.split(' ');
       if (res[0] == 'hello'){
@@ -292,8 +287,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   container: {
-    flex: 1,
-    //...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFillObject,
     justifyContent: "flex-end",
     alignItems: "center",
     
@@ -350,62 +344,4 @@ const styles = StyleSheet.create({
   },
 });
 
-// <Footer style={styles.headerStyle}>
-//           <FooterTab style={styles.footerTabStyle}>
-//             <Icon name="ios-map" 
-//               size={25} color={'white'} 
-//               style={{
-//                 paddingLeft: 5,
-//                 paddingRight: 5,
-//                 marginLeft: 5,
-//                 marginRight: 10
-//               }}/>
-//           </FooterTab>
-//         </Footer>
 
-// static navigationOptions = ({ navigation }) => {
-//   return {
-//       title: 'Map',
-//       headerStyle: {
-//         backgroundColor: '#16A085',
-//         barStyle: "light-content", // or directly
-//       },
-//       headerTintColor: '#fff',
-//       headerTitleStyle: {
-//         fontWeight: 'bold',
-//       },
-//       headerRight: (
-//         <View style={{
-//           flexDirection: "row-reverse",
-//           }}>
-//           <TouchableOpacity 
-//             style={{
-//               marginLeft: 5,
-//               marginRight: 10
-//              }}
-//             onPress={()=> this.props.navigation.openDrawer()}
-//           >
-//             <Icon name={'ios-menu'} size={25} color={'white'} 
-//             style={{
-//               paddingLeft: 5,
-//               paddingRight: 5,
-//             }}/>
-//           </TouchableOpacity>
-//           <TouchableOpacity 
-//             style={{
-//               marginLeft: 10,
-//               marginRight: 5
-//              }}
-//             onPress={() => alert('This is a button!')}
-//           >
-//             <Icon name={'ios-person-add'} size={24} color={'white'}
-//               style={{
-//                 paddingLeft: 5,
-//                 paddingRight: 5,
-//               }}
-//             />
-//           </TouchableOpacity>
-//         </View>
-//       ),
-//     }
-//   }
