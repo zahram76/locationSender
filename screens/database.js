@@ -9,7 +9,7 @@ import {
     Button,
     ToastAndroid } 
 from "react-native";
-
+import Icon from "react-native-vector-icons/Ionicons";
 import SQLite from "react-native-sqlite-storage";
 
 SQLite.DEBUG(true);
@@ -21,16 +21,24 @@ export default class database extends Component {
 
     this.state = {
         TrackingUsers: [],
-        // {
-            // firstName: null,
-            // lastName: null,
-            // Age: null,
-            // PhoneNo: null,
-            // userId: null
-        // },
         rowss: "",
+        number: 0,
     }
+
+    this.timer = null;
+    this.addOne = this.addOne.bind(this);
+    this.stopTimer = this.stopTimer.bind(this);
+
     ToastAndroid.show('Hello!!', ToastAndroid.SHORT);
+  }
+
+  addOne() {
+    this.setState({number: this.state.number+1});
+    this.timer = setTimeout(this.addOne, 100);
+  }
+
+  stopTimer() {
+    clearTimeout(this.timer);
   }
 
   init(){
@@ -71,7 +79,11 @@ export default class database extends Component {
         <Text>database screen</Text>
         <Button title="in database. go to map screen" 
             onPress={()=> this.props.navigation.navigate('Map')}/>
-
+        
+        <Text style={{marginTop: 50, marginBottom: 20}}> {this.state.number}  </Text>
+        <TouchableOpacity onPressIn={this.addOne} onPressOut={this.stopTimer}>
+            <Icon name="ios-add" size={50} color={'purple'} />
+        </TouchableOpacity>
       </View>
     );
   }
