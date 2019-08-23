@@ -1,9 +1,9 @@
 import React from "react";
-import {StyleSheet,
+import {
   View, 
   Text, 
-  Button} from "react-native";
-
+  TouchableOpacity} from "react-native";
+import {styles} from '../style.js';
 
 export default class ForgotPass  extends React.Component {
   constructor(props) {
@@ -13,8 +13,11 @@ export default class ForgotPass  extends React.Component {
   render() {
     return (
         <View>
-            <Text>ForgotPass screen</Text>
-            <Button title="in ForgotPass. go to signin screen" onPress={()=> this.props.navigation.navigate('Map')}></Button>
+            <Text style={styles.text} > ForgotPass screen </Text>
+            <TouchableOpacity  style={styles.BubbleStyle}
+              onPress={()=> this.props.navigation.navigate('Map')}>
+                <Text style={styles.text} > in ForgotPass. go to signin screen </Text>
+            </TouchableOpacity>
         </View>
     );
   }

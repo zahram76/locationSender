@@ -1,16 +1,14 @@
 import React, { Component } from 'react';
 import {
-    StyleSheet,
     View, 
     Text, 
     TouchableOpacity, 
-    ImageBackground,
-    TextInput,
     Button,
     ToastAndroid } 
 from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import SQLite from "react-native-sqlite-storage";
+import {styles} from '../style.js';
 
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
@@ -46,27 +44,24 @@ export default class database extends Component {
     SQLite.openDatabase(
         {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
         console.log("Database OPEN");
-        console.log("execute transaction");
         DB.transaction((tx) => {
-            tx.executeSql('SELECT * FROM TrackingUser', [], (tx, results) => {
-                var len = results.rows.length;
-                console.log("helllllllllllllo");
-                console.log(JSON.stringify(results));
-                if(len > 0) {
-                  var row = results.rows.item(0);
-                  var rrr = JSON.stringify(row);
-                  console.log(row);
-                  JSON.parse(rrr, (key, value) => {
-                    console.log(key + ' ' + value);
-                  });
-                  var res = row.splite(',');
-                  //var r1 = res[0].splite('user_id');
-                  //this.state.TrackingUsers.push(rrr);
-                  console.log(res);
-                  alert(len);
-                }
-              });
-         });
+          console.log("execute transaction");
+          tx.executeSql('CREATE TABLE IF NOT EXISTS TrackingUsers(user_id INTEGER PRIMARY KEY AUTOINCREMENT, phone_no VARCHAR(12) unique not null , first_name VARCHAR(20) not null,last_name VARCKAR(20) not null)', [], (tx, results) => {
+            var len = results.rows.length;
+            console.log(" Tracking Users ");
+            console.log(JSON.stringify(results) + ' ' + len);
+        });
+          tx.executeSql('CREATE TABLE IF NOT EXISTS Locations(loc_id integer primary key autoincrement, user_id INTEGER not null, datatime text not null)', [], (tx, results) => {
+            var len = results.rows.length;
+            console.log(" Locations ");
+            console.log(JSON.stringify(results) + ' ' + len);
+          });
+          tx.executeSql('CREATE TABLE IF NOT EXISTS CurrentUser(user_id integer primary key autoincrement, first_name text not null, last_name text not null, username text not null, password text not null, phone_no text not null)', [], (tx, results) => {
+            var len = results.rows.length;
+            console.log(" CurrentUser ");
+            console.log(JSON.stringify(results) + ' ' + len);
+          });
+      });
     })
   }
 
@@ -77,25 +72,19 @@ export default class database extends Component {
         <Text>SQLite Example</Text>
         <Text>row is {this.state.rowss}</Text>
         <Text>database screen</Text>
-        <Button title="in database. go to map screen" 
-            onPress={()=> this.props.navigation.navigate('Map')}/>
+        <TouchableOpacity 
+            onPress={()=> this.props.navigation.navigate('Map')}>
+          <Text style={styles.text} > in database. go to map screen </Text>
+        </TouchableOpacity>
         
-        <Text style={{marginTop: 50, marginBottom: 20}}> {this.state.number}  </Text>
-        <TouchableOpacity onPressIn={this.addOne} onPressOut={this.stopTimer}>
+        <Text style={styles.text}> {this.state.number}  </Text>
+        <TouchableOpacity style={styles.ButtonStyle}
+          onPressIn={this.addOne} onPressOut={this.stopTimer}>
             <Icon name="ios-add" size={50} color={'purple'} />
         </TouchableOpacity>
       </View>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-});
 
 

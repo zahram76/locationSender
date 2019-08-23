@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet,
+import {
   View, 
   Text, 
   TouchableOpacity, 
@@ -7,15 +7,23 @@ import {StyleSheet,
   PermissionsAndroid, 
   Dimensions,
   Image,
+  StyleSheet,
 } from "react-native";
 import SwitchSelector from "react-native-switch-selector";
 import SmsListener from 'react-native-android-sms-listener';
-import MapView, {Marker, AnimatedRegion, Polyline, Circle} from "react-native-maps";
+import MapView, {Marker, AnimatedRegion, Polyline} from "react-native-maps";
 import haversine from "haversine";
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from "@react-native-community/async-storage";
 import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+import SQLite from "react-native-sqlite-storage";
+import {styles} from '../style.js'
+import {MapTypeMenu} from './MapTypeMenu.js';
+import {requestPermission} from './GetPermissions.js';
 
+
+var db =  SQLite.openDatabase(
+  {name : "database", createFromLocation : "~database.sqlite"});
 let { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.01 
@@ -23,42 +31,15 @@ const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 const LATITUDE = 0; 
 const LONGITUDE = 0;
 
-const options = [
-  { label: "satellite", value: "hybrid" },
+var options = [
   { label: "standard", value: "standard" },
+  { label: "satellite", value: "hybrid" },
+  { label: "terrian", value: "terrian" },
 ];
-
-export async function requestPermission() {
-  try {
-    const granted = await PermissionsAndroid.requestMultiple(
-      [PermissionsAndroid.PERMISSIONS.SEND_SMS,
-      PermissionsAndroid.PERMISSIONS.READ_SMS,
-      PermissionsAndroid.PERMISSIONS.RECEIVE_SMS,
-      PermissionsAndroid.PERMISSIONS.ACCESS_FINE_LOCATION] ,
-      {
-        title: 'App',
-        message:
-          'App needs access to your SMS and read your loacation',
-        buttonNeutral: 'Ask Me Later',
-        buttonNegative: 'Cancel',
-        buttonPositive: 'OK',
-      },
-
-    );
-    if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-      console.log('granted');
-    } else {
-      console.log('not granted');
-    }
-  } catch (err) {
-    console.warn(err);
-  }
-};
 
 export default class Map  extends React.Component {
   constructor(props) {
     super(props);
-
     this.state = {
       latitude: LATITUDE,
       longitude: LONGITUDE,
@@ -77,59 +58,64 @@ export default class Map  extends React.Component {
       },
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
-      mapType: "standard",
+      mapType : 'standard'
     };
   }
 
   _menu = null;
-
   setMenuRef = ref => {
     this._menu = ref;
   };
 
   render() {
     return (
-      <View style={styles.container}>  
+      <View style={styles.MapContainer}> 
+      <MapTypeMenu></MapTypeMenu> 
           <MapView
-              style={styles.map}
+              style={styles.MapViewStyle }
               mapType={this.state.mapType}
-              loadingEnabled
               onRegionChangeComplete ={ (region) => {
                 this.state.latitudeDelta = region.latitudeDelta
                 this.state.longitudeDelta = region.longitudeDelta
                 }}
-              region={this.getMapRegion()}
-            >
+              region={this.getMapRegion()}>
                 <Polyline coordinates={this.state.routeCoordinates} strokeWidth={5} strokeColor= {"red"}/>
                 <Marker.Animated
                     ref={marker => {
                     this.marker = marker;
                     }}
-                    coordinate= {this.state.coordinate}
-                >
+                    coordinate= {this.state.coordinate}>
                   <Image style={styles.MarkerImage} source={require('../images/cartoon-marker-48.png')}/>
                 </Marker.Animated>
             </MapView>
-            <SwitchSelector
-              style={{marginVertical : 20,
-                marginHorizontal : 100}}
-              options={options}
-              initial={1}
-              onPress={value => this.toggleSwitch(value)}
-            />
-            <Text> latitude : {this.state.coords.latitude} </Text> 
-            <Text> longitude : {this.state.coords.longitude} </Text> 
-            <View style={styles.buttonContainer}>
-            <TouchableOpacity style={[styles.bubble, styles.button]}>
-                <Text style={styles.bottomBarContent}>
-                {parseFloat(this.state.distanceTravelled).toFixed(2)} km
-                </Text>
-            </TouchableOpacity>
-            </View>
+            <View style={styles.ButtonContainer}>
+              <TouchableOpacity style={[styles.BubbleStyle]}>
+                  <Text style={styles.bottomBarContent}>
+                  {parseFloat(this.state.distanceTravelled).toFixed(2)} km
+                  </Text>
+              </TouchableOpacity>
           </View>
+        </View>
     );
   }
   
+  // loadingEnabled={true}
+  // showsIndoors={true}
+  // panControl={true}
+  // zoomControl={true}
+  // mapTypeControl={true}
+  // scaleControl={true}
+  // streetViewControl={true}
+  // overviewMapControl={true}
+  // rotateControl={true}
+ //
+  // <SwitchSelector
+  // style={{marginVertical : 20,
+  //   marginHorizontal : 100}}
+  // options={options}
+  // initial={1}
+  // onPress={value => this.toggleSwitch(value)}/>
+
   static navigationOptions = ({ navigation }) => {
     return {
         title: 'Map',
@@ -166,6 +152,7 @@ export default class Map  extends React.Component {
                   }} textStyle={{color: '#000',fontSize: 16}}>Database</MenuItem>
                 <MenuItem onPress={() =>{
                   this._menu.hide()
+                  AsyncStorage.clear();
                   navigation.navigate('Auth')
                   }}  textStyle={{color: '#000', fontSize: 16}}>Sign out</MenuItem>
             </Menu>
@@ -247,11 +234,35 @@ export default class Map  extends React.Component {
         const lo =  parseFloat( parseFloat(long.split('.'[1])));
         let coords = {...this.state.coord, latitude: la, longitude:lo};
         this.setState({coords});
+
         AsyncStorage.setItem('latitude', JSON.stringify(la));
         AsyncStorage.setItem('longitude', JSON.stringify(lo));
       }
     }
   }
+
+  executeQuery(queryStr){
+    db.transaction((tx) => {
+      tx.executeSql('SELECT * FROM TrackingUser', [], (tx, results) => {
+          var len = results.rows.length;
+          console.log("helllllllllllllo");
+          console.log(JSON.stringify(results));
+          if(len > 0) {
+            var row = results.rows.item(0);
+            var rrr = JSON.stringify(row);
+            console.log(row);
+            JSON.parse(rrr, (key, value) => {
+              console.log(key + ' ' + value);
+            });
+            var res = row.splite(',');
+            //var r1 = res[0].splite('user_id');
+            //this.state.TrackingUsers.push(rrr);
+            console.log(res);
+            alert(len);
+          }
+        });
+   });
+}       
 
   getMapRegion = () => ({
     latitude: this.state.latitude,
@@ -265,83 +276,3 @@ export default class Map  extends React.Component {
     return haversine(prevLatLng, newLatLng) || 0;
   };  
 }
-
-const styles = StyleSheet.create({
-  headerStyle: {
-    backgroundColor: '#16A085',
-    tintColor: '#fff',
-    height: 55,
-  },
-  footerTabStyle: {
-    backgroundColor: '#16A085',
-    tintColor: '#fff',
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  TitleStyle: {
-    marginHorizontal: 15,
-    alignItems: "center",
-    color: 'white',
-    justifyContent: "center",
-    fontWeight: 'bold',
-    fontSize: 20,
-  },
-  container: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: "flex-end",
-    alignItems: "center",
-    
-  },
-  map: {
-    marginTop: 1.5,
-    ...StyleSheet.absoluteFillObject
-  },
-  bubble: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "rgba(255,255,255,0.7)",
-    paddingHorizontal: 18,
-    paddingVertical: 12,
-    borderRadius: 20
-  },
-  latlng: {
-    width: 200,
-    alignItems: "stretch"
-  },
-  buttonContainer: {
-    justifyContent: "flex-end",
-    marginHorizontal: 110,
-    marginVertical: 20,
-    backgroundColor: "transparent",
-    flexDirection: "row-reverse",
-    alignContent: "space-between",
-  },
-  MarkerImage: {
-    width: 35,
-    height: 45,
-  },
-  button1: { 
-    width: 100,
-    height: 45,
-    borderRadius: 25,
-    backgroundColor: '#16A085',
-    justifyContent: "center",
-    marginTop: 20,
-    alignItems: "center",
-    marginHorizontal: 7
-  },
-  btnView: {
-    justifyContent: "flex-end",
-     marginVertical: 20,
-     justifyContent: "center",
-     flexDirection: "row-reverse",
-     alignContent: "space-between",
-   },
-   text: {
-    color: 'rgba(255,255,255,255)',
-    fontSize: 16,
-    textAlign: "center"
-  },
-});
-
-

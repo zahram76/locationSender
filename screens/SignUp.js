@@ -1,20 +1,22 @@
 import React, {Component} from "react";
-import {StyleSheet,
+import {
     View, 
     Text, 
     TouchableOpacity, 
     ImageBackground,
-    Dimensions,
     TextInput,
     Image,
     ScrollView,
-    Button} from "react-native";
+    } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
-import AsyncStorage from '@react-native-community/async-storage';
-//import styles from './style.js';
+import SQLite from "react-native-sqlite-storage";
+import {styles} from '../style.js';
 
-const {width : WIDTH} = Dimensions.get('window'); 
-const {height : HEIGHT} = Dimensions.get('window'); 
+// var db =  SQLite.openDatabase(
+//   {name : "database", createFromLocation : "~database.sqlite"});
+SQLite.DEBUG(true);
+SQLite.enablePromise(true);
+
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -66,42 +68,50 @@ export default class SignUp extends Component {
         else if (this.state.rePassword != this.state.password) {
           alert("Does not match!")
         } else {
-          // if this username is not in database
-            // try {
-            //   AsyncStorage.setItem('username', this.state.username)
-            //   this.props.navigation.navigate('App')
-            // } catch (e) {
-            //   alert(e);
-            // } ooooooooorrrrrrr
             this.props.navigation.push('SignIn')
             this.props.navigation.navigate('Auth')
         }
     }
 
-    insertUsersToDatabase(fn, ln, a, pn){
+    initDatabase(){
+      console.log("Opening database ...");
       SQLite.openDatabase(
-        {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
-        console.log("Database OPEN");
-        DB.transaction((tx) => {
-          tx.executeSql('insert into TrackingUser (first name, last name, Age, Phone number) valuse (:first name, :last name, :Age, :Phone number)', [fn, ln, a, pn] )
-          console.log("query executed");            
-       });
-      });
+          {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+          console.log("Database OPEN");
+          DB.transaction((tx) => {
+            console.log("execute transaction");
+            tx.executeSql('CREATE TABLE IF NOT EXISTS TrackingUsers(user_id INTEGER PRIMARY KEY AUTOINCREMENT, phone_no VARCHAR(12) unique not null , first_name VARCHAR(20) not null,last_name VARCKAR(20) not null)', [], (tx, results) => {
+              var len = results.rows.length;
+              console.log(" Tracking Users ");
+              console.log(JSON.stringify(results) + ' ' + len);
+          });
+            tx.executeSql('CREATE TABLE IF NOT EXISTS Locations(loc_id integer primary key autoincrement, user_id INTEGER not null, datatime text not null)', [], (tx, results) => {
+              var len = results.rows.length;
+              console.log(" Locations ");
+              console.log(JSON.stringify(results) + ' ' + len);
+            });
+            tx.executeSql('CREATE TABLE IF NOT EXISTS CurrentUser(user_id integer primary key autoincrement, first_name text not null, last_name text not null, username text not null, password text not null, phone_no text not null)', [], (tx, results) => {
+              var len = results.rows.length;
+              console.log(" CurrentUser ");
+              console.log(JSON.stringify(results) + ' ' + len);
+            });
+        });
+      })
     }
 
     render() {
         return ( 
-          <View style={styles.scrolStyle}>
-            <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
-              <ImageBackground source={require('../images/background.png')} style={styles.backcontainer}> 
+          <View style={{ScrollViewStyle}}>
+            <ScrollView style={styles.ScrollViewStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
+              <ImageBackground source={require('../images/background.png')} style={styles.BackgroundContainer}> 
                 <View style={styles.logoContainer}>
                   <Image source={require('../images/logo.png')} style={styles.logo}/>
                 </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-person'} size={18} color={'gray'}
-                      style={styles.inputIcon}/>
+                      style={styles.IconStyle}/>
                     <TextInput 
-                      style={styles.input}
+                      style={styles.TextInputStyle}
                       placeholder={'Username'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
@@ -109,9 +119,9 @@ export default class SignUp extends Component {
                   </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-lock'} size={18} color={'gray'}
-                      style={styles.inputIcon}/>
+                      style={styles.IconStyle}/>
                     <TextInput 
-                      style={styles.input}
+                      style={styles.TextInputStyle}
                       placeholder={'Password'}
                       secureTextEntry={this.state.showPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
@@ -126,9 +136,9 @@ export default class SignUp extends Component {
                   </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-lock'} size={18} color={'gray'}
-                      style={styles.inputIcon}/>
+                      style={styles.IconStyle}/>
                     <TextInput 
-                      style={styles.input}
+                      style={styles.TextInputStyle}
                       placeholder={'Re Password'}
                       secureTextEntry={this.state.reshowPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
@@ -143,9 +153,9 @@ export default class SignUp extends Component {
                   </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'md-phone-portrait'} size={18} color={'gray'}
-                      style={styles.inputIcon}/>
+                      style={styles.IconStyle}/>
                     <TextInput 
-                      style={styles.input}
+                      style={styles.TextInputStyle}
                       placeholder={'src phone number'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
@@ -154,17 +164,17 @@ export default class SignUp extends Component {
                   </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'md-phone-portrait'} size={18} color={'gray'}
-                      style={styles.inputIcon}/>
+                      style={styles.IconStyle}/>
                     <TextInput 
-                      style={styles.input}
+                      style={styles.TextInputStyle}
                       placeholder={'dest phone number'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
                       onChangeText={txt => this.setState({dest_phone: txt})}
                      />
                   </View>
-                  <View style={styles.btnContainer}>
-                    <TouchableOpacity style={styles.btnLogin}
+                  <View style={{flexDirection: 'row'}}>
+                    <TouchableOpacity style={styles.ButtonStyle}
                       onPress={this.sighUpOnPress.bind(this)}>
                       <Text style={styles.text}>SIGN UP</Text>
                     </TouchableOpacity>
@@ -179,85 +189,3 @@ export default class SignUp extends Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    backcontainer:{
-        flex: 1,
-        alignItems: "center",
-        width: null,
-        height: null,
-        justifyContent: "center",
-        backgroundColor: '#ffffff',
-      },
-      scrolStyle: {
-       flex: 1,
-       backgroundColor: 'white',
-      },
-      inputContainer: {
-        marginTop: 7
-      },
-      input: {
-        width: WIDTH-55,
-        height: 45,
-        borderRadius: 25,
-        fontSize: 16,
-        paddingLeft: 45,
-        backgroundColor: 'rgba(0,0,0,0.28)',
-        color: 'rgba(255,255,255,0.7)',
-        marginHorizontal: 25
-      },
-      inputIcon: {
-        position: 'absolute',
-        top: 14,
-        left: 42
-      },
-      btnEye: {
-        position: 'absolute',
-        top: 10,
-        right: 42
-      },
-      btnContainer:{
-        flexDirection: "row",
-      },
-      btnLogin: { 
-        width: WIDTH*(0.4),
-        height: 45,
-        borderRadius: 25,
-        backgroundColor: '#16A085',
-        justifyContent: "center",
-        marginTop: 20,
-        alignItems: "center",
-        marginHorizontal: 7
-      },
-      text: {
-        color: 'rgba(255,255,255,255)',
-        fontSize: 16,
-        textAlign: "center"
-      },
-      logo: {
-        width: 100,
-        height: 100
-      },
-      logoContainer: {
-        alignItems: "center",
-        marginTop: 50,
-        marginBottom: 30
-      },
-      imageContainer: {
-        marginTop: 10,
-        justifyContent: "flex-end",
-        flexDirection: "row-reverse",
-        alignContent: "space-between",
-      },
-      grandmother: {
-        marginTop: 26,
-        width: 90,
-        height: 165,
-        position: "relative",
-      },
-      grandfather: {
-        width: 110,
-        height: 195,
-        position: "relative",
-      },
-});

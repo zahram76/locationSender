@@ -1,15 +1,14 @@
 import React from "react";
-import {StyleSheet,
+import {
   View, 
-  Text, 
-  Button,
   Image,
   Alert,
 TouchableOpacity} from "react-native";
-import AsyncStorage from '@react-native-community/async-storage';
+import {styles} from '../style.js'
 import SettingsList from 'react-native-settings-list';
-import Menu, { MenuItem, MenuDivider } from 'react-native-material-menu';
+import Menu, { MenuItem } from 'react-native-material-menu';
 import Icon from "react-native-vector-icons/Ionicons";
+import AsyncStorage from '@react-native-community/async-storage';
 
 export default class Profile  extends React.Component {
   constructor(props) {
@@ -124,6 +123,7 @@ export default class Profile  extends React.Component {
                   }} textStyle={{color: '#000',fontSize: 16}}>Database</MenuItem>
                 <MenuItem onPress={() =>{
                   this._menu.hide()
+                  AsyncStorage.clear();
                   navigation.navigate('Auth')
                   }}  textStyle={{color: '#000', fontSize: 16}}>Sign out</MenuItem>
             </Menu>
@@ -136,28 +136,3 @@ export default class Profile  extends React.Component {
     this.setState({switchValue: value});
   }
 }
-
-const styles = StyleSheet.create({
-    button: { 
-        width: 100,
-        height: 45,
-        borderRadius: 25,
-        backgroundColor: '#16A085',
-        justifyContent: "center",
-        marginTop: 20,
-        alignItems: "center",
-        marginHorizontal: 7
-      },
-      text: {
-        color: 'rgba(255,255,255,255)',
-        fontSize: 16,
-        textAlign: "center"
-      },
-      btnView: {
-       // marginTop: 10,
-        marginBottom: 20,
-        justifyContent: "center",
-        flexDirection: "row-reverse",
-        alignContent: "space-between",
-      }
-});

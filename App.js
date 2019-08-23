@@ -22,7 +22,7 @@ import Profile from './screens/Profile.js';
 import ForgotPass from './screens/ForgotPass.js';
 import AuthLoadingScreen from './screens/AuthLoading.js';
 import database from './screens/database.js';
-import AddPerson from './screens/AddNewPerson';
+import AddNewPerson from './screens/AddNewPerson';
 
 
 // const AppDrawerNavigator = createDrawerNavigator({
@@ -50,7 +50,7 @@ const CustomeDrawerComponent = (props) => (
   </SafeAreaView>
 )
 
-const AppDrawerNavigator = createStackNavigator({
+const AppStack = createStackNavigator({
   Map: {
     screen: Map,
   },
@@ -81,7 +81,7 @@ const AppDrawerNavigator = createStackNavigator({
     },
    },
    AddPerson: {
-    screen: AddPerson,
+    screen: AddNewPerson,
     navigationOptions: {
       title: 'Add Person',
       headerStyle: {
@@ -107,11 +107,6 @@ const AuthStack = createStackNavigator({
       header: null, //this will hide the header
     },
   },
-  SignUp: { screen: SignUp ,
-    navigationOptions: {
-      header: null,
-    },
-  },
   ForgotPass: { screen: ForgotPass ,
     navigationOptions: {
       title: 'ForgotPass',
@@ -122,7 +117,7 @@ const AuthStack = createStackNavigator({
 const AuthLoading = createAppContainer(createSwitchNavigator(
   {
     AuthLoading: AuthLoadingScreen,
-    App: AppDrawerNavigator,
+    App: AppStack,
     Auth: AuthStack,
     
   },
