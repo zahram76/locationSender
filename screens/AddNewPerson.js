@@ -7,13 +7,11 @@ import {
     TextInput,
     Image,
     ScrollView,
-    } from "react-native";
+} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 import SQLite from "react-native-sqlite-storage";
 import {styles} from '../style.js';
 
-// var db =  SQLite.openDatabase(
-//   {name : "database", createFromLocation : "~database.sqlite"});
 SQLite.DEBUG(true);
 SQLite.enablePromise(true);
 
@@ -33,12 +31,15 @@ export default class AddNewPerson extends Component {
             press: false,
             reshowPass: true,
             repress: false,
-            username: '',
-            password: '',
-            rePassword: '',
-            src_phone: '',
-            dest_phone: '',
+            first_name: '',
+            last_name: '',
+            phone_no: '',
+            age: 0,
         };
+        
+        DB =  SQLite.openDatabase(
+        {name : "database", createFromLocation : "~database.sqlite"});
+
     }
 
     showPass = () => {
@@ -57,37 +58,47 @@ export default class AddNewPerson extends Component {
         }
       }
 
-    sighUpOnPress() {
-        if (this.state.password == ''
-          || this.state.rePassword == ''
-          || this.state.username == ''
-          || this.state.src_phone == ''
-          || this.state.dest_phone == ''){
+      AddButtonPress() {
+        if (this.state.first_name == ''
+          || this.state.last_name == ''
+          || this.state.phone_no == ''
+          || this.state.age == 0){
             alert("Please fill the blanks!")
-        }
-        else if (this.state.rePassword != this.state.password) {
-          alert("Does not match!")
         } else {
-          // if this username is not in database
-            // try {
-            //   AsyncStorage.setItem('username', this.state.username)
-            //   this.props.navigation.navigate('App')
-            // } catch (e) {
-            //   alert(e);
-            // } ooooooooorrrrrrr
-            this.props.navigation.push('SignIn')
-            this.props.navigation.navigate('Auth')
+          SQLite.openDatabase(
+            {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+            DB.transaction((tx) => {
+            console.log("execute transaction");
+            tx.executeSql('insert into TrackingUsers(phone_no, first_name, last_name, age) values (?,?,?,?)', 
+              [this.state.phone_no,this.state.first_name, this.state.last_name, this.state.age],
+                 (tx, results) => {
+                  console.log('Results', results.rowsAffected);
+                  if (results.rowsAffected > 0) {
+                    if (results.rowsAffected > 0) {
+                      alert('Success'+'\n'+'You are Registered Successfully');
+                      this.props.navigation.navigate('Map');
+                    } else {
+                      alert('Registration Failed');
+                    }
+                  }
+                }
+              );
+            });
+          });
         }
     }
 
+    componentDidMount(){
+      this.initDatabase();
+    }
+
     initDatabase(){
-      console.log("Opening database ...");
       SQLite.openDatabase(
-          {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
-          console.log("Database OPEN");
+        {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+        console.log("Database OPEN");
           DB.transaction((tx) => {
             console.log("execute transaction");
-            tx.executeSql('CREATE TABLE IF NOT EXISTS TrackingUsers(user_id INTEGER PRIMARY KEY AUTOINCREMENT, phone_no VARCHAR(12) unique not null , first_name VARCHAR(20) not null,last_name VARCKAR(20) not null)', [], (tx, results) => {
+            tx.executeSql('CREATE TABLE IF NOT EXISTS TrackingUsers(user_id INTEGER PRIMARY KEY AUTOINCREMENT, phone_no VARCHAR(12) unique not null , first_name VARCHAR(20) not null, last_name VARCKAR(20) not null, age integer not null)', [], (tx, results) => {
               var len = results.rows.length;
               console.log(" Tracking Users ");
               console.log(JSON.stringify(results) + ' ' + len);
@@ -103,66 +114,65 @@ export default class AddNewPerson extends Component {
               console.log(JSON.stringify(results) + ' ' + len);
             });
         });
-      })
+        });
     }
 
     render() {
         return ( 
-          <View style={styles.ScrollViewStyle}>
-            <ScrollView style={styles.ScrollViewStyle} scrollEnabled contentContainerStyle={styles.ScrollViewStyle}>
-              <ImageBackground source={require('../images/background.png')} style={styles.BackgroundContainer}> 
-                  <View style={styles.inputContainer}>
+          <View style={styles.scrolStyle}>
+            <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
+              <ImageBackground source={require('../images/background.png')} style={styles.backcontainer}> 
+                <View style={[styles.inputContainer, {marginTop: 50}]}>
                     <Icon name={'md-phone-portrait'} size={18} color={'gray'}
-                      style={styles.IconStyle}/>
+                      style={styles.inputIcon}/>
                     <TextInput 
-                      style={styles.TextInputStyle}
+                      style={styles.input}
                       placeholder={'phone number'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
-                      onChangeText={txt => this.setState({src_phone: txt})}
+                      onChangeText={txt => this.setState({phone_no: txt})}
                      />
                   </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-person'} size={18} color={'gray'}
-                      style={styles.IconStyle}/>
+                      style={styles.inputIcon}/>
                     <TextInput 
-                      style={styles.TextInputStyle}
+                      style={styles.input}
                       placeholder={'first name'}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent'
+                      onChangeText={txt => this.setState({first_name: txt})}
                      />
                   </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-person'} size={18} color={'gray'}
-                      style={styles.IconStyle}/>
+                      style={styles.inputIcon}/>
                     <TextInput 
-                      style={styles.TextInputStyle}
+                      style={styles.input}
                       placeholder={'last name'}
-                      secureTextEntry={this.state.showPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent' 
-                      onChangeText={(txt => this.setState({password: txt}))}
+                      onChangeText={(txt => this.setState({last_name: txt}))}
                     />
                   </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-person'} size={18} color={'gray'}
-                      style={styles.IconStyle}/>
+                      style={styles.inputIcon}/>
                     <TextInput 
-                      style={styles.TextInputStyle}
+                      style={styles.input}
                       placeholder={'age'}
-                      secureTextEntry={this.state.showPass}
                       placeholderTextColor={'rgba(255,255,255,255)'}
                       underlineColorAndroid='transparent' 
-                      onChangeText={(txt => this.setState({password: txt}))}
+                      onChangeText={(txt => this.setState({age: txt}))}
                     />
                   </View>
-                  <View style={{flexDirection: 'row'}}>
-                    <TouchableOpacity style={styles.ButtonStyle}
-                      onPress={this.sighUpOnPress.bind(this)}>
+                  <View style={[styles.btnContainer,{marginTop: 15}]}>
+                    <TouchableOpacity style={styles.btnLogin}
+                      onPress={this.AddButtonPress.bind(this)}>
                       <Text style={styles.text}>Add</Text>
                     </TouchableOpacity>
                   </View>
-                  <View style={[styles.imageContainer, {marginTop: 50}]}>
+                  <View style={styles.imageContainer}>
                     <Image source={require('../images/gmother.png')} style={styles.grandmother}/>
                     <Image source={require('../images/gfather.png')} style={styles.grandfather}/>
                   </View>

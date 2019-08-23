@@ -10,21 +10,10 @@
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/resourceHashesCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/build/intermediates/instant_run_merged_manifests/debug/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/instant_run_merged_manifests/debug/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../screens/AddNewPerson.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/AddNewPerson.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/ForgotPass.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/ForgotPass.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/Map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/Profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/Profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/SignIn.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/SignIn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/SignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/SignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/database.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/database.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/getDestPhoneNumber.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/getDestPhoneNumber.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -85,8 +74,8 @@
     </navigator>
     <panes>
       <pane id="AndroidView" />
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -279,12 +268,12 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest" />
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
         </state>
       </provider>
-      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../node_modules/react-native-mauron85-background-geolocation/android/common/src/main/java/com/marianhello/bgloc/data/BackgroundLocation.java" />
     <entry file="file://$PROJECT_DIR$/../node_modules/react-native-android-sms-listener/android/build.gradle">
@@ -300,8 +289,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/../node_modules/react-native-android-sms-listener/android/src/main/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor" />
       <provider editor-type-id="android-manifest" />
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/../node_modules/react-native-android-sms-listener/android/src/main/java/com/centaurwarchief/smslistener/SmsListenerPackage.java">
       <provider selected="true" editor-type-id="text-editor">

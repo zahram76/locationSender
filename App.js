@@ -23,6 +23,7 @@ import ForgotPass from './screens/ForgotPass.js';
 import AuthLoadingScreen from './screens/AuthLoading.js';
 import database from './screens/database.js';
 import AddNewPerson from './screens/AddNewPerson';
+import getDestPhone from './screens/getDestPhoneNumber';
 
 
 // const AppDrawerNavigator = createDrawerNavigator({
@@ -102,14 +103,22 @@ const AppStack = createStackNavigator({
 );
 
 const AuthStack = createStackNavigator({ 
-  SignIn: { screen: SignIn ,
+  getDestPhone: {
+    screen: getDestPhone,
     navigationOptions: {
       header: null, //this will hide the header
+      },
+  },
+  SignIn: { 
+    screen: SignIn ,
+    navigationOptions: {
+    header: null, //this will hide the header
     },
   },
-  ForgotPass: { screen: ForgotPass ,
+  ForgotPass: { 
+    screen: ForgotPass ,
     navigationOptions: {
-      title: 'ForgotPass',
+    title: 'ForgotPass',
     },
   },
  });
