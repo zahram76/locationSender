@@ -11,12 +11,7 @@ import {
 import Icon from "react-native-vector-icons/Ionicons";
 import SQLite from "react-native-sqlite-storage";
 import {styles} from '../style.js';
-
-// var db =  SQLite.openDatabase(
-//   {name : "database", createFromLocation : "~database.sqlite"});
-SQLite.DEBUG(true);
-SQLite.enablePromise(true);
-
+import {initDatabase} from './initDatabase.js';
 
 export default class SignUp extends Component {
     constructor(props) {
@@ -36,9 +31,12 @@ export default class SignUp extends Component {
             username: '',
             password: '',
             rePassword: '',
-            src_phone: '',
-            dest_phone: '',
+            phone: '',
         };
+    }
+
+    componentDidMount(){
+      initDatabase();
     }
 
     showPass = () => {
@@ -57,55 +55,75 @@ export default class SignUp extends Component {
         }
       }
 
+    
+      insertUser(){
+        SQLite.openDatabase(
+          {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+          DB.transaction((tx) => {
+          console.log("execute transaction");
+          tx.executeSql('insert into CurrentUser(username, password, phone_no) values (?,?,?)', 
+            [this.state.username, this.state.password, this.state.phone],
+               (tx, results) => {
+                console.log('Results', results.rowsAffected);
+                if (results.rowsAffected > 0) {
+                  if (results.rowsAffected > 0) {
+                    alert('Success'+'\n'+'You are Registered Successfully');
+                    this.props.navigation.navigate('SignIn');
+                  } else {
+                    alert('Registration Failed');
+                  }
+                }
+     });});});
+    }
+
+    isRepeatedUser(){
+      SQLite.openDatabase(
+        {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+        DB.transaction((tx) => {
+        console.log("execute transaction");
+        tx.executeSql('select username from CurrentUser where username=?', 
+          [this.state.username],
+             (tx, results) => {
+              console.log('username Results',JSON.stringify(results.rows));
+              if(results.rows.length == 0){
+                tx.executeSql('select phone_no from CurrentUser where phone_no=?', 
+                [this.state.phone],
+                  (tx, results) => {
+                    console.log('phone Results',JSON.stringify(results.rows));
+                    if(results.rows.length == 0){
+                      this.insertUser();
+                  } else {
+                    alert('This mobile number is already in use. ')
+                  }});
+              } else { alert('This username is already in use. ') }
+        });
+    });});
+  }
+
     sighUpOnPress() {
         if (this.state.password == ''
           || this.state.rePassword == ''
           || this.state.username == ''
-          || this.state.src_phone == ''
-          || this.state.dest_phone == ''){
+          || this.state.phone == ''){
             alert("Please fill the blanks!")
         }
         else if (this.state.rePassword != this.state.password) {
           alert("Does not match!")
         } else {
-            this.props.navigation.push('SignIn')
-            this.props.navigation.navigate('Auth')
-        }
+          this.isRepeatedUser()
+          }
+            // this.props.navigation.push('SignIn')
+            // this.props.navigation.navigate('Auth')
     }
 
-    initDatabase(){
-      console.log("Opening database ...");
-      SQLite.openDatabase(
-          {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
-          console.log("Database OPEN");
-          DB.transaction((tx) => {
-            console.log("execute transaction");
-            tx.executeSql('CREATE TABLE IF NOT EXISTS TrackingUsers(user_id INTEGER PRIMARY KEY AUTOINCREMENT, phone_no VARCHAR(12) unique not null , first_name VARCHAR(20) not null,last_name VARCKAR(20) not null)', [], (tx, results) => {
-              var len = results.rows.length;
-              console.log(" Tracking Users ");
-              console.log(JSON.stringify(results) + ' ' + len);
-          });
-            tx.executeSql('CREATE TABLE IF NOT EXISTS Locations(loc_id integer primary key autoincrement, user_id INTEGER not null, datatime text not null)', [], (tx, results) => {
-              var len = results.rows.length;
-              console.log(" Locations ");
-              console.log(JSON.stringify(results) + ' ' + len);
-            });
-            tx.executeSql('CREATE TABLE IF NOT EXISTS CurrentUser(user_id integer primary key autoincrement, first_name text not null, last_name text not null, username text not null, password text not null, phone_no text not null)', [], (tx, results) => {
-              var len = results.rows.length;
-              console.log(" CurrentUser ");
-              console.log(JSON.stringify(results) + ' ' + len);
-            });
-        });
-      })
-    }
 
     render() {
         return ( 
-          <View style={{ScrollViewStyle}}>
-            <ScrollView style={styles.ScrollViewStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
+          <View style={styles.scrolStyle}>
+            <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
               <ImageBackground source={require('../images/background.png')} style={styles.BackgroundContainer}> 
                 <View style={styles.logoContainer}>
-                  <Image source={require('../images/logo.png')} style={styles.logo}/>
+                  <Image source={require('../images/logo1.png')} style={styles.logo}/>
                 </View>
                   <View style={styles.inputContainer}>
                     <Icon name={'ios-person'} size={18} color={'gray'}
@@ -113,8 +131,9 @@ export default class SignUp extends Component {
                     <TextInput 
                       style={styles.TextInputStyle}
                       placeholder={'Username'}
-                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      placeholderTextColor={'gray'}
                       underlineColorAndroid='transparent'
+                      onChangeText={(txt => this.setState({username: txt.split(' ')}))}
                      />
                   </View>
                   <View style={styles.inputContainer}>
@@ -124,9 +143,9 @@ export default class SignUp extends Component {
                       style={styles.TextInputStyle}
                       placeholder={'Password'}
                       secureTextEntry={this.state.showPass}
-                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      placeholderTextColor={'gray'}
                       underlineColorAndroid='transparent' 
-                      onChangeText={(txt => this.setState({password: txt}))}
+                      onChangeText={(txt => this.setState({password: txt.split(' ')}))}
                     />
                     <TouchableOpacity style={styles.btnEye}
                       onPress={this.showPass.bind(this)}>
@@ -141,7 +160,7 @@ export default class SignUp extends Component {
                       style={styles.TextInputStyle}
                       placeholder={'Re Password'}
                       secureTextEntry={this.state.reshowPass}
-                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      placeholderTextColor={'gray'}
                       underlineColorAndroid='transparent'
                       onChangeText={txt => this.setState({rePassword: txt})}
                     />
@@ -156,32 +175,21 @@ export default class SignUp extends Component {
                       style={styles.IconStyle}/>
                     <TextInput 
                       style={styles.TextInputStyle}
-                      placeholder={'src phone number'}
-                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      placeholder={'phone number'}
+                      placeholderTextColor={'gray'}
                       underlineColorAndroid='transparent'
-                      onChangeText={txt => this.setState({src_phone: txt})}
-                     />
-                  </View>
-                  <View style={styles.inputContainer}>
-                    <Icon name={'md-phone-portrait'} size={18} color={'gray'}
-                      style={styles.IconStyle}/>
-                    <TextInput 
-                      style={styles.TextInputStyle}
-                      placeholder={'dest phone number'}
-                      placeholderTextColor={'rgba(255,255,255,255)'}
-                      underlineColorAndroid='transparent'
-                      onChangeText={txt => this.setState({dest_phone: txt})}
+                      onChangeText={txt => this.setState({phone: txt})}
                      />
                   </View>
                   <View style={{flexDirection: 'row'}}>
                     <TouchableOpacity style={styles.ButtonStyle}
                       onPress={this.sighUpOnPress.bind(this)}>
-                      <Text style={styles.text}>SIGN UP</Text>
+                      <Text style={styles.text}>Sign up</Text>
                     </TouchableOpacity>
                   </View>
                   <View style={styles.imageContainer}>
-                    <Image source={require('../images/gmother.png')} style={styles.grandmother}/>
-                    <Image source={require('../images/gfather.png')} style={styles.grandfather}/>
+                    <Image source={require('../images/gmother.png')} style={styles.grandmotherSignUp}/>
+                    <Image source={require('../images/gfather.png')} style={styles.grandfatherSignUp}/>
                   </View>
                 </ImageBackground>
               </ScrollView>

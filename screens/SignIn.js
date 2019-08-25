@@ -10,8 +10,10 @@ import {
 } from "react-native";
 import { CheckBox } from 'react-native-elements';
 import Icon from "react-native-vector-icons/Ionicons";
+import SQLite from "react-native-sqlite-storage";
 import AsyncStorage from '@react-native-community/async-storage';
 import {styles} from '../style.js';
+import { initDatabase } from "./initDatabase.js";
 
 export default class SignIn extends Component {
     constructor(props) {
@@ -22,10 +24,15 @@ export default class SignIn extends Component {
             press: false,
             TextInput_Username: '',
             TextInput_Pass: '',
-            username: '',     
-            password: ''  ,
-            checked: true
+            user_id_: null,
+            checked: true,
+            message: '',
+            isUser: false,
           };
+    }
+
+    componentDidMount(){
+      initDatabase();
     }
 
     showPass = () => {
@@ -36,22 +43,45 @@ export default class SignIn extends Component {
         }
       }
 
-    signInOnPress() {
+     isUser(){
+        SQLite.openDatabase(
+          {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+          DB.transaction((tx) => {
+          tx.executeSql('select user_id, username, password from CurrentUser where username=?', 
+            [this.state.TextInput_Username],(tx, results) => {
+                if(results.rows.length == 1){
+                  if(results.rows.item(0).password.split(' ')[0] == this.state.TextInput_Pass){
+                    this.setState({user_id_: results.rows.item(0).user_id.toString()}) // vaghti chand ta userand betoonan estefade konan khube.
+                    this.whenIsUser();
+                  } else { this.setState({message: ' Incorrect password. '});
+                    this.whenIsNotUser()
+                  }
+                } else { this.setState({message: ' There is no user with this username. '});  
+                  this.whenIsNotUser()
+                }
+          });
+      });});
+    }
+
+    whenIsNotUser(){
+      alert(this.state.message);
+    }
+
+    whenIsUser(){
+      if(this.state.checked == true){
+        AsyncStorage.setItem('user_id', this.state.user_id_)// ba this.state.username kar nemikone
+      }   
+      console.log('is user true ');
+      this.props.navigation.navigate('App')   
+    }
+  
+   signInOnPress() {
         if (this.state.TextInput_Username == ''
         || this.state.TextInput_Pass == ''){
-          alert("Please fill the blanks!")
+          alert("Please fill in  the blanks!")
       } else {
-          if(this.state.checked == true){
-            try {
-              AsyncStorage.setItem('username', this.state.TextInput_Username)// ba this.state.username kar nemikone
-            }
-            catch(e){
-              alert(e)
-            }
-          }
-          this.props.navigation.navigate('App')       
+         this.isUser() }  
       }
-    }
 
     render() {
         return ( 
@@ -67,10 +97,10 @@ export default class SignIn extends Component {
                     <TextInput 
                       style={styles.input}
                       onChangeText={txt => {
-                        this.setState({ TextInput_Username: txt });
+                        this.setState({ TextInput_Username: txt.split(' ')[0] });
                       }}
                       placeholder={'Username'}
-                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      placeholderTextColor={'gray'}
                       underlineColorAndroid='transparent'
                      />
                   </View>
@@ -81,10 +111,10 @@ export default class SignIn extends Component {
                       style={styles.input}
                       placeholder={'Password'}
                       onChangeText={txt => {
-                        this.setState({ TextInput_Pass: txt });
+                        this.setState({ TextInput_Pass: txt.split(' ')[0] });
                       }}
                       secureTextEntry={this.state.showPass}
-                      placeholderTextColor={'rgba(255,255,255,255)'}
+                      placeholderTextColor={'gray'}
                       underlineColorAndroid='transparent'
                     />
                     <TouchableOpacity style={styles.btnEye}
@@ -103,11 +133,19 @@ export default class SignIn extends Component {
                     onPress={() => this.setState({checked: !this.state.checked})}
                     />
                   </View>
+                  <View style={{flexDirection: 'row'}}>
                   <View style={styles.btnContainer}>
                     <TouchableOpacity style={styles.btnLogin}
                       onPress={this.signInOnPress.bind(this) }>
                       <Text style={styles.text}>SIGN IN</Text>
                     </TouchableOpacity>
+                  </View>
+                  <View style={styles.btnContainer}>
+                    <TouchableOpacity style={styles.btnLogin}
+                      onPress={() => this.props.navigation.navigate('SignUp')}>
+                      <Text style={styles.text}>SIGN UP</Text>
+                    </TouchableOpacity>
+                  </View>
                   </View>
                   <View style={styles.imageContainer}>
                     <Image source={require('../images/gmother.png')} style={styles.grandmother}/>

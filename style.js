@@ -47,6 +47,18 @@ export const styles = StyleSheet.create({
       paddingVertical: 12,
       borderRadius: 20
     },
+
+    BubbleContainer: {
+      position: 'absolute',//use absolute position to show button on top of the map
+      top: '90%', //for center align
+      alignSelf: 'center', //for align to right
+      marginHorizontal: 110,
+      marginVertical: 10,
+      backgroundColor: "transparent",
+      flexDirection: "row-reverse",
+      alignContent: "space-between",
+    },
+    
     ButtonContainer: {
       //position: 'absolute',
       justifyContent: "flex-end",
@@ -103,8 +115,8 @@ export const styles = StyleSheet.create({
       borderRadius: 25,
       fontSize: 16,
       paddingLeft: 45,
-      backgroundColor: 'rgba(0,0,0,0.28)',
-      color: 'rgba(255,255,255,0.7)',
+      backgroundColor: 'rgba(0,0,0,0.1)',
+      color: '#000000',
       marginHorizontal: 25
     },
     IconStyle: {
@@ -144,8 +156,8 @@ export const styles = StyleSheet.create({
       borderRadius: 25,
       fontSize: 16,
       paddingLeft: 45,
-      backgroundColor: 'rgba(0,0,0,0.28)',
-      color: 'rgba(255,255,255,0.7)',
+      backgroundColor: 'rgba(0,0,0,0.1)',
+      color: '#000000',
       marginHorizontal: 25
     },
     inputIcon: {
@@ -162,7 +174,7 @@ export const styles = StyleSheet.create({
       flexDirection: "row",
     },
     btnLogin: { 
-      width: WIDTH*(0.4),
+      width: WIDTH*(0.3),
       height: 45,
       borderRadius: 25,
       backgroundColor: '#16A085',
@@ -197,9 +209,45 @@ export const styles = StyleSheet.create({
       height: 255,
       position: "relative",
     },
+    grandmotherSignUp: {
+      marginTop: 18,
+      width: 120,
+      height: 195,
+      position: "relative",
+    },
+    grandfatherSignUp: {
+      width: 140,
+      height: 215,
+      position: "relative",
+    },
     checkboxContainer:{
       backgroundColor: '#ffffff',
       borderColor: '#ffffff'
-    }
+    },
+    addinput: {
+      width: WIDTH-55,
+      height: 45,
+      borderRadius: 25,
+      fontSize: 16,
+      paddingLeft: 45,
+      backgroundColor: 'rgba(0,0,0,0.05)',
+      color: '#000000',
+      marginHorizontal: 25
+    },
+    pickerTextBack: {
+      width: 150,
+      height: 45,
+      borderRadius: 25,
+      fontSize: 16,
+      paddingLeft: 45,
+      //backgroundColor: 'rgba(0,0,0,0.05)',
+      color: '#000000',
+      marginHorizontal: 25,
+      justifyContent: 'center'
+    },
+    pickerText: {
+      color: '#000000',
+      fontSize: 16,
+    },
   });
   

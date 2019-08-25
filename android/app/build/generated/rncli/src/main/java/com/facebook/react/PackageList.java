@@ -15,6 +15,8 @@ import com.sender.R;
 
 // @react-native-community/async-storage
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
+// lottie-react-native
+import com.airbnb.android.react.lottie.LottiePackage;
 // react-native-android-sms-listener
 import com.centaurwarchief.smslistener.SmsListenerPackage;
 // react-native-gesture-handler
@@ -61,6 +63,7 @@ public class PackageList {
     return new ArrayList<>(Arrays.<ReactPackage>asList(
       new MainReactPackage(),
       new AsyncStoragePackage(),
+      new LottiePackage(),
       new SmsListenerPackage(),
       new RNGestureHandlerPackage(),
       new SmsPackage(),

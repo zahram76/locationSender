@@ -21,9 +21,6 @@ import {styles} from '../style.js'
 import {MapTypeMenu} from './MapTypeMenu.js';
 import {requestPermission} from './GetPermissions.js';
 
-
-var db =  SQLite.openDatabase(
-  {name : "database", createFromLocation : "~database.sqlite"});
 let { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
 const LATITUDE_DELTA = 0.01 
@@ -58,7 +55,8 @@ export default class Map  extends React.Component {
       },
       latitudeDelta: LATITUDE_DELTA,
       longitudeDelta: LONGITUDE_DELTA,
-      mapType : 'standard'
+      mapType : 'standard',
+      TrackingUser: [],
     };
   }
 
@@ -69,10 +67,10 @@ export default class Map  extends React.Component {
 
   render() {
     return (
-      <View style={styles.MapContainer}> 
-      <MapTypeMenu></MapTypeMenu> 
+      <View style={{flex: 1}}> 
+       
           <MapView
-              style={styles.MapViewStyle }
+              style={{flex:1, height: '100%', width: '100%'}}
               mapType={this.state.mapType}
               onRegionChangeComplete ={ (region) => {
                 this.state.latitudeDelta = region.latitudeDelta
@@ -88,33 +86,29 @@ export default class Map  extends React.Component {
                   <Image style={styles.MarkerImage} source={require('../images/cartoon-marker-48.png')}/>
                 </Marker.Animated>
             </MapView>
-            <View style={styles.ButtonContainer}>
-              <TouchableOpacity style={[styles.BubbleStyle]}>
+            
+            <View  style={{
+                  position: 'absolute',//use absolute position to show button on top of the map
+                  top: '3%', //for top align
+                  left: '80%',
+                  alignSelf: 'flex-start', //for align to right 
+                  borderRadius: 20,
+                  color: 'transparent', 
+                }}>
+              <MapTypeMenu onChange={mapType => this.setState({mapType})}></MapTypeMenu>
+            </View>
+
+            <View style={styles.BubbleContainer}>
+              <TouchableOpacity style={styles.BubbleStyle}>
                   <Text style={styles.bottomBarContent}>
                   {parseFloat(this.state.distanceTravelled).toFixed(2)} km
                   </Text>
               </TouchableOpacity>
           </View>
-        </View>
+
+          </View>
     );
   }
-  
-  // loadingEnabled={true}
-  // showsIndoors={true}
-  // panControl={true}
-  // zoomControl={true}
-  // mapTypeControl={true}
-  // scaleControl={true}
-  // streetViewControl={true}
-  // overviewMapControl={true}
-  // rotateControl={true}
- //
-  // <SwitchSelector
-  // style={{marginVertical : 20,
-  //   marginHorizontal : 100}}
-  // options={options}
-  // initial={1}
-  // onPress={value => this.toggleSwitch(value)}/>
 
   static navigationOptions = ({ navigation }) => {
     return {
@@ -137,7 +131,7 @@ export default class Map  extends React.Component {
                   style={{paddingHorizontal:16, height: '100%', alignItems:'center', 
                   justifyContent: 'center'}}>
                     <Icon name={'ios-menu'} size={25} color={'white'} 
-                    style={{alignSelf:'center'}} resizeMode='contain'/></TouchableOpacity>}
+                    style={{alignSelf:'center', marginRight: 3,}} resizeMode='contain'/></TouchableOpacity>}
             >
                 <MenuItem onPress={() => {
                   this._menu.hide()
@@ -162,10 +156,11 @@ export default class Map  extends React.Component {
                 height: '100%', 
                 alignItems:'center', 
                 justifyContent: 'center',
+                marginRight: 3,
                }}
               onPress={() => navigation.navigate('AddPerson')}
             >
-              <Icon name={'ios-person-add'} size={24} color={'white'}
+              <Icon name={'ios-person-add'} size={25} color={'white'}
                style={{alignSelf:'center'}} resizeMode='contain'
               />
             </TouchableOpacity>
@@ -180,7 +175,8 @@ export default class Map  extends React.Component {
 
   async componentDidMount() {
     await requestPermission();
-  
+    await this.readTrackingUsers();
+
     const lat = Number(await AsyncStorage.getItem('latitude')); //get first location 
     const long = Number(await AsyncStorage.getItem('longitude'));
     let coords = {...this.state.coord, latitude: lat, longitude:long};
@@ -225,44 +221,43 @@ export default class Map  extends React.Component {
   }
 
   parseMessage(message){ 
+
+    // var a = message.originatingAddress.split(' ')
+    // var b = this.state.phone_no.split(' ')
+    // var n = a[0].localeCompare(b[0]);
     if(message.originatingAddress == '+989336812618'){
       const res = message.body.split(' ');
-      if (res[0] == 'hello'){
-        const long = res[1].split('long:')[1];
-        const lat = res[2].split('lat:')[1];
+      if (res[0] == 'hello' && res[1] == 'location'){
+        const long = res[2].split('long:')[1];
+        const lat = res[3].split('lat:')[1];
         const la = parseFloat( parseFloat(lat.split('.'[1])));
         const lo =  parseFloat( parseFloat(long.split('.'[1])));
         let coords = {...this.state.coord, latitude: la, longitude:lo};
         this.setState({coords});
-
         AsyncStorage.setItem('latitude', JSON.stringify(la));
         AsyncStorage.setItem('longitude', JSON.stringify(lo));
       }
     }
   }
 
-  executeQuery(queryStr){
-    db.transaction((tx) => {
-      tx.executeSql('SELECT * FROM TrackingUser', [], (tx, results) => {
-          var len = results.rows.length;
-          console.log("helllllllllllllo");
-          console.log(JSON.stringify(results));
-          if(len > 0) {
-            var row = results.rows.item(0);
-            var rrr = JSON.stringify(row);
-            console.log(row);
-            JSON.parse(rrr, (key, value) => {
-              console.log(key + ' ' + value);
-            });
-            var res = row.splite(',');
-            //var r1 = res[0].splite('user_id');
-            //this.state.TrackingUsers.push(rrr);
-            console.log(res);
-            alert(len);
-          }
-        });
-   });
-}       
+  readTrackingUsers(){
+    SQLite.openDatabase(
+      {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+      DB.transaction((tx) => {
+        tx.executeSql('select phone_no, user_id from TrackingUsers', [], (tx, results) => {
+          if(results.rows.length > 0){
+            var i;
+            for(i=0; i<results.rows.length; ++i){
+              const TrackingUser = {
+                user_id: results.rows.item(i)[0].toString(),
+                phone_no: results.rows.item(i)[1].toString()
+              };
+              this.state.TrackingUser.push(TrackingUser);
+            }
+          } else { alert(' There are no users to track. ')}
+        });});
+  })  
+}     
 
   getMapRegion = () => ({
     latitude: this.state.latitude,

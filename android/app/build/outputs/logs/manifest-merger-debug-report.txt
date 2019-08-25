@@ -7,6 +7,7 @@ INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidMan
 MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-33:12
 MERGED from [:react-native-sqlite-storage] C:\Users\Zahra\reactproject\sender\node_modules\react-native-sqlite-storage\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:@react-native-community_async-storage] C:\Users\Zahra\reactproject\sender\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
+MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-12:12
 MERGED from [:react-native-vector-icons] C:\Users\Zahra\reactproject\sender\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
@@ -18,6 +19,7 @@ MERGED from [com.facebook.fresco:animated-webp:1.14.2] C:\Users\Zahra\.gradle\ca
 MERGED from [com.facebook.fresco:webpsupport:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b040b34d413c423fbfe864e9e570de47\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-gesture-handler] C:\Users\Zahra\reactproject\sender\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-get-sms-android] C:\Users\Zahra\reactproject\sender\node_modules\react-native-get-sms-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:2:1-11:12
 MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fb14ca5c162aef18b735e74b7c5f5cca\AndroidManifest.xml:17:1-22:12
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6cea93f2db1853de5a5661b0343c9e7e\AndroidManifest.xml:2:1-9:12
 MERGED from [com.facebook.fresco:animated-base:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f41050e4dc1b29888025568041bec431\AndroidManifest.xml:2:1-9:12
@@ -83,6 +85,8 @@ INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidMa
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:11-69
 uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:4:5-67
+MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
+MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:24:5-67
@@ -117,6 +121,8 @@ MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManif
 MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:10:5-31:19
 MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a38c9716f30ae6db40318f97ffa489c\AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a38c9716f30ae6db40318f97ffa489c\AndroidManifest.xml:11:5-20
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:9:5-20
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:9:5-20
 MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5d4b4534f656c66690bf7dcc9b006b96\AndroidManifest.xml:11:5-20
 MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5d4b4534f656c66690bf7dcc9b006b96\AndroidManifest.xml:11:5-20
 MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:30:5-36:19
@@ -197,6 +203,8 @@ MERGED from [:react-native-sqlite-storage] C:\Users\Zahra\reactproject\sender\no
 MERGED from [:react-native-sqlite-storage] C:\Users\Zahra\reactproject\sender\node_modules\react-native-sqlite-storage\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:@react-native-community_async-storage] C:\Users\Zahra\reactproject\sender\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:@react-native-community_async-storage] C:\Users\Zahra\reactproject\sender\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
@@ -219,6 +227,8 @@ MERGED from [:react-native-gesture-handler] C:\Users\Zahra\reactproject\sender\n
 MERGED from [:react-native-gesture-handler] C:\Users\Zahra\reactproject\sender\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-get-sms-android] C:\Users\Zahra\reactproject\sender\node_modules\react-native-get-sms-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-get-sms-android] C:\Users\Zahra\reactproject\sender\node_modules\react-native-get-sms-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:5:5-7:41
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:5:5-7:41
 MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fb14ca5c162aef18b735e74b7c5f5cca\AndroidManifest.xml:20:5-44
 MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fb14ca5c162aef18b735e74b7c5f5cca\AndroidManifest.xml:20:5-44
 MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6cea93f2db1853de5a5661b0343c9e7e\AndroidManifest.xml:5:5-7:41

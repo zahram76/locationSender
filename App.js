@@ -103,14 +103,20 @@ const AppStack = createStackNavigator({
 );
 
 const AuthStack = createStackNavigator({ 
-  getDestPhone: {
-    screen: getDestPhone,
-    navigationOptions: {
-      header: null, //this will hide the header
-      },
-  },
+  // getDestPhone: {
+  //   screen: getDestPhone,
+  //   navigationOptions: {
+  //     header: null, //this will hide the header
+  //     },
+  // },
   SignIn: { 
     screen: SignIn ,
+    navigationOptions: {
+    header: null, //this will hide the header
+    },
+  },
+  SignUp: { 
+    screen: SignUp ,
     navigationOptions: {
     header: null, //this will hide the header
     },
