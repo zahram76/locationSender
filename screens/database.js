@@ -30,6 +30,12 @@ export default class database extends Component {
     ToastAndroid.show('Hello!!', ToastAndroid.SHORT);
   }
 
+  
+  componentWillUnmount(){
+    const {params} = this.props.navigation.state;
+    params.callRefresh();
+  }
+
   addOne() {
     this.setState({number: this.state.number+1});
     this.timer = setTimeout(this.addOne, 100);
@@ -77,7 +83,7 @@ export default class database extends Component {
           <Text style={styles.text} > in database. go to map screen </Text>
         </TouchableOpacity>
         
-        <Text style={styles.text}> {this.state.number}  </Text>
+        <Text> {this.state.number}  </Text>
         <TouchableOpacity style={styles.ButtonStyle}
           onPressIn={this.addOne} onPressOut={this.stopTimer}>
             <Icon name="ios-add" size={50} color={'purple'} />

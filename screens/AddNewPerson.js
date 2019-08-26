@@ -53,6 +53,16 @@ export default class AddNewPerson extends Component {
     });
   }
 
+  componentWillUnmount(){
+    this.props.navigation.setParams({refresh : "true"});
+    //navigation.setParams({callRefresh: this.callRefresh()})
+  }
+
+  // back(){
+  //   const {goBack} = this.props.navigation;
+  //   goBack();
+  // }
+
     AddButtonPress() {
       this.setState({canceled: false});
         if (this.state.first_name == ''
@@ -130,7 +140,8 @@ export default class AddNewPerson extends Component {
               if (results.rowsAffected > 0) {
                 this.setState({modalVisible: false})
                 alert('Success'+'\n'+'You are Registered Successfully');
-                this.props.navigation.navigate('Map');
+                this.props.navigation.navigate('Map',{refresh : true});
+                //this.back();
               } else {
                 alert('Registration Failed');
               }
@@ -242,13 +253,13 @@ export default class AddNewPerson extends Component {
                       alert('Modal has been closed.');
                       this.setModalVisible(!this.state.modalVisible);
                     }}>
-                    <View style={{marginTop: 22, backgroundColor: "rgba(255,255,255,0.4)",
+                    <View style={{backgroundColor: "rgba(255,255,255,0.4)",
                       justifyContent: "center",
                       flex: 1, alignItems: 'center',}}>
-                      <View style={{marginTop: 100}}>
+                      <View style={{marginTop: 150}}>
                         <ActivityIndicator size="large" color="#0000ff" /> 
                         <TouchableHighlight
-                          style={{margin: 30, backgroundColor: "rgba(255,255,255,0.5)",
+                          style={{margin: 30, backgroundColor: "rgba(255,255,255,0.4)",
                           justifyContent: "center", alignItems: 'center',}}
                           onPress={() => {
                             this.setModalVisible(!this.state.modalVisible);
