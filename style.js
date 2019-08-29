@@ -249,5 +249,13 @@ export const styles = StyleSheet.create({
       color: '#000000',
       fontSize: 16,
     },
+    MapTypeMenuStyle: {
+      position: 'absolute',//use absolute position to show button on top of the map
+      top: '3%', //for top align
+      left: '80%',
+      alignSelf: 'flex-start', //for align to right 
+      borderRadius: 20,
+      color: 'transparent',
+    }
   });
   

@@ -6,13 +6,15 @@ import SQLite from "react-native-sqlite-storage";
       {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
       console.log("Database OPEN");
         DB.transaction((tx) => {
+          tx.executeSql('PRAGMA foreign_keys = ON', [], (tx, results) => {
+        });
           console.log("execute transaction");
           tx.executeSql('CREATE TABLE IF NOT EXISTS TrackingUsers(user_id INTEGER PRIMARY KEY AUTOINCREMENT, phone_no VARCHAR(12) unique not null , first_name VARCHAR(20) not null, last_name VARCKAR(20) not null, age integer not null, marker_color text not null )', [], (tx, results) => {
             var len = results.rows.length;
             console.log("\n Tracking Users ");
             console.log(JSON.stringify(results) + ' ' + len);
         });
-          tx.executeSql('CREATE TABLE IF NOT EXISTS Locations(loc_id integer primary key autoincrement, user_id INTEGER not null, datatime text not null, latitude text not null, longitude text not null)', [], (tx, results) => {
+          tx.executeSql('CREATE TABLE IF NOT EXISTS Locations(loc_id integer primary key autoincrement, user_id INTEGER not null, datatime text not null, latitude text not null, longitude text not null, FOREIGN KEY (user_id) REFERENCES TrackingUsers (user_id) ON DELETE CASCADE)', [], (tx, results) => {
             var len = results.rows.length;
             console.log("\n Locations ");
             console.log(JSON.stringify(results) + ' ' + len);

@@ -17,6 +17,8 @@ import SmsListener from 'react-native-android-sms-listener';
 import SQLite from "react-native-sqlite-storage";
 import SmsAndroid  from 'react-native-get-sms-android';
 import {initDatabase} from './initDatabase.js';
+import {InsertUser} from './insertUser.js';
+import {deleteUser} from './deleteUser.js';
 import {styles} from '../style.js';
 
 export default class AddNewPerson extends Component {
@@ -36,6 +38,7 @@ export default class AddNewPerson extends Component {
             first_name: '',
             last_name: '',
             phone_no: '',
+            delete_phone_no: '',
             age: 0,
             color: 'red',
             answer: undefined,
@@ -52,16 +55,6 @@ export default class AddNewPerson extends Component {
         this.parseMessage(message);
     });
   }
-
-  componentWillUnmount(){
-    this.props.navigation.setParams({refresh : "true"});
-    //navigation.setParams({callRefresh: this.callRefresh()})
-  }
-
-  // back(){
-  //   const {goBack} = this.props.navigation;
-  //   goBack();
-  // }
 
     AddButtonPress() {
       this.setState({canceled: false});
@@ -108,7 +101,7 @@ export default class AddNewPerson extends Component {
       });
     }
 
-    parseMessage(message){ 
+    async parseMessage(message){ 
       var a = message.originatingAddress.split(' ')
       var b = this.state.phone_no.split(' ')
       var n = a[0].localeCompare(b[0]);
@@ -120,7 +113,8 @@ export default class AddNewPerson extends Component {
             if(res[2] == 'yes'){
               this.setState({answer: res[2]})
               console.log('yes ');
-              this.InsertUser();
+              await InsertUser(this.state.phone_no,this.state.first_name,this.state.last_name,this.state.age,this.state.color);
+              this.props.navigation.navigate('Map',{refresh : this.state.phone_no, addRemove: "add"});
             } else {
               this.setState({answer: 'no'})
               alert("I can't access");
@@ -128,29 +122,20 @@ export default class AddNewPerson extends Component {
       }} 
     }
   
-    InsertUser(){
-      SQLite.openDatabase(
-        {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
-        DB.transaction((tx) => {
-        console.log("execute transaction");
-        tx.executeSql('insert into TrackingUsers(phone_no, first_name, last_name, age, marker_color) values (?,?,?,?,?)', 
-          [this.state.phone_no,this.state.first_name, this.state.last_name, this.state.age, this.state.color],
-             (tx, results) => {
-              console.log('Results', results.rowsAffected);
-              if (results.rowsAffected > 0) {
-                this.setState({modalVisible: false})
-                alert('Success'+'\n'+'You are Registered Successfully');
-                this.props.navigation.navigate('Map',{refresh : true});
-                //this.back();
-              } else {
-                alert('Registration Failed');
-              }
-   });});});
-  }
-  
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
     this.setState({canceled: true});
+  }
+
+  DeleteButton(){
+    //this.setState({canceled: false});
+    if (this.state.delete_phone_no == ''){
+        alert("Please fill in the blanks!")
+    } else {
+      console.log('delete user by phone : '+this,this.state.delete_phone_no);
+      deleteUser(this.state.delete_phone_no);
+      this.props.navigation.navigate('Map',{refresh : this.state.delete_phone_no, addRemove: "remove"});
+    }
   }
 
     render() {
@@ -269,6 +254,29 @@ export default class AddNewPerson extends Component {
                       </View>
                     </View>
                   </Modal>
+
+                  <View style={[styles.inputContainer, {marginTop: 50}]}>
+                    <Icon name={'md-phone-portrait'} size={18} color={'gray'}
+                      style={styles.inputIcon}/>
+                    <TextInput 
+                      style={styles.addinput}
+                      placeholder={'phone number'}
+                      placeholderTextColor={'gray'}
+                      underlineColorAndroid='transparent'
+                      onChangeText={txt => {
+                        console.log(txt)
+                        this.setState({delete_phone_no: txt.split(' ')[0]})
+                        console.log('after : ' + this.state.Dlete_phone_no)
+                      }}
+                    />
+                 </View>
+                 <View style={[styles.btnContainer,{marginTop: 15, alignSelf: 'center'}]}>
+                  <TouchableOpacity style={styles.btnLogin}
+                    onPress={this.DeleteButton.bind(this)}>
+                    <Text style={styles.text}>Delete</Text>
+                  </TouchableOpacity>
+                </View>
+
                 </View>
 
           </ImageBackground>
