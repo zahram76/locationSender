@@ -49,7 +49,11 @@ export default class Map  extends React.Component {
               mapType={this.state.mapType}
               region={this.state.region} 
               onRegionChangeComplete ={ (region) => {this.setState({ region})}}
-              onIndoorBuildingFocused={(IndoorBuilding) => console.log(IndoorBuilding)}>
+              onIndoorBuildingFocused={(IndoorBuilding) => console.log(IndoorBuilding)}
+              showsBuildings={true}
+              showsCompass={true}
+              //onMoveShouldSetResponder={this.draggedMap}
+              >
               
               {this.state.Markers.map(poly => {
                 if(this.state.isReady == true){
@@ -140,7 +144,9 @@ export default class Map  extends React.Component {
                 routeCoordinates: routeCoordinates.concat([newCoordinate]),
                 distanceTravelled:
                   distanceTravelled, //+ this.calcDistance(newCoordinate, index),
-                prevLatLng: newCoordinate};
+                prevLatLng: newCoordinate,
+                color: a[index].color,
+                title: a[index].title };
     this.setState({Markers: a});
   }
 
