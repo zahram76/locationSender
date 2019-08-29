@@ -25,10 +25,6 @@ export default class Profile  extends React.Component {
   _menu = null;
 
   
-  componentWillUnmount(){
-    const {params} = this.props.navigation.state;
-    params.callRefresh();
-  }
   
   render() {
     var bgColor = '#DCE3F4';

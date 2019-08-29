@@ -30,12 +30,6 @@ export default class database extends Component {
     ToastAndroid.show('Hello!!', ToastAndroid.SHORT);
   }
 
-  
-  componentWillUnmount(){
-    const {params} = this.props.navigation.state;
-    params.callRefresh();
-  }
-
   addOne() {
     this.setState({number: this.state.number+1});
     this.timer = setTimeout(this.addOne, 100);

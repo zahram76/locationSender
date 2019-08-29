@@ -12,6 +12,7 @@ import {MapTypeMenu} from './MapTypeMenu.js';
 import {requestPermission} from './GetPermissions.js';
 import {insertLocation} from './WriteLocation.js';
 import { deleteUser } from "./deleteUser.js";
+import {CurrentLocationButton} from '../component/CurrentLocationButton'
 
 let { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
@@ -44,14 +45,16 @@ export default class Map  extends React.Component {
     return (
       <View style={{flex: 1}}> 
           <MapView
-              ref={ref => {this.map = ref;}}
+              ref={ref => {this.map = ref}}
               style={{flex:1, height: '100%', width: '100%'}}
               mapType={this.state.mapType}
-              region={this.state.region} 
-              onRegionChangeComplete ={ (region) => {this.setState({ region})}}
-              onIndoorBuildingFocused={(IndoorBuilding) => console.log(IndoorBuilding)}
-              showsBuildings={true}
+              initialRegion={this.state.region}
+              //region={this.state.region} 
+              //onRegionChangeComplete ={ (region) => {this.setState({ region})}}
+              //onIndoorBuildingFocused={(IndoorBuilding) => console.log(IndoorBuilding)}
+              //showsBuildings={true}
               showsCompass={true}
+              //onLayout={() => this.fitAllMarkers()}
               //onMoveShouldSetResponder={this.draggedMap}
               >
               
@@ -68,6 +71,7 @@ export default class Map  extends React.Component {
                 if(this.state.isReady == true){
                   return (
                     <Marker.Animated
+                        ref={ref => {this.marker = ref}}
                         key={`marker_${marker.index}`}
                         tracksViewChanges={true}
                         coordinate={{
@@ -82,12 +86,18 @@ export default class Map  extends React.Component {
             <View  style={styles.MapTypeMenuStyle}>
               <MapTypeMenu onChange={mapType => this.setState({mapType})}></MapTypeMenu>
             </View>
+            <CurrentLocationButton cb ={() => {this.centerMap(500)}}/>  
         </View>
     );
   }
   
   componentDidUpdate(){
     //this.fitAllMarkers();
+  }
+
+  fotTOsupliedMarker(){
+    this.map.fitToSuppliedMarkers([`marker_0`],{edgePadding: DEFAULT_PADDING,
+    animated: true,});
   }
 
   fitAllMarkers() {
@@ -124,6 +134,21 @@ export default class Map  extends React.Component {
   componentWillUnmount(){
     // Remove the event listener before removing the screen from the stack
     this.focusListener.remove();
+  }
+
+  centerMap(d){
+    const {
+      latitude,longitude,
+      latitudeDelta,longitudeDelta
+    } = this.state.region
+
+    console.log(JSON.stringify(this.state.region))
+
+    this.map.animateToRegion({
+      latitude,longitude,latitudeDelta,longitudeDelta
+    }, d);
+    console.log(latitude+' '+longitude+' '+
+      latitudeDelta+' '+longitudeDelta)
   }
 
   animateMarker (index){
@@ -169,6 +194,11 @@ export default class Map  extends React.Component {
           const lo =  parseFloat( parseFloat(long.split('.'[1])));
 
           let coords = {latitude: la, longitude: lo};
+          this.setState({region: {latitude: la, longitude: lo, 
+            latitudeDelta: this.state.region.latitudeDelta,
+            longitudeDelta: this.state.region.longitudeDelta,
+          }})
+          this.centerMap(100)
           let a = this.state.coordinates;
           a[index] = coords;
           this.setState({coordinates : a});

@@ -3,12 +3,15 @@ import {
   View, 
   Text, 
   Image,
+  Dimensions
 } from "react-native";
 import { Menu as Menu1, MenuProvider,renderers,
    MenuOptions, MenuOption, MenuTrigger} from "react-native-popup-menu";
 
 //onBackdropPress={() => }
 const { ContextMenu, SlideInMenu, Popover } = renderers;
+const height = Dimensions.get('window').height;
+const width = Dimensions.get('window').width;
 
 export const MapTypeMenu= ({onChange}) => { // onchange for pass value to map
     console.log('in map type menu');
@@ -21,11 +24,21 @@ export const MapTypeMenu= ({onChange}) => { // onchange for pass value to map
 
         <MenuTrigger  >
           <View style={{ 
-              backgroundColor: "rgba(255,255,255,0.8)",
               paddingHorizontal: 7,
               paddingVertical: 7,
               borderRadius: 20,
-              color: 'transparent',
+              zIndex: 9,
+              //position: 'absolute',
+              width: 45,
+              height: 45,
+              backgroundColor: '#fff',
+              borderRadius: 50,
+              shadowColor: '#000000',
+              elevation: 7,
+              shadowRadius: 5,
+              shadowOpacity: 1.0,
+              justifyContent: 'space-around',
+              alignItems: 'center',
             }}>
             <Image style={{
               width: 28, height: 28
