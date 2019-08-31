@@ -49,14 +49,7 @@ export default class Map  extends React.Component {
               style={{flex:1, height: '100%', width: '100%'}}
               mapType={this.state.mapType}
               initialRegion={this.state.region}
-              //region={this.state.region} 
-              //onRegionChangeComplete ={ (region) => {this.setState({ region})}}
-              //onIndoorBuildingFocused={(IndoorBuilding) => console.log(IndoorBuilding)}
-              //showsBuildings={true}
-              showsCompass={true}
-              //onLayout={() => this.fitAllMarkers()}
-              //onMoveShouldSetResponder={this.draggedMap}
-              >
+              showsCompass={true}>
               
               {this.state.Markers.map(poly => {
                 if(this.state.isReady == true){
@@ -273,16 +266,7 @@ export default class Map  extends React.Component {
             console.log(' reading tracking users please wait :) ' + results.rows.length ); 
 
              for(i=0; i<results.rows.length; ++i){
-            //   var isRepeat = false;
-            //     for(j=0; j<this.state.TrackingUser.length; ++j){
-            //       if(this.state.TrackingUser[j].user_id == results.rows.item(i).user_id){
-            //         console.log('repeated user :  '+ results.rows.item(i).user_id)
-            //         isRepeat = true;
-            //       }
-            //     }
                 console.log(JSON.stringify(results.rows.item(i))+'\n');
-                // if(isRepeat != true){
-                //   console.log('not repeated')
                   const TrackingUser = {
                     user_id: results.rows.item(i).user_id,
                     phone_no: results.rows.item(i).phone_no.split(' ')[0].toString(),
@@ -295,11 +279,6 @@ export default class Map  extends React.Component {
                   console.log(' marker color = ' + results.rows.item(i).marker_color.split(' ')[0].toString())
                   console.log(' initialize Markers for user with index = ' + i);
 
-                  // var lat = results.rows.item(i).latitude!=null? parseFloat(results.rows.item(i).latitude.toString()): 0;
-                  // var long = results.rows.item(i).longitude!=null? parseFloat(results.rows.item(i).longitude.toString()): 0;
-
-                  // console.log(' lat : ' + lat+ ' long : '+long)
-                  
                   this.state.Markers.push({
                     latitude: 0,
                     longitude: 0,
@@ -315,13 +294,10 @@ export default class Map  extends React.Component {
                     color: results.rows.item(i).marker_color.split(' ')[0].toString(),
                     index: i,
                   });
-                  //this.setState({Markers : a});
                   console.log(' Markers color = ' + this.state.Markers[i].color);
                   this.state.coordinates.push({latitude: 0, longitude: 0});
-                  //isRepeat = false;
                 }
                 this.setState({isReady:true});
-          //  }
           } else { alert(' There are no users to track. ')}
         });
       });
