@@ -17,12 +17,20 @@ import com.sender.R;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 // lottie-react-native
 import com.airbnb.android.react.lottie.LottiePackage;
+// react-native-android-location-enabler
+import com.heanoria.library.reactnative.locationenabler.RNAndroidLocationEnablerPackage;
 // react-native-android-sms-listener
 import com.centaurwarchief.smslistener.SmsListenerPackage;
+// react-native-geolocation-service
+import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 // react-native-gesture-handler
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
 // react-native-get-sms-android
 import com.react.SmsPackage;
+// react-native-image-picker
+import com.imagepicker.ImagePickerPackage;
+// react-native-image-resizer
+import fr.bamlab.rnimageresizer.ImageResizerPackage;
 // react-native-maps
 import com.airbnb.android.react.maps.MapsPackage;
 // react-native-sqlite-storage
@@ -64,9 +72,13 @@ public class PackageList {
       new MainReactPackage(),
       new AsyncStoragePackage(),
       new LottiePackage(),
+      new RNAndroidLocationEnablerPackage(),
       new SmsListenerPackage(),
+      new RNFusedLocationPackage(),
       new RNGestureHandlerPackage(),
       new SmsPackage(),
+      new ImagePickerPackage(),
+      new ImageResizerPackage(),
       new MapsPackage(),
       new SQLitePluginPackage(),
       new VectorIconsPackage()

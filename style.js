@@ -224,15 +224,26 @@ export const styles = StyleSheet.create({
       backgroundColor: '#ffffff',
       borderColor: '#ffffff'
     },
+    // addinput: {
+    //   width: WIDTH-55,
+    //   height: 45,
+    //   borderRadius: 25,
+    //   fontSize: 16,
+    //   paddingLeft: 45,
+    //   backgroundColor: 'rgba(0,0,0,0.05)',
+    //   color: '#000000',
+    //   marginHorizontal: 25
+    // },
     addinput: {
-      width: WIDTH-55,
-      height: 45,
-      borderRadius: 25,
+      zIndex: 9,
+      //borderBottomColor: '#BFBFBF',
+      borderBottomWidth: 1,
+      height: 40,
       fontSize: 16,
-      paddingLeft: 45,
-      backgroundColor: 'rgba(0,0,0,0.05)',
+      paddingLeft: 25, // if have icon
       color: '#000000',
-      marginHorizontal: 25
+      marginLeft: 15,
+      marginRight: 10
     },
     pickerTextBack: {
       width: 150,
@@ -254,6 +265,11 @@ export const styles = StyleSheet.create({
       top: '3%', //for top align
       left: '80%',
       alignSelf: 'flex-start', //for align to right 
+      borderRadius: 20,
+      color: 'transparent',
+    },
+    currentMap: {
+      position: 'absolute',//use absolute position to show button on top of the map
       borderRadius: 20,
       color: 'transparent',
     }

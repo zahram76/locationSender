@@ -23,9 +23,11 @@ import ForgotPass from './screens/ForgotPass.js';
 import AuthLoadingScreen from './screens/AuthLoading.js';
 import database from './screens/database.js';
 import AddNewPerson from './screens/AddNewPerson';
+import FlatListComponent from './screens/FlatList.js'
 import getDestPhone from './screens/getDestPhoneNumber';
 
 
+const color = '#028687';
 // const AppDrawerNavigator = createDrawerNavigator({
 //   Map: { screen: Map },
 //   Profile: { screen: Profile },
@@ -57,23 +59,13 @@ const AppStack = createStackNavigator({
   },
   Profile: {
     screen: Profile,  
-    navigationOptions: {
-      title: 'Profile',
-      headerStyle: {
-        backgroundColor: '#16A085',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold',
-      },
-    },
    },
    database: {
     screen: database,
     navigationOptions: {
       title: 'Database',
       headerStyle: {
-        backgroundColor: '#16A085',
+        backgroundColor: color,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
@@ -81,34 +73,31 @@ const AppStack = createStackNavigator({
       },
     },
    },
-   AddPerson: {
-    screen: AddNewPerson,
+   FlatListComponent: {
+    screen: FlatListComponent,
     navigationOptions: {
-      title: 'Add Person',
+      title: 'flat list',
       headerStyle: {
-        backgroundColor: '#16A085',
+        backgroundColor: color,
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
         fontWeight: 'bold',
       },
     },
+  },
+   AddPerson: {
+    screen: AddNewPerson,
    }
 },
-// {
-//   contentComponent: CustomeDrawerComponent,
-//   drawerPosition: 'Right',
-//   drawerLockMode: 'unlocked',
-// }
+{
+  // contentComponent: CustomeDrawerComponent,
+  // drawerPosition: 'Right',
+  // drawerLockMode: 'unlocked',
+}
 );
 
 const AuthStack = createStackNavigator({ 
-  // getDestPhone: {
-  //   screen: getDestPhone,
-  //   navigationOptions: {
-  //     header: null, //this will hide the header
-  //     },
-  // },
   SignIn: { 
     screen: SignIn ,
     navigationOptions: {

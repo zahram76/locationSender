@@ -7,12 +7,11 @@ export function deleteUser(phone_no){
         tx.executeSql('DELETE FROM TrackingUsers where phone_no=?', [phone_no], (tx, results) => {
               console.log('Results', results.rowsAffected);
               if (results.rowsAffected > 0) {
-                alert(
+                console.log(
                   'Success'+'\n'+'user deleted successfully') 
                 } else {
-                    alert(
-                        'no user to delete') 
-                }
+                    console.log('no user to delete') 
+                }  
 
                   
         })})});

@@ -10,22 +10,22 @@ import Menu, { MenuItem } from 'react-native-material-menu';
 import Icon from "react-native-vector-icons/Ionicons";
 import AsyncStorage from '@react-native-community/async-storage';
 
+
+const color = '#028687';
 export default class Profile  extends React.Component {
-  constructor(props) {
-    super(props);
-    const { navigation } = this.props;
-    const data = navigation.getParam('saveSession', true);    
-    this.onValueChange = this.onValueChange.bind(this);
+  constructor() {
+    super();
+    // const { navigation } = this.props;
+    // const data = navigation.getParam('saveSession', true);    
+    // this.onValueChange = this.onValueChange.bind(this);
     this.state ={
-        saveSession : data,
+        //saveSession : data,
         switchValue: false
     };
   }
   
   _menu = null;
 
-  
-  
   render() {
     var bgColor = '#DCE3F4';
     return (     
@@ -91,9 +91,9 @@ export default class Profile  extends React.Component {
 
   static navigationOptions = ({ navigation }) => {
     return {
-        title: 'Map',
+        title: 'Profile',
         headerStyle: {
-          backgroundColor: '#16A085',
+          backgroundColor: color,
           barStyle: "light-content", // or directly
         },
         headerTintColor: '#fff',

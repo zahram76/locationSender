@@ -1,0 +1,144 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.sender"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="28" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:5:5-77
+11-->C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:5:22-75
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:4:5-67
+12-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:4:22-64
+13    <uses-permission android:name="android.permission.READ_SMS" />
+13-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:5:5-67
+13-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:5:22-64
+14    <uses-permission android:name="android.permission.WRITE_SMS" />
+14-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:6:5-68
+14-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:6:22-65
+15    <uses-permission android:name="android.permission.SEND_SMS" />
+15-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:7:5-67
+15-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:7:22-64
+16    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+16-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:8:5-79
+16-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:8:22-76
+17    <uses-permission android:name="android.permission.CAMERA" />
+17-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:9:5-64
+17-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:9:22-62
+18    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+18-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:10:5-80
+18-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:10:22-78
+19    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+19-->[:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-70
+19-->[:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:22-67
+20    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+20-->[:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+20-->[:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:22-76
+21    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+21-->[:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-81
+21-->[:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-78
+22
+23    <uses-feature
+23-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:26:5-28:35
+24        android:glEsVersion="0x00020000"
+24-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:27:9-41
+25        android:required="true" />
+25-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:28:9-32
+26
+27    <application
+27-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:12:5-33:19
+28        android:name="com.sender.MainApplication"
+28-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:13:7-38
+29        android:allowBackup="false"
+29-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:17:7-34
+30        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+30-->[androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72b2b92ec4ab73ff21fb9bc348de3b22\core-1.0.1\AndroidManifest.xml:22:18-86
+31        android:debuggable="true"
+32        android:icon="@mipmap/ic_launcher"
+32-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:15:7-41
+33        android:label="@string/app_name"
+33-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:14:7-39
+34        android:roundIcon="@mipmap/ic_launcher_round"
+34-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:16:7-52
+35        android:theme="@style/AppTheme"
+35-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:18:7-38
+36        android:usesCleartextTraffic="true" >
+36-->C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:7:18-53
+37        <activity
+37-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:19:7-28:18
+38            android:name="com.sender.MainActivity"
+38-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:20:9-37
+39            android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
+39-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:22:9-79
+40            android:label="@string/app_name"
+40-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:21:9-41
+41            android:windowSoftInputMode="adjustResize" >
+41-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:23:9-51
+42            <intent-filter>
+42-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:24:9-27:25
+43                <action android:name="android.intent.action.MAIN" />
+43-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:25:13-65
+43-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:25:21-62
+44
+45                <category android:name="android.intent.category.LAUNCHER" />
+45-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:26:13-73
+45-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:26:23-70
+46            </intent-filter>
+47        </activity>
+48        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity" />
+48-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:29:7-84
+48-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:29:17-81
+49
+50        <meta-data
+50-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:30:9-32:70
+51            android:name="com.google.android.geo.API_KEY"
+51-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:31:13-58
+52            android:value="AIzaSyAbMAWVMRM-DsrRSIUqiCQis-YuelZG_S4" />
+52-->C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:32:13-68
+53
+54        <provider
+54-->[:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:9-18:20
+55            android:name="com.imagepicker.FileProvider"
+55-->[:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-56
+56            android:authorities="com.sender.provider"
+56-->[:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-60
+57            android:exported="false"
+57-->[:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-37
+58            android:grantUriPermissions="true" >
+58-->[:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-47
+59            <meta-data
+59-->[:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-17:58
+60                android:name="android.support.FILE_PROVIDER_PATHS"
+60-->[:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:17-67
+61                android:resource="@xml/provider_paths" />
+61-->[:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-55
+62        </provider> <!-- Needs to be explicitly declared on P+ -->
+63        <uses-library
+63-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:33:9-35:40
+64            android:name="org.apache.http.legacy"
+64-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:34:13-50
+65            android:required="false" />
+65-->[com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:35:13-37
+66
+67        <activity
+67-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+68            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+68-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+69            android:exported="false"
+69-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+70            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+70-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+71
+72        <meta-data
+72-->[com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:8:9-10:69
+73            android:name="com.google.android.gms.version"
+73-->[com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:9:13-58
+74            android:value="@integer/google_play_services_version" />
+74-->[com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:10:13-66
+75    </application>
+76
+77</manifest>

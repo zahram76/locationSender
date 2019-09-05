@@ -1,68 +1,72 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-33:12
-INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-33:12
-INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-33:12
-INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-33:12
-MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-33:12
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-35:12
+INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-35:12
+INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-35:12
+INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-35:12
+MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-35:12
 MERGED from [:react-native-sqlite-storage] C:\Users\Zahra\reactproject\sender\node_modules\react-native-sqlite-storage\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:@react-native-community_async-storage] C:\Users\Zahra\reactproject\sender\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-android-location-enabler] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-location-enabler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-14:12
+MERGED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-21:12
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-12:12
 MERGED from [:react-native-vector-icons] C:\Users\Zahra\reactproject\sender\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a38c9716f30ae6db40318f97ffa489c\AndroidManifest.xml:2:1-13:12
-MERGED from [org.webkit:android-jsc:r245459] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fae4ae7404758cc601bdb6d6ff25f339\AndroidManifest.xml:2:1-11:12
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\26c2f81da2583ba67cef64a45d77e6cd\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:animated-gif:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8ef72fdf1c54b2a770cf3e84bf884002\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:animated-webp:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\c47060e84832afa711fc2957dbe9d347\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:webpsupport:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b040b34d413c423fbfe864e9e570de47\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f97b1494bd0e268bded6b2a52140dde0\jetified-react-native-0.60.0\AndroidManifest.xml:2:1-13:12
+MERGED from [org.webkit:android-jsc:r245459] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6224978c44c9db0c1e30902cf2f4a183\android-jsc-r245459\AndroidManifest.xml:2:1-11:12
+MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fe6d86434b2cc10069406ca45468fa6e\fresco-2.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:animated-gif:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b5c1fc65e582bd0ceedb630cf3dc6db8\animated-gif-1.14.2\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:animated-webp:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bd67c4e1e62c6d75c268addc2777b8ce\animated-webp-1.14.2\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:webpsupport:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\395a1a2365471d6328c72528aaddbfd5\webpsupport-1.14.2\AndroidManifest.xml:2:1-9:12
 MERGED from [:react-native-gesture-handler] C:\Users\Zahra\reactproject\sender\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
 MERGED from [:react-native-get-sms-android] C:\Users\Zahra\reactproject\sender\node_modules\react-native-get-sms-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-15:12
-MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:2:1-11:12
-MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fb14ca5c162aef18b735e74b7c5f5cca\AndroidManifest.xml:17:1-22:12
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6cea93f2db1853de5a5661b0343c9e7e\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:animated-base:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f41050e4dc1b29888025568041bec431\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:animated-drawable:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d197961bbd4b734caf7b283f37934533\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a74078043bf794c465db37951a72270\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1b753acb540ef8c0479c8ad99dc3cbc3\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5c78be5ac6244e7c9daa3108edeaa6f7\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ae01d9058e5d69d8fec3a572fa7d4bb5\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\be3e345bce1ff9cf82efe2198794e8a1\AndroidManifest.xml:2:1-9:12
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5d4b4534f656c66690bf7dcc9b006b96\AndroidManifest.xml:2:1-13:12
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\82464f5c05cfeb4ec4dd817fd9cd84c5\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:17:1-38:12
-MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:17:1-29:12
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31a067dd4f76e34061441e318d0e38be\AndroidManifest.xml:2:1-13:12
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d2ce2ac2c16faef2e65b816e1271c627\AndroidManifest.xml:2:1-9:12
-MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c95aed1e82f8b217f40563a0d583040\AndroidManifest.xml:17:1-28:12
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\54b7941673e415ce905743a47ae38e97\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8c41620235d2b7286e0a32f740dca841\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\110786513aa35ae15598e70445336e18\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8a8f1c98daff24ddfddf9d1d50c9f0b3\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\22a55f55b95037b25ad21110c0ebcf34\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\21e431d44f6aa80da4960788f8e7c1f3\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bbc0fa3df1d2c6fb3cb49f469581e63b\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\513e8308a621b904fffc76ab7658df89\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\53a4d7bf30a830b100a4d85eb59384b2\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bb9895ef1707bc51b3895705241f689b\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\568824665a33627c6d50dfba8ca7cba8\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\40909a0e8be6d8a96fc99963ed17f811\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a30717de9a51c586efbe9026e2d111a3\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\62cddb9b6b6351c59c884c1ac770b3fc\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.media:media:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a2906fbd5b6f0f4aba3b0c875145b0de\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\23ef4f064e2b2caa714359fab8619306\AndroidManifest.xml:17:1-24:12
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9ca35e3c611798e8de4e95f92c6ef4dd\AndroidManifest.xml:17:1-25:12
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6baa45fb00211e9305d69d5e54277e53\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4bcf57feb9f2bd62bee33fadc82edebb\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\250569f4833faedea464f151166e0970\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\af9fcae1184d07ddc9839e6980b61cf2\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.print:print:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72488c7e972bcfdecc8e2cc646dfe272\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\94b325da8a681995e48edf65a9a68b16\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3d47186957b294b974fdf8914e13ed5d\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8adf4d492e4662cd238e22b718005a73\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fecefae94b245f90e5cf0e067fa67ca7\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b94b69d7810491c4beb2ea96265f9259\AndroidManifest.xml:17:1-22:12
+MERGED from [:react-native-image-resizer] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-resizer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:2:1-11:12
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\86b30ed96c1feb64a9987b4d590113b2\lottie-3.0.0\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f6a183f8595ca34f3d5cc99d1f8bc322\appcompat-1.0.2\AndroidManifest.xml:17:1-22:12
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\508b1392ff208ddd75400b325cf40262\imagepipeline-okhttp3-2.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:animated-base:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ac67a33df5264fefb51094675c47ecb6\animated-base-1.14.2\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:animated-drawable:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fe0a0290da168fa612b7fa571aa38bdd\animated-drawable-1.14.2\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9f9d5f9afa5c7eba3bfe5df14b9689f6\drawee-2.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\51fe305f545284ab77d04b26f23360d0\nativeimagefilters-2.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\dd100bd7c919d716b2cef49f38c6c1e9\imagepipeline-2.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\47fb9539af38cd90237414917983afe0\nativeimagetranscoder-2.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\341a7838e3e1075329ef67ac2360bee6\imagepipeline-base-2.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e954bd1e9ad0832fdb169a5f4a5e5b07\soloader-0.6.0\AndroidManifest.xml:2:1-13:12
+MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4456ec454da32a2d530abb11cb4373e6\jetified-fbcore-2.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3c441937713772a721e73be8f405662d\play-services-location-17.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:2:1-13:12
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e97d49e25e749bf64ddb03a7a6947c47\play-services-places-placereport-17.0.0\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3087f829ad78da1f0d52970740cc50c8\play-services-tasks-17.0.0\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3f5124f9c8ea77d4f65f2bfbf835d6cd\jetified-play-services-basement-17.0.0\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4f37a040d795d0eef135b10b20545e3f\fragment-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d382ba9b8c9ea9d7b43a9cfaea0ecdf4\vectordrawable-animated-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\abc680e55824c418c024460e31034ed4\legacy-support-core-ui-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ba2af06f417607d7ef1ca9f201a0d139\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\324a702de98e8e0560de88ae82ee3427\vectordrawable-1.0.1\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\331f61861c2d3a925f2252286afb1f53\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f3997ce16a5c00ae84a772d300d0e1e8\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\04087833f388d5ffa97a080d757646c2\coordinatorlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\34085af895daa23049fd0af188e6a001\drawerlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\eb11c4797d5d5b24d5dcbbebe26babf4\slidingpanelayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\740a70a0c89c8c085b6e012b4bd7790e\customview-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31dc29ba3158cee4b1ca2bf2f6ff141b\swiperefreshlayout-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\435f1166e6a428a0025d9cd273cb35a2\asynclayoutinflater-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72b2b92ec4ab73ff21fb9bc348de3b22\core-1.0.1\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\07608d1ce0a2b5e25216bbe877b06158\versionedparcelable-1.0.0\AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\aa91d8d2653c363bbd5da9d9892260d3\cursoradapter-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\684c19030ab34291fff8f6b761838da8\lifecycle-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9d52be8c254a228a91eaf05f51d52923\documentfile-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9093771a98b01557e81860f4122d7892\localbroadcastmanager-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\7ec682ca46f5c90ea9a9e0cba0c0310a\print-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\85b59553d84ac8d04663d7d81848664c\lifecycle-viewmodel-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d4ef17d609918d2a5f5a86d1ea02678f\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:2:1-8:12
 INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:2:1-8:12
 INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:2:1-8:12
@@ -73,13 +77,13 @@ INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidMa
 		INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml
 	android:versionName
 		INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-33:12
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-35:12
 		INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml
 	xmlns:tools
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:3:5-51
 	android:versionCode
 		INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-33:12
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:1-35:12
 		INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:1:11-69
@@ -87,10 +91,12 @@ uses-permission#android.permission.INTERNET
 ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:4:5-67
 MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
+MERGED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
+MERGED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-67
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:24:5-67
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:24:5-67
 	android:name
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:4:22-64
 uses-permission#android.permission.READ_SMS
@@ -113,88 +119,104 @@ MERGED from [:react-native-get-sms-android] C:\Users\Zahra\reactproject\sender\n
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:7:22-64
 uses-permission#android.permission.ACCESS_FINE_LOCATION
 ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:8:5-79
+MERGED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
+MERGED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:5-79
 	android:name
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:8:22-76
+uses-permission#android.permission.CAMERA
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:9:5-64
+	android:name
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:9:22-62
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:10:5-80
+	android:name
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:10:22-78
 application
-ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:10:5-31:19
-MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:10:5-31:19
-MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:10:5-31:19
-MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a38c9716f30ae6db40318f97ffa489c\AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a38c9716f30ae6db40318f97ffa489c\AndroidManifest.xml:11:5-20
-MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:9:5-20
-MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:9:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5d4b4534f656c66690bf7dcc9b006b96\AndroidManifest.xml:11:5-20
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5d4b4534f656c66690bf7dcc9b006b96\AndroidManifest.xml:11:5-20
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:30:5-36:19
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:30:5-36:19
-MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:22:5-27:19
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31a067dd4f76e34061441e318d0e38be\AndroidManifest.xml:7:5-11:19
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31a067dd4f76e34061441e318d0e38be\AndroidManifest.xml:7:5-11:19
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d2ce2ac2c16faef2e65b816e1271c627\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d2ce2ac2c16faef2e65b816e1271c627\AndroidManifest.xml:7:5-20
-MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c95aed1e82f8b217f40563a0d583040\AndroidManifest.xml:22:5-26:19
-MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c95aed1e82f8b217f40563a0d583040\AndroidManifest.xml:22:5-26:19
-MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\23ef4f064e2b2caa714359fab8619306\AndroidManifest.xml:22:5-89
-MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\23ef4f064e2b2caa714359fab8619306\AndroidManifest.xml:22:5-89
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9ca35e3c611798e8de4e95f92c6ef4dd\AndroidManifest.xml:22:5-23:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9ca35e3c611798e8de4e95f92c6ef4dd\AndroidManifest.xml:22:5-23:19
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:12:5-33:19
+MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:12:5-33:19
+MERGED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:12:5-33:19
+MERGED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-19:19
+MERGED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-19:19
+MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f97b1494bd0e268bded6b2a52140dde0\jetified-react-native-0.60.0\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f97b1494bd0e268bded6b2a52140dde0\jetified-react-native-0.60.0\AndroidManifest.xml:11:5-20
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\86b30ed96c1feb64a9987b4d590113b2\lottie-3.0.0\AndroidManifest.xml:9:5-20
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\86b30ed96c1feb64a9987b4d590113b2\lottie-3.0.0\AndroidManifest.xml:9:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e954bd1e9ad0832fdb169a5f4a5e5b07\soloader-0.6.0\AndroidManifest.xml:11:5-20
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e954bd1e9ad0832fdb169a5f4a5e5b07\soloader-0.6.0\AndroidManifest.xml:11:5-20
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3c441937713772a721e73be8f405662d\play-services-location-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3c441937713772a721e73be8f405662d\play-services-location-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:7:5-11:19
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:7:5-11:19
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e97d49e25e749bf64ddb03a7a6947c47\play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e97d49e25e749bf64ddb03a7a6947c47\play-services-places-placereport-17.0.0\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3087f829ad78da1f0d52970740cc50c8\play-services-tasks-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3087f829ad78da1f0d52970740cc50c8\play-services-tasks-17.0.0\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3f5124f9c8ea77d4f65f2bfbf835d6cd\jetified-play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3f5124f9c8ea77d4f65f2bfbf835d6cd\jetified-play-services-basement-17.0.0\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72b2b92ec4ab73ff21fb9bc348de3b22\core-1.0.1\AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72b2b92ec4ab73ff21fb9bc348de3b22\core-1.0.1\AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\07608d1ce0a2b5e25216bbe877b06158\versionedparcelable-1.0.0\AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\07608d1ce0a2b5e25216bbe877b06158\versionedparcelable-1.0.0\AndroidManifest.xml:22:5-23:19
 	android:appComponentFactory
-		ADDED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\23ef4f064e2b2caa714359fab8619306\AndroidManifest.xml:22:18-86
+		ADDED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72b2b92ec4ab73ff21fb9bc348de3b22\core-1.0.1\AndroidManifest.xml:22:18-86
 	android:label
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:12:7-39
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:12:7-39
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:14:7-39
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:14:7-39
 	tools:ignore
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:7:75-114
 	android:roundIcon
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:14:7-52
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:14:7-52
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:16:7-52
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:16:7-52
 	tools:targetApi
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:7:54-74
 	android:icon
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:13:7-41
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:13:7-41
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:15:7-41
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:15:7-41
 	android:allowBackup
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:15:7-34
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:15:7-34
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:17:7-34
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:17:7-34
 	android:theme
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:16:7-38
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:16:7-38
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:18:7-38
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:18:7-38
 	android:usesCleartextTraffic
 		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml:7:18-53
 	android:name
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:11:7-38
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:11:7-38
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:13:7-38
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:13:7-38
 activity#com.sender.MainActivity
-ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:17:7-26:18
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:19:7-28:18
 	android:label
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:19:9-41
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:21:9-41
 	android:windowSoftInputMode
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:21:9-51
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:23:9-51
 	android:configChanges
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:20:9-79
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:22:9-79
 	android:name
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:18:9-37
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:20:9-37
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:22:9-25:25
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:24:9-27:25
 action#android.intent.action.MAIN
-ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:23:13-65
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:25:13-65
 	android:name
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:23:21-62
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:25:21-62
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:24:13-73
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:26:13-73
 	android:name
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:24:23-70
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:26:23-70
 activity#com.facebook.react.devsupport.DevSettingsActivity
-ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:27:7-84
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:29:7-84
 	android:name
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:27:17-81
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:29:17-81
 meta-data#com.google.android.geo.API_KEY
-ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:28:9-30:70
+ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:30:9-32:70
 	android:value
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:30:13-68
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:32:13-68
 	android:name
-		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:29:13-58
+		ADDED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml:31:13-58
 uses-sdk
 INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\main\AndroidManifest.xml
@@ -205,116 +227,124 @@ MERGED from [:@react-native-community_async-storage] C:\Users\Zahra\reactproject
 MERGED from [:@react-native-community_async-storage] C:\Users\Zahra\reactproject\sender\node_modules\@react-native-community\async-storage\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:lottie-react-native] C:\Users\Zahra\reactproject\sender\node_modules\lottie-react-native\src\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-android-location-enabler] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-location-enabler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-android-location-enabler] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-location-enabler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
+MERGED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-vector-icons] C:\Users\Zahra\reactproject\sender\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] C:\Users\Zahra\reactproject\sender\node_modules\react-native-vector-icons\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a38c9716f30ae6db40318f97ffa489c\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a38c9716f30ae6db40318f97ffa489c\AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r245459] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fae4ae7404758cc601bdb6d6ff25f339\AndroidManifest.xml:7:5-9:41
-MERGED from [org.webkit:android-jsc:r245459] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fae4ae7404758cc601bdb6d6ff25f339\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\26c2f81da2583ba67cef64a45d77e6cd\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\26c2f81da2583ba67cef64a45d77e6cd\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:animated-gif:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8ef72fdf1c54b2a770cf3e84bf884002\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:animated-gif:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8ef72fdf1c54b2a770cf3e84bf884002\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:animated-webp:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\c47060e84832afa711fc2957dbe9d347\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:animated-webp:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\c47060e84832afa711fc2957dbe9d347\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:webpsupport:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b040b34d413c423fbfe864e9e570de47\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:webpsupport:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b040b34d413c423fbfe864e9e570de47\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f97b1494bd0e268bded6b2a52140dde0\jetified-react-native-0.60.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.react:react-native:0.60.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f97b1494bd0e268bded6b2a52140dde0\jetified-react-native-0.60.0\AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6224978c44c9db0c1e30902cf2f4a183\android-jsc-r245459\AndroidManifest.xml:7:5-9:41
+MERGED from [org.webkit:android-jsc:r245459] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6224978c44c9db0c1e30902cf2f4a183\android-jsc-r245459\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fe6d86434b2cc10069406ca45468fa6e\fresco-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fresco:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fe6d86434b2cc10069406ca45468fa6e\fresco-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:animated-gif:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b5c1fc65e582bd0ceedb630cf3dc6db8\animated-gif-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:animated-gif:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b5c1fc65e582bd0ceedb630cf3dc6db8\animated-gif-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:animated-webp:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bd67c4e1e62c6d75c268addc2777b8ce\animated-webp-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:animated-webp:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bd67c4e1e62c6d75c268addc2777b8ce\animated-webp-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:webpsupport:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\395a1a2365471d6328c72528aaddbfd5\webpsupport-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:webpsupport:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\395a1a2365471d6328c72528aaddbfd5\webpsupport-1.14.2\AndroidManifest.xml:5:5-7:41
 MERGED from [:react-native-gesture-handler] C:\Users\Zahra\reactproject\sender\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-gesture-handler] C:\Users\Zahra\reactproject\sender\node_modules\react-native-gesture-handler\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-get-sms-android] C:\Users\Zahra\reactproject\sender\node_modules\react-native-get-sms-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-get-sms-android] C:\Users\Zahra\reactproject\sender\node_modules\react-native-get-sms-android\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
-MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:5:5-7:41
-MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1ecb9a9caaa87c0940871a9e823f3f76\AndroidManifest.xml:5:5-7:41
-MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fb14ca5c162aef18b735e74b7c5f5cca\AndroidManifest.xml:20:5-44
-MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fb14ca5c162aef18b735e74b7c5f5cca\AndroidManifest.xml:20:5-44
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6cea93f2db1853de5a5661b0343c9e7e\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6cea93f2db1853de5a5661b0343c9e7e\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:animated-base:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f41050e4dc1b29888025568041bec431\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:animated-base:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f41050e4dc1b29888025568041bec431\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:animated-drawable:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d197961bbd4b734caf7b283f37934533\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:animated-drawable:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d197961bbd4b734caf7b283f37934533\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a74078043bf794c465db37951a72270\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3a74078043bf794c465db37951a72270\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1b753acb540ef8c0479c8ad99dc3cbc3\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\1b753acb540ef8c0479c8ad99dc3cbc3\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5c78be5ac6244e7c9daa3108edeaa6f7\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5c78be5ac6244e7c9daa3108edeaa6f7\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ae01d9058e5d69d8fec3a572fa7d4bb5\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ae01d9058e5d69d8fec3a572fa7d4bb5\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\be3e345bce1ff9cf82efe2198794e8a1\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\be3e345bce1ff9cf82efe2198794e8a1\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5d4b4534f656c66690bf7dcc9b006b96\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\5d4b4534f656c66690bf7dcc9b006b96\AndroidManifest.xml:7:5-9:41
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\82464f5c05cfeb4ec4dd817fd9cd84c5\AndroidManifest.xml:5:5-7:41
-MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\82464f5c05cfeb4ec4dd817fd9cd84c5\AndroidManifest.xml:5:5-7:41
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:20:5-44
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31a067dd4f76e34061441e318d0e38be\AndroidManifest.xml:5:5-43
-MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31a067dd4f76e34061441e318d0e38be\AndroidManifest.xml:5:5-43
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d2ce2ac2c16faef2e65b816e1271c627\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d2ce2ac2c16faef2e65b816e1271c627\AndroidManifest.xml:5:5-44
-MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c95aed1e82f8b217f40563a0d583040\AndroidManifest.xml:20:5-44
-MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c95aed1e82f8b217f40563a0d583040\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\54b7941673e415ce905743a47ae38e97\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\54b7941673e415ce905743a47ae38e97\AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8c41620235d2b7286e0a32f740dca841\AndroidManifest.xml:20:5-44
-MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8c41620235d2b7286e0a32f740dca841\AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\110786513aa35ae15598e70445336e18\AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\110786513aa35ae15598e70445336e18\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8a8f1c98daff24ddfddf9d1d50c9f0b3\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8a8f1c98daff24ddfddf9d1d50c9f0b3\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\22a55f55b95037b25ad21110c0ebcf34\AndroidManifest.xml:20:5-44
-MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\22a55f55b95037b25ad21110c0ebcf34\AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\21e431d44f6aa80da4960788f8e7c1f3\AndroidManifest.xml:20:5-44
-MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\21e431d44f6aa80da4960788f8e7c1f3\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bbc0fa3df1d2c6fb3cb49f469581e63b\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bbc0fa3df1d2c6fb3cb49f469581e63b\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\513e8308a621b904fffc76ab7658df89\AndroidManifest.xml:20:5-44
-MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\513e8308a621b904fffc76ab7658df89\AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\53a4d7bf30a830b100a4d85eb59384b2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\53a4d7bf30a830b100a4d85eb59384b2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bb9895ef1707bc51b3895705241f689b\AndroidManifest.xml:20:5-44
-MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\bb9895ef1707bc51b3895705241f689b\AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\568824665a33627c6d50dfba8ca7cba8\AndroidManifest.xml:20:5-44
-MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\568824665a33627c6d50dfba8ca7cba8\AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\40909a0e8be6d8a96fc99963ed17f811\AndroidManifest.xml:20:5-44
-MERGED from [androidx.customview:customview:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\40909a0e8be6d8a96fc99963ed17f811\AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a30717de9a51c586efbe9026e2d111a3\AndroidManifest.xml:20:5-44
-MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a30717de9a51c586efbe9026e2d111a3\AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\62cddb9b6b6351c59c884c1ac770b3fc\AndroidManifest.xml:20:5-44
-MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\62cddb9b6b6351c59c884c1ac770b3fc\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a2906fbd5b6f0f4aba3b0c875145b0de\AndroidManifest.xml:20:5-44
-MERGED from [androidx.media:media:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a2906fbd5b6f0f4aba3b0c875145b0de\AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\23ef4f064e2b2caa714359fab8619306\AndroidManifest.xml:20:5-44
-MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\23ef4f064e2b2caa714359fab8619306\AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9ca35e3c611798e8de4e95f92c6ef4dd\AndroidManifest.xml:20:5-44
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9ca35e3c611798e8de4e95f92c6ef4dd\AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6baa45fb00211e9305d69d5e54277e53\AndroidManifest.xml:20:5-44
-MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\6baa45fb00211e9305d69d5e54277e53\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4bcf57feb9f2bd62bee33fadc82edebb\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4bcf57feb9f2bd62bee33fadc82edebb\AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\250569f4833faedea464f151166e0970\AndroidManifest.xml:20:5-44
-MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\250569f4833faedea464f151166e0970\AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\af9fcae1184d07ddc9839e6980b61cf2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\af9fcae1184d07ddc9839e6980b61cf2\AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72488c7e972bcfdecc8e2cc646dfe272\AndroidManifest.xml:20:5-44
-MERGED from [androidx.print:print:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72488c7e972bcfdecc8e2cc646dfe272\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\94b325da8a681995e48edf65a9a68b16\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\94b325da8a681995e48edf65a9a68b16\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3d47186957b294b974fdf8914e13ed5d\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3d47186957b294b974fdf8914e13ed5d\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8adf4d492e4662cd238e22b718005a73\AndroidManifest.xml:20:5-44
-MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8adf4d492e4662cd238e22b718005a73\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fecefae94b245f90e5cf0e067fa67ca7\AndroidManifest.xml:20:5-44
-MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fecefae94b245f90e5cf0e067fa67ca7\AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b94b69d7810491c4beb2ea96265f9259\AndroidManifest.xml:20:5-44
-MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\b94b69d7810491c4beb2ea96265f9259\AndroidManifest.xml:20:5-44
+MERGED from [:react-native-image-resizer] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-resizer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [:react-native-image-resizer] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-resizer\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:7:5-9:41
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\86b30ed96c1feb64a9987b4d590113b2\lottie-3.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.airbnb.android:lottie:3.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\86b30ed96c1feb64a9987b4d590113b2\lottie-3.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f6a183f8595ca34f3d5cc99d1f8bc322\appcompat-1.0.2\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.0.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f6a183f8595ca34f3d5cc99d1f8bc322\appcompat-1.0.2\AndroidManifest.xml:20:5-44
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\508b1392ff208ddd75400b325cf40262\imagepipeline-okhttp3-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-okhttp3:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\508b1392ff208ddd75400b325cf40262\imagepipeline-okhttp3-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:animated-base:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ac67a33df5264fefb51094675c47ecb6\animated-base-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:animated-base:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ac67a33df5264fefb51094675c47ecb6\animated-base-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:animated-drawable:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fe0a0290da168fa612b7fa571aa38bdd\animated-drawable-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:animated-drawable:1.14.2] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\fe0a0290da168fa612b7fa571aa38bdd\animated-drawable-1.14.2\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9f9d5f9afa5c7eba3bfe5df14b9689f6\drawee-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:drawee:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9f9d5f9afa5c7eba3bfe5df14b9689f6\drawee-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\51fe305f545284ab77d04b26f23360d0\nativeimagefilters-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagefilters:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\51fe305f545284ab77d04b26f23360d0\nativeimagefilters-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\dd100bd7c919d716b2cef49f38c6c1e9\imagepipeline-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\dd100bd7c919d716b2cef49f38c6c1e9\imagepipeline-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\47fb9539af38cd90237414917983afe0\nativeimagetranscoder-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:nativeimagetranscoder:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\47fb9539af38cd90237414917983afe0\nativeimagetranscoder-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\341a7838e3e1075329ef67ac2360bee6\imagepipeline-base-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:imagepipeline-base:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\341a7838e3e1075329ef67ac2360bee6\imagepipeline-base-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e954bd1e9ad0832fdb169a5f4a5e5b07\soloader-0.6.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.soloader:soloader:0.6.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e954bd1e9ad0832fdb169a5f4a5e5b07\soloader-0.6.0\AndroidManifest.xml:7:5-9:41
+MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4456ec454da32a2d530abb11cb4373e6\jetified-fbcore-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.facebook.fresco:fbcore:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4456ec454da32a2d530abb11cb4373e6\jetified-fbcore-2.0.0\AndroidManifest.xml:5:5-7:41
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3c441937713772a721e73be8f405662d\play-services-location-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-location:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3c441937713772a721e73be8f405662d\play-services-location-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:5:5-43
+MERGED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:5:5-43
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e97d49e25e749bf64ddb03a7a6947c47\play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-places-placereport:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\e97d49e25e749bf64ddb03a7a6947c47\play-services-places-placereport-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3087f829ad78da1f0d52970740cc50c8\play-services-tasks-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3087f829ad78da1f0d52970740cc50c8\play-services-tasks-17.0.0\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3f5124f9c8ea77d4f65f2bfbf835d6cd\jetified-play-services-basement-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3f5124f9c8ea77d4f65f2bfbf835d6cd\jetified-play-services-basement-17.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4f37a040d795d0eef135b10b20545e3f\fragment-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4f37a040d795d0eef135b10b20545e3f\fragment-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d382ba9b8c9ea9d7b43a9cfaea0ecdf4\vectordrawable-animated-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d382ba9b8c9ea9d7b43a9cfaea0ecdf4\vectordrawable-animated-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\abc680e55824c418c024460e31034ed4\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\abc680e55824c418c024460e31034ed4\legacy-support-core-ui-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ba2af06f417607d7ef1ca9f201a0d139\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\ba2af06f417607d7ef1ca9f201a0d139\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\324a702de98e8e0560de88ae82ee3427\vectordrawable-1.0.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\324a702de98e8e0560de88ae82ee3427\vectordrawable-1.0.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\331f61861c2d3a925f2252286afb1f53\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\331f61861c2d3a925f2252286afb1f53\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f3997ce16a5c00ae84a772d300d0e1e8\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\f3997ce16a5c00ae84a772d300d0e1e8\viewpager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\04087833f388d5ffa97a080d757646c2\coordinatorlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\04087833f388d5ffa97a080d757646c2\coordinatorlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\34085af895daa23049fd0af188e6a001\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\34085af895daa23049fd0af188e6a001\drawerlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\eb11c4797d5d5b24d5dcbbebe26babf4\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\eb11c4797d5d5b24d5dcbbebe26babf4\slidingpanelayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\740a70a0c89c8c085b6e012b4bd7790e\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\740a70a0c89c8c085b6e012b4bd7790e\customview-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31dc29ba3158cee4b1ca2bf2f6ff141b\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31dc29ba3158cee4b1ca2bf2f6ff141b\swiperefreshlayout-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\435f1166e6a428a0025d9cd273cb35a2\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\435f1166e6a428a0025d9cd273cb35a2\asynclayoutinflater-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72b2b92ec4ab73ff21fb9bc348de3b22\core-1.0.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.1] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\72b2b92ec4ab73ff21fb9bc348de3b22\core-1.0.1\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\07608d1ce0a2b5e25216bbe877b06158\versionedparcelable-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\07608d1ce0a2b5e25216bbe877b06158\versionedparcelable-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\aa91d8d2653c363bbd5da9d9892260d3\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\aa91d8d2653c363bbd5da9d9892260d3\cursoradapter-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\684c19030ab34291fff8f6b761838da8\lifecycle-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\684c19030ab34291fff8f6b761838da8\lifecycle-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9d52be8c254a228a91eaf05f51d52923\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9d52be8c254a228a91eaf05f51d52923\documentfile-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9093771a98b01557e81860f4122d7892\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9093771a98b01557e81860f4122d7892\localbroadcastmanager-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\7ec682ca46f5c90ea9a9e0cba0c0310a\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\7ec682ca46f5c90ea9a9e0cba0c0310a\print-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\85b59553d84ac8d04663d7d81848664c\lifecycle-viewmodel-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\85b59553d84ac8d04663d7d81848664c\lifecycle-viewmodel-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\420f294924962582b4c42c622af43461\lifecycle-livedata-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\66e997bde0b6ece28f7fd36f5f4a1584\lifecycle-livedata-core-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\8787729f29cf7add1bc29c81caccddfd\core-runtime-2.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d4ef17d609918d2a5f5a86d1ea02678f\interpolator-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\d4ef17d609918d2a5f5a86d1ea02678f\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml
 INJECTED from C:\Users\Zahra\reactproject\sender\android\app\src\debug\AndroidManifest.xml
 	android:targetSdkVersion
@@ -331,39 +361,59 @@ uses-permission#android.permission.RECEIVE_SMS
 ADDED from [:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:5-70
 	android:name
 		ADDED from [:react-native-android-sms-listener] C:\Users\Zahra\reactproject\sender\node_modules\react-native-android-sms-listener\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:9:22-67
-uses-permission#android.permission.ACCESS_COARSE_LOCATION
-ADDED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-81
-	android:name
-		ADDED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:22-78
 uses-permission#android.permission.ACCESS_NETWORK_STATE
-ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:23:5-79
+ADDED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-79
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:23:5-79
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:23:5-79
 	android:name
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:23:22-76
-uses-feature#0x00020000
-ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:26:5-28:35
-	android:glEsVersion
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:27:9-41
-	android:required
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:28:9-32
-uses-library#org.apache.http.legacy
-ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:33:9-35:40
-	android:required
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:35:13-37
+		ADDED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:22-76
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:5-81
+MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-81
+MERGED from [:react-native-maps] C:\Users\Zahra\reactproject\sender\node_modules\react-native-maps\lib\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:5-81
 	android:name
-		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\0dfb5a74df9d6656b2b5c78eab5071c6\AndroidManifest.xml:34:13-50
-activity#com.google.android.gms.common.api.GoogleApiActivity
-ADDED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:23:9-26:75
+		ADDED from [:react-native-geolocation-service] C:\Users\Zahra\reactproject\sender\node_modules\react-native-geolocation-service\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:22-78
+provider#com.imagepicker.FileProvider
+ADDED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:10:9-18:20
+	android:grantUriPermissions
+		ADDED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:14:13-47
+	android:authorities
+		ADDED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:12:13-60
 	android:exported
-		ADDED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:25:13-37
+		ADDED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:13:13-37
+	android:name
+		ADDED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:11:13-56
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:15:13-17:58
+	android:resource
+		ADDED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:17:17-55
+	android:name
+		ADDED from [:react-native-image-picker] C:\Users\Zahra\reactproject\sender\node_modules\react-native-image-picker\android\build\intermediates\library_manifest\debug\AndroidManifest.xml:16:17-67
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:28:9-32
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:33:9-35:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\a959d73635f15c78cd42ffb67f3c548e\jetified-play-services-maps-16.1.0\AndroidManifest.xml:34:13-50
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:25:13-37
 	android:theme
-		ADDED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:26:13-72
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:26:13-72
 	android:name
-		ADDED from [com.google.android.gms:play-services-base:16.1.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\4a38770d98c844dcc4a740d78bc934c0\AndroidManifest.xml:24:13-79
+		ADDED from [com.google.android.gms:play-services-base:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\291563c6708268cf4683b088770f2b39\play-services-base-17.0.0\AndroidManifest.xml:24:13-79
 meta-data#com.google.android.gms.version
-ADDED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31a067dd4f76e34061441e318d0e38be\AndroidManifest.xml:8:9-10:69
-MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c95aed1e82f8b217f40563a0d583040\AndroidManifest.xml:23:9-25:69
-MERGED from [com.google.android.gms:play-services-basement:16.2.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c95aed1e82f8b217f40563a0d583040\AndroidManifest.xml:23:9-25:69
+ADDED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:8:9-10:69
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3f5124f9c8ea77d4f65f2bfbf835d6cd\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:17.0.0] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\3f5124f9c8ea77d4f65f2bfbf835d6cd\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
 	android:value
-		ADDED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31a067dd4f76e34061441e318d0e38be\AndroidManifest.xml:10:13-66
+		ADDED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:10:13-66
 	android:name
-		ADDED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\31a067dd4f76e34061441e318d0e38be\AndroidManifest.xml:9:13-58
+		ADDED from [com.google.maps.android:android-maps-utils:0.5] C:\Users\Zahra\.gradle\caches\transforms-2\files-2.1\9c3ca28fd0164c8ce21bf101c768346f\jetified-android-maps-utils-0.5\AndroidManifest.xml:9:13-58
