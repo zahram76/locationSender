@@ -25,12 +25,10 @@ import {deleteUser} from './deleteUser.js';
 import {styles} from '../style.js';
 
 const color = '#028687';
-
 const ImageOptions = [
   require('../images/error.png'),
   require('../images/verified.png')
 ]
-
 const options = {
   title: 'Select Avatar',
   customButtons: [{ name: 'fb', title: 'Choose Photo from Facebook' }],
@@ -226,8 +224,7 @@ export default class AddNewPerson extends Component {
             <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
               <ImageBackground source={require('../images/background.png')} style={styles.backcontainer}> 
 
-          <View style={{flex: 1, flexDirection: 'column', width: '100%'}}>
-
+          <View style={{flex: 1, flexDirection: 'column', width: '100%'}}>  
               <View style={style.avatarContainer} >
                 <TouchableOpacity onPress={() => this.getImage()}>
                     <Image source={this.state.avatarSource}

@@ -21,6 +21,8 @@ import com.airbnb.android.react.lottie.LottiePackage;
 import com.heanoria.library.reactnative.locationenabler.RNAndroidLocationEnablerPackage;
 // react-native-android-sms-listener
 import com.centaurwarchief.smslistener.SmsListenerPackage;
+// react-native-fs
+import com.rnfs.RNFSPackage;
 // react-native-geolocation-service
 import com.agontuk.RNFusedLocation.RNFusedLocationPackage;
 // react-native-gesture-handler
@@ -74,6 +76,7 @@ public class PackageList {
       new LottiePackage(),
       new RNAndroidLocationEnablerPackage(),
       new SmsListenerPackage(),
+      new RNFSPackage(),
       new RNFusedLocationPackage(),
       new RNGestureHandlerPackage(),
       new SmsPackage(),
