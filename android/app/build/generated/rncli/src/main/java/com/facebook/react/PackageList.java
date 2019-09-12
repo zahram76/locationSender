@@ -35,6 +35,8 @@ import com.imagepicker.ImagePickerPackage;
 import fr.bamlab.rnimageresizer.ImageResizerPackage;
 // react-native-maps
 import com.airbnb.android.react.maps.MapsPackage;
+// react-native-sim-data
+import eu.sigrlami.rnsimdata.RNSimDataReactPackage;
 // react-native-sqlite-storage
 import org.pgsqlite.SQLitePluginPackage;
 // react-native-vector-icons
@@ -83,6 +85,7 @@ public class PackageList {
       new ImagePickerPackage(),
       new ImageResizerPackage(),
       new MapsPackage(),
+      new RNSimDataReactPackage(),
       new SQLitePluginPackage(),
       new VectorIconsPackage()
     ));

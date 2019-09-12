@@ -3,6 +3,8 @@ import {StyleSheet, Dimensions} from 'react-native';
 const {width : WIDTH} = Dimensions.get('window'); 
 const {height : HEIGHT} = Dimensions.get('window'); 
 
+const color = '#349e9f';
+
 export const styles = StyleSheet.create({
     headerStyle: {
       backgroundColor: '#16A085',
@@ -89,6 +91,16 @@ export const styles = StyleSheet.create({
        flexDirection: "row-reverse",
        alignContent: "space-between",
      },
+     btn:{
+      height: 45,
+      borderRadius: 25,
+      color: color,
+      backgroundColor: '#ffffff',
+      justifyContent: "center",
+      marginTop: 10,
+      alignItems: "center",
+      marginRight: 7, 
+    },
      text: {
       color: 'rgba(255,255,255,255)',
       fontSize: 16,
@@ -224,26 +236,14 @@ export const styles = StyleSheet.create({
       backgroundColor: '#ffffff',
       borderColor: '#ffffff'
     },
-    // addinput: {
-    //   width: WIDTH-55,
-    //   height: 45,
-    //   borderRadius: 25,
-    //   fontSize: 16,
-    //   paddingLeft: 45,
-    //   backgroundColor: 'rgba(0,0,0,0.05)',
-    //   color: '#000000',
-    //   marginHorizontal: 25
-    // },
     addinput: {
       zIndex: 9,
-      //borderBottomColor: '#BFBFBF',
       borderBottomWidth: 1,
       height: 40,
       fontSize: 16,
-      paddingLeft: 25, // if have icon
       color: '#000000',
-      marginLeft: 15,
-      marginRight: 10
+      marginLeft: 25,
+      marginRight: 25
     },
     pickerTextBack: {
       width: 150,
@@ -251,7 +251,6 @@ export const styles = StyleSheet.create({
       borderRadius: 25,
       fontSize: 16,
       paddingLeft: 45,
-      //backgroundColor: 'rgba(0,0,0,0.05)',
       color: '#000000',
       marginHorizontal: 25,
       justifyContent: 'center'
@@ -272,6 +271,13 @@ export const styles = StyleSheet.create({
       position: 'absolute',//use absolute position to show button on top of the map
       borderRadius: 20,
       color: 'transparent',
-    }
+    },
+    imageStyle:{
+      width: 22,
+      height: 22,
+      alignSelf: 'center',
+      left: 6,
+      right: 10
+    },
   });
   

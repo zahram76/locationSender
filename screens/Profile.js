@@ -1,140 +1,184 @@
-import React from "react";
+import React, {Component} from "react";
 import {
-  View, 
-  Image,
-  Alert,
-TouchableOpacity} from "react-native";
-import {styles} from '../style.js'
-import SettingsList from 'react-native-settings-list';
-import Menu, { MenuItem } from 'react-native-material-menu';
-import Icon from "react-native-vector-icons/Ionicons";
-import AsyncStorage from '@react-native-community/async-storage';
+    View, 
+    Text, 
+    Image,
+    ScrollView,
+    StyleSheet,
+} from "react-native";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import SQLite from "react-native-sqlite-storage";
+import {styles} from '../style.js';
+import {Setting} from './Setting.js'
 
+const color = '#349e9f';
 
-const color = '#028687';
-export default class Profile  extends React.Component {
-  constructor() {
-    super();
-    // const { navigation } = this.props;
-    // const data = navigation.getParam('saveSession', true);    
-    // this.onValueChange = this.onValueChange.bind(this);
-    this.state ={
-        //saveSession : data,
-        switchValue: false
-    };
-  }
-  
-  _menu = null;
+  // SQLite.DEBUG(true);
+  // SQLite.enablePromise(true);
 
-  render() {
-    var bgColor = '#DCE3F4';
-    return (     
-      <View style={{backgroundColor:'#EFEFF4',flex:1}}>
-        <SettingsList borderColor='#c8c7cc' defaultItemSize={50}>
-          <SettingsList.Header headerStyle={{marginTop:15}}/>
-          <SettingsList.Item
-            icon={
-                <Image style={styles.imageStyle} source={require('../images/cartoon-marker-48.png')}/>
-            }
-            hasSwitch={true}
-            switchState={this.state.switchValue}
-            switchOnValueChange={this.onValueChange}
-            hasNavArrow={false}
-            title='Background Geo'
-          />
-          <SettingsList.Item
-            icon={<Image style={styles.imageStyle} source={require('../images/cartoon-marker-48.png')}/>}
-            title='Accountt'
-            titleInfo=' '
-            titleInfoStyle={styles.titleInfoStyle}
-            onPress={() => Alert.alert('Route to add account Page')}
-          />
-          <SettingsList.Item
-            icon={<Image style={styles.imageStyle} source={require('../images/cartoon-marker-48.png')}/>}
-            title='Markers'
-            titleInfo=' '
-            titleInfoStyle={styles.titleInfoStyle}
-            onPress={() => Alert.alert('Route to markers Page')}
-          />
-          <SettingsList.Item
-            icon={<Image style={styles.imageStyle} source={require('../images/cartoon-marker-48.png')}/>}
-            title='Distance filter'
-            onPress={() => Alert.alert('Route To distance filter Page')}
-          />
-          <SettingsList.Item
-            icon={<Image style={styles.imageStyle} source={require('../images/cartoon-marker-48.png')}/>}
-            title='Map'
-            titleInfo=' '
-            titleInfoStyle={styles.titleInfoStyle}
-            onPress={() => Alert.alert('Route To map setting Page')}
-          />
-          <SettingsList.Header headerStyle={{marginTop:15}}/>
-          <SettingsList.Item
-            icon={<Image style={styles.imageStyle} source={require('../images/cartoon-marker-48.png')}/>}
-            title='Notifications'
-            onPress={() => Alert.alert('Route To Notifications Page')}
-          />
-          <SettingsList.Item
-            icon={<Image style={styles.imageStyle} source={require('../images/cartoon-marker-48.png')}/>}
-            title='Theme'
-            onPress={() => Alert.alert('Route To Theme Page')}
-          />
-          <SettingsList.Item
-            icon={<Image style={styles.imageStyle} source={require('../images/cartoon-marker-48.png')}/>}
-            title='General setting'
-            onPress={() => Alert.alert('Route To Do Not Disturb Page')}
-          />
-        </SettingsList>
-      </View>
-    );
-  }
-
-  static navigationOptions = ({ navigation }) => {
-    return {
-        title: 'Profile',
-        headerStyle: {
-          backgroundColor: color,
-          barStyle: "light-content", // or directly
-        },
-        headerTintColor: '#fff',
-        headerTitleStyle: {
-          fontWeight: 'bold',
-        },
-        headerRight: (
-          <View style={{
-            flexDirection: "row-reverse",
-            }}>
-            <Menu
-                ref={(ref) => this._menu = ref}
-                button={<TouchableOpacity onPress={() => this._menu.show()} 
-                  style={{paddingHorizontal:16, height: '100%', alignItems:'center', 
-                  justifyContent: 'center'}}>
-                    <Icon name={'ios-menu'} size={25} color={'white'} 
-                    style={{alignSelf:'center'}} resizeMode='contain'/></TouchableOpacity>}
-            >
-                <MenuItem onPress={() => {
-                  this._menu.hide()
-                  navigation.navigate('Map')
-                  }} textStyle={{color: '#000',fontSize: 16}} >Map</MenuItem>
-                <MenuItem onPress={() => {
-                  this._menu.hide()
-                  }} textStyle={{ fontSize: 16}} disabled>Setting</MenuItem>
-                <MenuItem  onPress={() =>{
-                  this._menu.hide()
-                  navigation.navigate('database')
-                  }} textStyle={{color: '#000',fontSize: 16}}>Database</MenuItem>
-                <MenuItem onPress={() =>{
-                  this._menu.hide()
-                  AsyncStorage.clear();
-                  navigation.navigate('Auth')
-                  }}  textStyle={{color: '#000', fontSize: 16}}>Sign out</MenuItem>
-            </Menu>
-          </View>
-        ),
-      }
+export default class Profile extends Component {
+  c = 0;
+    constructor(props) {
+        super(props);
+        this.state={
+          switchValue: false,
+            phone_no: '',
+            username: '',
+            password: '',
+            user_id: '',
+            avatarSource: require('../asset/defaultProfile.png'),
+        };
+        this.init();
     }
 
-  onValueChange(value){
-    this.setState({switchValue: value});
+    static navigationOptions = ({ navigation }) => {
+      return {
+          title: 'Profile',
+          headerStyle: {
+            backgroundColor: color,
+          },
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
+          headerLeft: (
+          <View style={{marginLeft: 15}}>
+            <MaterialCommunityIcons name={'arrow-left'} size={25} style={{color: 'white'}}
+              onPress={ () => { navigation.navigate('Map',{name: 'profile'}) }} />
+          </View>
+          ),
+        }
+      }
+    
+
+    init(){
+      console.log(' init profile');
+      var a = [];
+      var image = null ;
+      SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB =>  {
+      DB.transaction((tx) => {
+        console.log("execute transaction");
+          tx.executeSql('select phone_no, user_id, username, password, user_image from CurrentUser ', [], (tx, results) => {
+                console.log('Results', results.rows.length);
+                if (results.rows.length > 0) {
+                  for(let i=0; i<results.rows.length; ++i){
+                    console.log('Resultsss', JSON.stringify(results.rows.item(i)));
+                   // if(results.rows.item(i).user_image != null){
+                      image = null //}
+                   // else
+                      JSON.parse(results.rows.item(i).user_image, (key,value) => {
+                        if(key == 'uri') 
+                          image = {uri : value}
+                        else if (key == 'require')
+                          image = require('../asset/defaultProfile.png')
+                      });
+                      
+                      this.setState({
+                        user_id : results.rows.item(i).user_id,
+                        phone_no : results.rows.item(i).phone_no,
+                        username : results.rows.item(i).username,
+                        password : results.rows.item(i).password,
+                        avatarSource: image == null ? this.state.avatarSource : image
+                      })
+                      console.log('phone: '+ this.state.phone_no,)
+                  }
+                  console.log('Success'+'\n'+'select users Successfully');
+                } else {
+                  console.log('no user');
+                }  
+          })
+      });
+    });
   }
+  
+  componentDidMount(){
+    this.props.navigation.setParams({ name: 'profile' })
+    const { navigation } = this.props;
+    //Adding an event listner om focus
+    //So whenever the screen will have focus it will set the state to zero
+    this.focusListener = navigation.addListener('didFocus', () => {
+      if(this.props.navigation.state.params != null){
+        console.log('in profile  navigation param : ' + JSON.stringify(this.props.navigation.state.params));
+        const str = JSON.stringify(this.props.navigation.state.params);
+        JSON.parse(str, (key,value) => {
+          if(key == 'name' && value == 'account'){ this.init();}
+          console.log(value);
+          
+        })  
+      } else { console.log( ' is nul ')}
+    });
+  }
+    render() {
+        return ( 
+         <View style={styles.scrolStyle}>
+            <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
+              <View style={{flex: 1, flexDirection: 'column', width: '100%'}}>
+                <View  style={[style.avatarContainer,{flex: 1, flexDirection: 'row', width: '100%'}]}>
+                  <View style={{flex: 2, flexDirection: 'column', width: '100%'}}>
+                    <Text style={[style.profileText, {marginTop: 70,marginBottom: 5}]}> {this.state.username} </Text>
+                    <Text style={style.profileText}> {this.state.phone_no} </Text>
+                  </View>
+                  <View style={{flex: 1, flexDirection: 'column', width: '100%'}}>
+                    <Image source={this.state.avatarSource}
+                        style={style.avatarImage} resizeMode={'cover'}/>
+                  </View>             
+                </View>
+              
+                <Setting  navigation = {this.props.navigation}/>
+              </View>
+        </ScrollView>
+     </View>
+        );
+    }
 }
+
+const style = StyleSheet.create({
+  MainContainer :{
+    justifyContent: 'center',
+    flex:1,
+    margin: 10,
+    marginTop: 40
+  },
+  item: {
+    padding: 10,
+    fontSize: 18,
+    height: 44,
+  },
+  container: {
+    position: 'absolute',
+    width: 45,
+    backgroundColor: '#ffffff',
+  },
+  avatarContainer:{
+    backgroundColor: color, //"#023D5A",
+    height:130,
+  },
+  avatarImage: {
+    width: 130,
+    height: 130,
+    borderRadius: 63,
+    borderWidth: 4,
+    borderColor: color, //"#023D5A",
+    marginBottom:10,
+    alignSelf: "center",
+    backgroundColor: color, //"#023D5A",
+    //position: 'absolute',
+    marginTop:20,
+    marginRight:20
+  },
+  labelStyle: {
+    marginBottom:10,
+    alignSelf: 'flex-start',
+    color: 'white',
+    marginTop:70,
+  },
+  profileText: {
+    marginHorizontal: 10,
+    alignSelf: 'flex-start',
+    color: 'white',
+    marginTop: 5,
+  },
+
+});
+
+

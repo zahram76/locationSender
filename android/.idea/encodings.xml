@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding" addBOMForNewFiles="with NO BOM" />
+  <component name="Encoding">
+    <file url="file://D:/Documents/AndroidStudio/DeviceExplorer/huawei-jsn_l22-GBT4C18B06007185/data/data/com.test/databases/db" charset="windows-1252" />
+  </component>
 </project>

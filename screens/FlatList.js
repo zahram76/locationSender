@@ -1,10 +1,11 @@
 import React, {Component} from 'react';  
-import {Image, StyleSheet, Text, View, Animated, FlatList, TouchableOpacity, Dimensions} from 'react-native';  
+import {Image, StyleSheet, Text, View, Animated, FlatList, TouchableOpacity, Dimensions} from 'react-native';
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";  
 import SQLite from "react-native-sqlite-storage";
 import {deleteUser} from './deleteUser.js';
 import {styles} from '../style.js';
 
-const color = '#028687';
+const color = '#349e9f';
 
 export default class FlatListComponent extends Component {  
   constructor(){
@@ -15,10 +16,6 @@ export default class FlatListComponent extends Component {
         isReady: false,
       }
       this.init();
-  }
-
-  componentDidMount(){
-    
   }
 
   removePeople(str) {
@@ -53,8 +50,7 @@ export default class FlatListComponent extends Component {
     console.log(' init flat list');
     var a = [];
     var image = null ;
-    SQLite.openDatabase(
-      {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+    SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
       console.log("execute transaction");
         tx.executeSql('select phone_no, user_id, first_name, last_name from TrackingUsers ', [], (tx, results) => {
@@ -71,8 +67,6 @@ export default class FlatListComponent extends Component {
                         image: require('../images/defaultProfile.png')
                     });
                 } 
-                console.log('select users to flat list Successfully' + JSON.stringify(a));
-                // this.setState({FlatListItems: a})
                 console.log('select users to flat list Successfully' + JSON.stringify(this.state.FlatListItems));
               } else { console.log('no user'); }  
         });
@@ -98,6 +92,20 @@ export default class FlatListComponent extends Component {
   });
 }
 
+componentDidMount(){
+  const { navigation } = this.props;
+  this.focusListener = navigation.addListener('didFocus', () => {
+    if(this.props.navigation.state.params != null){
+      console.log('in flat list  navigation param : ' + JSON.stringify(this.props.navigation.state.params));
+      const str = JSON.stringify(this.props.navigation.state.params);
+      JSON.parse(str, (key,value) => {
+        if(key == 'name' && value == 'TrackingUserSettings'){ this.init();}
+        console.log(value);
+      })  
+    } else { console.log( ' is nul ')}
+  });
+}
+
 FlatListItemSeparator = () => {
   return (
     <View
@@ -107,6 +115,25 @@ FlatListItemSeparator = () => {
         backgroundColor: "#DBDBDB"}}/>);
   }
 
+  static navigationOptions = ({ navigation }) => {
+    return {
+        title: 'Users',
+        headerStyle: {
+          backgroundColor: color,
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+        headerLeft: (
+          <View style={{marginLeft: 15}}>
+            <MaterialCommunityIcons name={'arrow-left'} size={25} style={{color: 'white'}}
+              onPress={ () => { navigation.navigate('Profile') }} />
+            </View>
+        ),
+      }
+    }
+
   render() {  
    return (  
     <View style={style.MainContainer}>
@@ -114,24 +141,24 @@ FlatListItemSeparator = () => {
       data={ this.state.FlatListItems }   
       ItemSeparatorComponent = {this.FlatListItemSeparator}
       renderItem={({item}) => 
-      <TouchableOpacity>
-      <View key={String(item.key).split(' ')[0]} style={style.itemContainer}>
+      <TouchableOpacity onPress={() => this.props.navigation.navigate("TrackingUserSettings",{user_id: item.user_id})}>
+      <View key={String(item.key).split(' ')[0]} style={style.container}>
           <View style={{flex: 1}}>
-              <Image source={item.image} style={style.userImage}/>
+              <Image source={item.image} style={style.photo}/>
           </View>
-          <View style={{flexDirection: 'column', flex: 5, marginTop: 10}}>
-            <Text style={{ marginHorizontal: 20, fontSize: 15}}>{item.first_name} {item.last_name}</Text>
-            <Text style={{ marginHorizontal: 20, fontSize: 12}}>{item.key}</Text>
+          <View style={style.container_text}>
+            <Text style={style.title}>{item.first_name} {item.last_name}</Text>
+            <Text style={style.description}>{item.key}</Text>
           </View>
           <View style={{flex: 1, alignSelf: 'center'}}>
-              <TouchableOpacity onPress={() =>{
-                this.setState({delete_phone_no: String(item.key)})
-                console.log('delete phone number: '+this.state.delete_phone_no)
-                this.DeleteButton(String(item.key))
-                }}>
-                  <Image  source={require('../images/removeIcon.png')} style={style.iconImage}/>
-              </TouchableOpacity>
-          </View>
+            <TouchableOpacity onPress={() =>{
+              this.setState({delete_phone_no: String(item.key)})
+              console.log('delete phone number: '+this.state.delete_phone_no)
+              this.DeleteButton(String(item.key))
+              }}>
+                <MaterialCommunityIcons size={25} name={'account-minus'} style={style.iconImage}/>
+            </TouchableOpacity>
+          </View>     
       </View>
       </TouchableOpacity>
       }
@@ -139,31 +166,60 @@ FlatListItemSeparator = () => {
   </View>   
     );
   }
+  
+  
 }
 
 const style = StyleSheet.create({
   MainContainer :{
-  // Setting up View inside content in Vertically center.
     justifyContent: 'center',
+    flexDirection: 'column',
     flex:1,
   },
-  item: {
+container: {
+    flex: 1,
+    flexDirection: 'row',
     padding: 10,
-    fontSize: 18,
-    height: 44,
-  },
-  container: {
-    position: 'absolute',
-    width: 45,
-    backgroundColor: '#ffffff',
+    marginLeft:16,
+    marginRight:16,
+    marginTop: 8,
+    marginBottom: 8,
+    borderRadius: 5,
+    backgroundColor: '#FFF',
+    elevation: 2,
 },
-itemContainer: {
-  flex: 1, flexDirection: 'row', 
-  backgroundColor: 'white', padding: 15
+title: {
+    fontSize: 16,
+    color: '#000',
 },
-userImage: {
-  height: 55, width: 55, 
-    borderRadius: 50, borderColor: color, borderWidth: 2, alignSelf: 'center'
+container_text: {
+    flex: 1,
+    flexDirection: 'column',
+    marginLeft: 5,
+    justifyContent: 'center',
 },
-iconImage:{height: 30, width: 30, alignSelf: 'center', alignContent: 'center'}
+description: {
+    fontSize: 11,
+    fontStyle: 'italic',
+},
+photo: {
+    height: 55,
+    width: 55,
+    borderRadius: 30
+},
+iconImage: {alignSelf: 'center', alignContent: 'center'},
+selected: {
+  flex: 1,
+  flexDirection: 'row',
+  padding: 10,
+  marginLeft:16,
+  marginRight:16,
+  marginTop: 8,
+  marginBottom: 8,
+  borderRadius: 5,
+  elevation: 2,
+  backgroundColor: "#ffffff",
+  borderColor: 'green',
+  borderWidth: 1    
+},
 });

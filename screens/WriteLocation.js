@@ -1,16 +1,17 @@
 import SQLite from "react-native-sqlite-storage";
 
 export function insertLocation(user_id, latitude, longitude){
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
+  var today = new Date();
+  var date = today.getFullYear()+'-'+(today.getMonth()+1<10? '0'+(today.getMonth()+1) : today.getMonth()+1)+
+    '-'+(today.getDate()<10? '0'+today.getDate() : today.getDate());
+  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  var dateTime = date+' '+time;
 
     SQLite.openDatabase(
       {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
       DB.transaction((tx) => {
         tx.executeSql('insert into Locations(user_id, datatime, latitude, longitude) values (?,?,?,?)', 
-          [user_id, dateTime, latitude, longitude,],
+          [user_id, dateTime, latitude, longitude],
              (tx, results) => {
               console.log('Results', results.rowsAffected);
         })})});

@@ -3,17 +3,16 @@ import {
     View, 
     Text, 
     TouchableOpacity, 
-    ImageBackground,
     TextInput,
     Image,
     ScrollView,
-    Picker,
+      Picker,
     Modal,
     StyleSheet,
     TouchableHighlight,
     ActivityIndicator,
 } from "react-native";
-import Icon from "react-native-vector-icons/Ionicons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SmsListener from 'react-native-android-sms-listener';
 import SQLite from "react-native-sqlite-storage";
 import ImagePicker from 'react-native-image-picker';
@@ -23,6 +22,7 @@ import {initDatabase} from './initDatabase.js';
 import {InsertUser} from './insertUser.js';
 import {deleteUser} from './deleteUser.js';
 import {styles} from '../style.js';
+var RNFS = require('react-native-fs');
 
 const color = '#028687';
 const ImageOptions = [
@@ -37,6 +37,7 @@ const options = {
     path: 'images',
   },
 };
+var phone_no = ''
 
 export default class AddNewPerson extends Component {
     constructor(props) {
@@ -53,28 +54,27 @@ export default class AddNewPerson extends Component {
             bordercolor: '#DBDBDB',
             bordercolor1: '#DBDBDB',
             bordercolor2: '#DBDBDB',
+            bordercolor3: '#DBDBDB',
             color: 'red',
-            answer: undefined,
             timer: null,
+            answer: undefined,
             modalVisible: false,
             canceled: false,
             resizedImageUri: null,
-            avatarSource: require('../images/defaultProfile.png'),
+            avatarSource: {uri: 'asset:/images/defaultProfile.png'},
             isReady: false,
             uriFlag: false,
+            sendigType: 'speed',
+            interval: 20,
         };
     }
 
   componentDidMount() {
-    initDatabase();
+    //initDatabase();
     SmsListener.addListener(message => {
       if(this.state.canceled == false)
         this.parseMessage(message);
     });
-  }
-
-  componentWillUnmount(){
-    this.props.navigation.setParams({refresh : this.state.phone_no, addRemove: "add"}) 
   }
 
   AddButtonPress() {
@@ -94,6 +94,8 @@ export default class AddNewPerson extends Component {
         this.setState({error: true});
         this.setState({isReady: true});
       } else {
+        phone_no = this.state.phone_no;
+        this.setModalVisible(true);
         this.isRepeatedUser();
       }
   }
@@ -143,19 +145,14 @@ export default class AddNewPerson extends Component {
             if(res[2] == 'yes'){
               this.setState({answer: res[2]})
               console.log('yes ');
-              
-              
-              var image;
-              if(this.state.uriFlag == false) {image = {require : this.state.avatarSource}; console.log('requier')}
-              else { image = this.state.avatarSource; console.log('uri'); this.setState({uriFlag: false})}
-
-              console.log('image '+image);
-              //insertUser(this.state.phone_no, this.state.first_name, this.state.last_name, image);
-
-              await this.InsertUser(this.state.phone_no,this.state.first_name,this.state.last_name,this.state.age,this.state.color, image);
+          
+              this.InsertUser(this.state.phone_no,this.state.first_name,this.state.last_name,this.state.age,
+                this.state.color, this.state.avatarSource, this.state.sendigType, this.state.interval);
+                console.log('pa color ine dige ', this.state.color)
               this.setState({message: 'Success'+'\n'+'You are Registered Successfully'});
               this.setState({error: false});
               this.setState({isReady: true});
+              this.setState({modalVisible: false})
               //this.props.navigation.navigate('Map',{refresh : this.state.phone_no, addRemove: "add"});
             } else {
               this.setState({answer: 'no'})
@@ -169,17 +166,18 @@ export default class AddNewPerson extends Component {
   
   setModalVisible(visible) {
     this.setState({modalVisible: visible});
-    this.setState({canceled: true});
+    if(this.state.visible == false)
+      this.setState({canceled: true});
   }
 
-  InsertUser(phone_no,first_name,last_name,age,color,image){
+  InsertUser(phone_no,first_name,last_name,age,color,image,sendigType,interval){
     console.log('image : '+ image)
         SQLite.openDatabase(
           {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
           DB.transaction((tx) => {
           console.log("execute transaction");
-          tx.executeSql('insert into TrackingUsers(phone_no, first_name, last_name, age, marker_color, user_image) values (?,?,?,?,?,?)', 
-            [phone_no,first_name, last_name, age, color, JSON.stringify(image)],
+          tx.executeSql('insert into TrackingUsers(phone_no, first_name, last_name, age, marker_color, user_image, sending_setting, interval, marker_image) values (?,?,?,?,?,?,?,?,?)', 
+            [phone_no,first_name, last_name, age, color, JSON.stringify(image),sendigType,interval, image.uri],
                (tx, results) => {
                 console.log('Results', results.rowsAffected);
                 if (results.rowsAffected > 0) {
@@ -189,150 +187,196 @@ export default class AddNewPerson extends Component {
                 } else {
                   alert('Registration Failed');
                 }
-     });});});
-    }
+          });
+        // console.log('update user image for marker setting in account : ',image.uri)
+        // tx.executeSql('update CurrentUser set markerImage=? where where phone_no=?', [image.uri,phone_no], 
+        //     (tx, results) => {
+        //       console.log('Results', results.rowsAffected);
+        //       if (results.rowsAffected > 0) {
+        //         console.log('markerImage update : ' + results.rowsAffected)
+        //       } else { console.log('can not find markerImage setting ') }  
+        // });
+    });
+  });
+}
 
   getImage(){ 
     console.log('image picker');
-    
-    ImagePicker.launchImageLibrary(options, (response) => {
-      if (response.didCancel) {
-        console.log('User cancelled image picker');
-      } else if (response.error) {
-        console.log('ImagePicker Error: ', response.error);
-      } else if (response.customButton) {
-        console.log('User tapped custom button: ', response.customButton);
-      } else {
-       // const source = { uri: response.uri };
-        // You can also display the image using data:
-        const uri = 'data:image/jpeg;base64,' + response.data ;
-        ImageResizer.createResizedImage(uri, 300, 300, 'JPEG', 80)
-        .then(({uri}) => {
-          this.setState({avatarSource: {uri: uri}});
-          this.setState({uriFlag: true})
-          console.log('resize : '+ uri)
-        }).catch((err) => {
-          console.log(err);
-        });
-      }
-    });
+      ImagePicker.launchImageLibrary(options, (response) => {
+         const uri = 'data:image/jpeg;base64,' + response.data ;
+         this.imageUri = uri
+        if (response.didCancel) {
+          console.log('User cancelled image picker');
+        } else if (response.error) {
+          console.log('ImagePicker Error: ', response.error);
+        } else if (response.customButton) {
+          console.log('User tapped custom button: ', response.customButton);
+        } else {
+          ImageResizer.createResizedImage(uri, 300, 300, 'JPEG', 80,1, RNFS.DocumentDirectoryPath+'/images/')
+          .then(({uri}) => {
+            this.setState({avatarSource: {uri: uri}})
+          }).catch((err) => {
+            console.log(err);
+          });
+        }
+      });
   }
+
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: 'New user',
+      headerStyle: {
+        backgroundColor: color,
+        barStyle: "light-content", // or directly
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+    },
+        headerLeft: (
+        <View style={{marginLeft: 15}}>
+          <MaterialCommunityIcons name={'arrow-left'} size={25} style={{color: 'white'}}
+            onPress={ () => { navigation.navigate('Map', {refresh : phone_no, addRemove: "add"}) }} />
+        </View>
+        ),
+      }
+    }
 
     render() {
         return ( 
          <View style={styles.scrolStyle}>
             <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
-              <ImageBackground source={require('../images/background.png')} style={styles.backcontainer}> 
-
-          <View style={{flex: 1, flexDirection: 'column', width: '100%'}}>  
-              <View style={style.avatarContainer} >
-                <TouchableOpacity onPress={() => this.getImage()}>
-                    <Image source={this.state.avatarSource}
-                            style={style.avatarImage} resizeMode={'cover'}/>
-                </TouchableOpacity> 
+              <View style={{flex: 1, flexDirection: 'column', width: '100%'}}>
+                <View style={style.avatarContainer} >
+                  <TouchableOpacity onPress={() => this.getImage()}>
+                      <Image source={this.state.avatarSource}
+                              style={style.avatarImage} resizeMode={'cover'}/>
+                  </TouchableOpacity> 
                 </View>
-
-              <View style={{flex: 1, marginTop: 10,marginBottom: 5}}>
-                <Text style={style.labelStyle}>First name</Text>
-                <Icon name={'ios-person'} size={20} color={'gray'}
-                  style={[styles.inputIcon, {left: 15,marginTop:25, alignSelf: 'center'}]}/>
+              <View style={{flex: 1, marginTop: 55,marginBottom: 20}}>
                 <View style={{flex: 5}}>
                     <TextInput 
-                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor, width: '90%'}]}
+                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor, width: '85%'}]}
                       onFocus={() => {this.setState({bordercolor : color}); 
                         this.setState({bordercolor1 : "#DBDBDB"});
                         this.setState({bordercolor2 : "#DBDBDB"}); 
                         this.setState({isReady: false}); }}
                       onBlur={() => {this.setState({bordercolor : "#DBDBDB"});}}
+                      placeholder={'First name'}
+                      placeholderTextColor={'#8D8D8D'}
                       underlineColorAndroid='transparent'
                       fontSize={16}
                       keyboardType={'default'}
                       onChangeText={txt => {
-                        this.setState({first_name: txt})
-                      }}
-                    />
+                        this.setState({first_name: txt})}}/>
                   </View>
                 </View>
-
-                <View style={{flex: 1, marginTop: 5,marginBottom: 10}}>
-                  <Text style={style.labelStyle}>last name</Text>
-                  <Icon name={'ios-person'} size={20} color={'gray'}
-                      style={[styles.inputIcon, {left: 15, marginTop:25, alignSelf: 'center'}]}/>
+                <View style={{flex: 1,marginBottom: 20}}>
                   <View style={{flex: 5}}>
                     <TextInput 
-                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor1, width: '90%'}]}
+                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor1, width: '85%'}]}
                       onFocus={() => {this.setState({bordercolor1 : color});
                           this.setState({bordercolor2 : "#DBDBDB"});
                           this.setState({bordercolor : "#DBDBDB"}); 
                           this.setState({isReady: false})}}
-                           
+                      placeholder={'Last name'}
+                      placeholderTextColor={'#8D8D8D'}     
                       onBlur={() => {this.setState({bordercolor1 : "#DBDBDB"})}}
                       underlineColorAndroid='transparent'
                       keyboardType={'default'}
                       onChangeText={txt => {
-                        this.setState({last_name: txt})
-                      }}
-                    />
+                        this.setState({last_name: txt})}}/>
                   </View>
                 </View>
 
-                <View style={{flex: 1, marginTop: 5,marginBottom: 10}}>
-                  <Text style={style.labelStyle}>last name</Text>
-                  <Icon name={'ios-person'} size={20} color={'gray'}
-                      style={[styles.inputIcon, {left: 15, marginTop:25, alignSelf: 'center'}]}/>
+                <View style={{flex: 1,marginBottom: 20}}>
                   <View style={{flex: 5}}>
                     <TextInput 
-                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor1, width: '90%'}]}
+                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor1, width: '85%'}]}
                       onFocus={() => {this.setState({bordercolor1 : color});
                           this.setState({bordercolor2 : "#DBDBDB"});
                           this.setState({bordercolor : "#DBDBDB"}); 
                           this.setState({isReady: false})}}
-                           
+                      placeholder={'Age'}
+                      placeholderTextColor={'#8D8D8D'}     
                       onBlur={() => {this.setState({bordercolor1 : "#DBDBDB"})}}
                       underlineColorAndroid='transparent'
-                      keyboardType={'default'}
+                      keyboardType={'numeric'}
                       onChangeText={txt => {
-                        this.setState({age: txt})
-                      }}
-                    />
+                        this.setState({age: txt})}}/>
                   </View>
                 </View>
-              
-                <View style={{flex: 1, marginTop: 5,marginBottom: 10}}>
-                  <Text style={style.labelStyle}>phone number</Text>
-                  <Icon name={'md-phone-portrait'} size={20} color={'gray'}
-                      style={[styles.inputIcon, {left: 15, marginTop:25, alignSelf: 'center'}]}/>
+              <View style={{flex: 1, marginBottom: 20}}>
+                <View style={{flex: 1, flexDirection: 'row'}}>
                   <View style={{flex: 5}}>
                     <TextInput 
-                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor2, width: '90%'}]}
+                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor2, width: '85%'}]}
                       onFocus={() =>{this.setState({bordercolor2 : color});
                         this.setState({bordercolor1 : "#DBDBDB"});
                         this.setState({bordercolor : "#DBDBDB"}); 
                         this.setState({isReady: false})}}
                       onBlur={() => {this.setState({bordercolor2 : "#DBDBDB"})}}
+                      placeholder={'Phone number'}
+                      placeholderTextColor={'#8D8D8D'}
                       underlineColorAndroid='transparent'
                       keyboardType={'numeric'}
                       onChangeText={txt => {
                         this.setState({phone_no: txt.split(' ')[0]})
-                        console.log('after : ' + this.state.phone_no)
-                      }}
-                    />
+                        console.log('after : ' + this.state.phone_no)}}/>
+                  </View>
                 </View>
-              </View>
+              </View >
 
-              <View style={{flex: 1, marginTop: 5,marginBottom: 10, flexDirection: 'row'}}>
-                <View style={{flex: 1, flexDirection: 'row'}}>
-                <Icon name={'ios-pin'} size={20} color={'gray'}
-                    style={[{left: 15, marginRight: 10, alignSelf: 'center'}]}/>
-                  <Text style={style.labelStyle}> marker color </Text>
-                  
+              <View style={{flex: 1, flexDirection: 'row', marginRight: 20, marginLeft: 15}}>
+                <View style={{flex: 1}}>
+                  <Text style={{height: 45, alignSelf: 'flex-start',
+                    paddingRight: 10, paddingLeft: 10, marginTop: 10, fontSize: 15}}>Send by </Text>
+                </View> 
+                <View style={{flex: 2, height: 45, borderRadius: 25,
+                      paddingLeft: 10, width: 30,
+                      backgroundColor: 'rgba(0,0,0,0.05)', color: '#000000'}}>
+                  <Picker
+                    selectedValue={this.state.sendigType}
+                    mode={'dropdown'}
+                    onValueChange={(itemValue, itemIndex) =>{
+                      this.setState({sendigType: itemValue})
+                      if(itemValue == 'interval') this.setState({showInputInterval: true})
+                      else {this.setState({showInputInterval: false})}
+                    }}>
+                    <Picker.Item label="interval" value="interval"/>
+                    <Picker.Item label="speed" value="speed"/>
+                  </Picker>
                 </View>
-                <View style={{flex: 1, height: 45, borderRadius: 25,
-                     marginRight: 27, paddingLeft: 10,
-                     backgroundColor: 'rgba(0,0,0,0.05)', color: '#000000'}}>
+                {this.state.showInputInterval? 
+                <View style={{flex: 1}}>
+                  <TextInput 
+                      style={[styles.addinput,{borderBottomColor : this.state.bordercolor3}]}
+                      onFocus={() =>{this.setState({bordercolor3 : color});
+                        this.setState({bordercolor1 : "#DBDBDB"});
+                        this.setState({bordercolor2 : "#DBDBDB"});
+                        this.setState({bordercolor : "#DBDBDB"}); 
+                        this.setState({isReady: false})}}
+                      onBlur={() => {this.setState({bordercolor3 : "#DBDBDB"})}}
+                      placeholder={'20'}
+                      placeholderTextColor={'#8D8D8D'}
+                      underlineColorAndroid='transparent'
+                      keyboardType={'numeric'}
+                      onChangeText={txt => { console.log('in add person for adding interval : ', txt);
+                        this.setState({interval: parseInt(txt)})}}/>
+                </View> : null}
+              </View>             
+
+              <View style={{flex: 1, flexDirection: 'row', marginRight: 20, marginLeft: 15}}>
+                <View style={{flex: 1}}>
+                  <Text style={{height: 45, alignSelf: 'flex-start',
+                    paddingRight: 10, paddingLeft: 10, marginTop: 10, fontSize: 15}}>Line color </Text>
+                </View> 
+                <View style={{flex: 2, height: 45, borderRadius: 25,
+                      paddingLeft: 10, width: 30,
+                      backgroundColor: 'rgba(0,0,0,0.05)', color: '#000000'}}>
                 <Picker
                   selectedValue={this.state.color}
-                  mode={"dialog"}
+                  mode={'dropdown'}
                   onValueChange={(itemValue, itemIndex) =>
                     this.setState({color: itemValue})
                   }>
@@ -346,8 +390,8 @@ export default class AddNewPerson extends Component {
                 </Picker>
                 </View>
               </View> 
-
             <View>
+
                   <Modal
                     animationType="fade"
                     transparent={true}
@@ -355,7 +399,7 @@ export default class AddNewPerson extends Component {
                     visible={this.state.modalVisible}
                     onRequestClose={() => {
                       alert('Modal has been closed.');
-                      this.setModalVisible(!this.state.modalVisible);
+                      this.setModalVisible(false);
                     }}>
                     <View style={{backgroundColor: "rgba(255,255,255,0.4)",
                       justifyContent: "center",
@@ -366,7 +410,7 @@ export default class AddNewPerson extends Component {
                           style={{margin: 30, backgroundColor: "rgba(255,255,255,0.4)",
                           justifyContent: "center", alignItems: 'center',}}
                           onPress={() => {
-                            this.setModalVisible(!this.state.modalVisible);
+                            this.setModalVisible(false);
                           }}>
                           <Text>cancel ?</Text>
                         </TouchableHighlight>
@@ -395,26 +439,10 @@ export default class AddNewPerson extends Component {
                     <Text style={{color: '#ffffff'}}>save</Text>
                   </TouchableOpacity> 
                 </View>
-
             </View>
-          </ImageBackground>
         </ScrollView>
      </View>
         );
-    }
-
-    static navigationOptions = ({ navigation }) => {
-      return {
-          title: 'New user',
-          headerStyle: {
-            backgroundColor: color,
-            barStyle: "light-content", // or directly
-          },
-          headerTintColor: '#fff',
-          headerTitleStyle: {
-            fontWeight: 'bold',
-        }
-      }
     }
 }
 
@@ -454,7 +482,7 @@ const style = StyleSheet.create({
   labelStyle: {
     marginLeft: 15,
     marginTop: 10,
-    color: color,
+   // color: color,
   },
   btn:{
     height: 45,

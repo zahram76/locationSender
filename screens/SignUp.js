@@ -36,7 +36,7 @@ export default class SignUp extends Component {
     }
 
     componentDidMount(){
-      initDatabase();
+     // initDatabase();
     }
 
     showPass = () => {
@@ -54,7 +54,6 @@ export default class SignUp extends Component {
           this.setState({reshowPass:true, repress:false});
         }
       }
-
     
       insertUser(){
         SQLite.openDatabase(
@@ -133,7 +132,7 @@ export default class SignUp extends Component {
                       placeholder={'Username'}
                       placeholderTextColor={'gray'}
                       underlineColorAndroid='transparent'
-                      onChangeText={(txt => this.setState({username: txt.split(' ')}))}
+                      onChangeText={(txt => this.setState({username: txt.split(' ')[0]}))}
                      />
                   </View>
                   <View style={styles.inputContainer}>
@@ -145,7 +144,7 @@ export default class SignUp extends Component {
                       secureTextEntry={this.state.showPass}
                       placeholderTextColor={'gray'}
                       underlineColorAndroid='transparent' 
-                      onChangeText={(txt => this.setState({password: txt.split(' ')}))}
+                      onChangeText={(txt => this.setState({password: txt.split(' ')[0]}))}
                     />
                     <TouchableOpacity style={styles.btnEye}
                       onPress={this.showPass.bind(this)}>

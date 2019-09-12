@@ -17,6 +17,7 @@ import { deleteUser } from "./deleteUser.js";
 import {CurrentLocationButton} from '../component/CurrentLocationButton';
 import {FitAllMarker} from '../component/fitAllMarker';
 import {MyLocation} from '../component/MyLocation.js';
+var RNFS = require('react-native-fs');
 
 const color = '#028687';
 let { width, height } = Dimensions.get('window')
@@ -51,6 +52,7 @@ export default class Map  extends React.Component {
       youAreReady: false,
       coordinates: [],
       mapType : 'standard',
+      markerImage: '',
       TrackingUser: [],
       isReady: false,
     };    
@@ -144,10 +146,6 @@ export default class Map  extends React.Component {
     }).catch(err => {
       alert(err); });
   }
- //---------------------------------------------------------------------------------------------- 
-  componentDidUpdate(){
-    //this.fitAllMarkers();
-  }
 //----------------------------------------------------------------------------------------------
   fotTOsupliedMarker(){
     this.map.fitToSuppliedMarkers(['marker_0'],{edgePadding: DEFAULT_PADDING,
@@ -236,7 +234,33 @@ geolocationWatcher(){
   );
 }
 //----------------------------------------------------------------------------------------------
+initSetting(){
+  console.log(' map for init setting');
+  DB.transaction((tx) => {
+    console.log("execute transaction");
+      tx.executeSql('select value from Settings where setting_name=?', ['mapType'], (tx, results) => {
+            console.log('map Results', results.rows.length);
+            if (results.rows.length > 0) {
+              this.state.mapType = results.rows.item(0).value
+              console.log('map inti setting : ' + this.state.mapType)
+            } else { console.log('can not find map type setting ') }
+      });
+      tx.executeSql('select value from Settings where setting_name=?', ['markerImage'], (tx, results) => {
+        console.log('marker Results', results.rows.length);
+        if (results.rows.length > 0) {
+          if (results.rows.item(0).value[0] != 'a')
+            this.setState({borderWidth: 5})
+          else if (results.rows.item(0).value[0] == 'a')
+            this.setState({borderWidth: 0})
+          this.setState({markerImage : {uri: results.rows.item(0).value}})
+          console.log('marker inti setting : ' + JSON.stringify(this.state.markerImage))
+        } else { console.log('can not find marker setting ') }
+    });
+  });
+}
+//----------------------------------------------------------------------------------------------
   componentDidMount() {
+    this.createDir()
     SmsListener.addListener(message => this.parseMessage(message));
     const { navigation } = this.props;
     //Adding an event listner om focus
@@ -246,15 +270,20 @@ geolocationWatcher(){
         console.log(' navigation param : ' + JSON.stringify(this.props.navigation.state.params));
         const str = JSON.stringify(this.props.navigation.state.params);
         var phone_no;
+        var addRemove;
+        var flag;
         JSON.parse(str, (key,value) => {
-          if(key == 'refresh'){
+          if(key == 'refresh' && value != ''){
             phone_no = value;
-          } else if(key == 'addRemove'){
-            this.afterNavigation(phone_no, value)
+            flag = true;
+            console.log('in component did mount in map phone no is : ', value)
+          } else if(key == 'addRemove' && value != ''){
+            addRemove = value
           }
+          if(flag)
+            this.afterNavigation(phone_no, addRemove)
           console.log(value);
         })  
-        //this.afterNavigation()
       } else { console.log( ' is nul ')}
     });
 
@@ -318,7 +347,7 @@ geolocationWatcher(){
 
           this.setState({region: {latitude: la, longitude: lo, 
             latitudeDelta: this.state.region.latitudeDelta,
-            longitudeDelta: this.state.region.longitudeDelta,
+            longitudeDelta: this.state.region.longitudxdeDelta,
           }})
 
           console.log('meghdar dehi region shod 2')
@@ -349,20 +378,22 @@ geolocationWatcher(){
           this.setState({isReady: false});
         tx.executeSql('select user_id, phone_no, marker_color from TrackingUsers where phone_no=?',
          [phone_no], (tx, results) => {
-          console.log(' in after  okkkkkkkkkkkkkkkkkk : ' )
+          console.log(' in after  navigion to add ' )
           this.setState({isReady: false});
-          this.props.navigation.setParams({refresh : "no"});
           if(results.rows.length > 0){
-
+            var a = [...this.state.TrackingUser]
             const TrackingUser = {
               user_id: results.rows.item(0).user_id,
-              phone_no: results.rows.item(0).phone_no.split(' ')[0].toString(),
-              marker_color: results.rows.item(0).marker_color.split(' ')[0].toString(),
+              phone_no: results.rows.item(0).phone_no.split(' ')[0],
+              marker_color: results.rows.item(0).marker_color,
               index: this.state.TrackingUser.length,
             };
-            this.state.TrackingUser.push(TrackingUser);
+            a.push(TrackingUser);
+            this.setState({TrackingUser: a})
             console.log(' new user added :) ');
 
+            var b = [...this.state.Markers]
+            console.log(' after copy of markers:) ', results.rows.item(0).marker_color,);
             const marker = {
               latitude: LATITUDE,
               longitude: LONGITUDE,
@@ -375,19 +406,31 @@ geolocationWatcher(){
                 latitudeDelta : LATITUDE_DELTA,
                 longitudeDelta : LONGITUDE_DELTA, 
               }),
-              color: results.rows.item(i).marker_color.split(' ')[0].toString(),
-              index: this.state.TrackingUser.length,
+               color: results.rows.item(0).marker_color,
+               index: this.state.TrackingUser.length,
             };
-            this.state.Markers.push(marker)
-              
+            b.push(marker)
+            console.log(' after push to b :) ');
+            this.setState({Markers: b})
             console.log(' new marker added :) ');
-            this.state.coordinates.push({latitude: LATITUDE, longitude: LONGITUDE});
-
+            var c = [...this.state.coordinates]
+            c.push({latitude: LATITUDE, longitude: LONGITUDE});
+            this.setState({coordinates: c})
             this.setState({isReady:true});
           }
         })}
       else if(opration == 'remove') {
-        console.log(' deleteddddddddddd :((((')
+        console.log(' in after  navigion to add ' )
+        var index;
+        for(let i=0; i<this.state.TrackingUser.length; ++i){
+          if(this.state.TrackingUser.phone_no == phone_no){
+            index = this.state.TrackingUser.index
+          }
+        }
+        if(index != null){
+          console.log('in remoev index in after navigaion ', index)
+         console.log(this.state.TrackingUser.slice(0,index).concat(this.state.TrackingUser.slice(index+1)))
+        }
       }
       })});
   }
@@ -503,5 +546,15 @@ geolocationWatcher(){
         ),
       }
     }
+//----------------------------------------------------------------------------------------------
+createDir(){
+    RNFS.mkdir(RNFS.DocumentDirectoryPath+'/images').then( result => {
+      console.log('GOT RESULT mkdir ', result);
+    }).then(contents => {
+      console.log('contents mkdir'+ contents);
+    }) .catch((err) => {
+      console.log('contents error mkdir' + err.message, err.code);
+    });
+  }
 }
 //----------------------------------------------------------------------------------------------

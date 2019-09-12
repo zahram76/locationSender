@@ -19,7 +19,7 @@ export const CurrentLocationButton = function(props){
                     onPress ={() => { cb() }}
                     /> 
             </View>
-            <Text style={{alignSelf: 'center',left: '20%', fontSize: 17}}>Me</Text>
+            <Text style={{alignSelf: 'center',left: '20%', fontSize: 17}}>other</Text>
         </View>
 
     )
