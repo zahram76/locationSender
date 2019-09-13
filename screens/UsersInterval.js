@@ -6,7 +6,7 @@ import {
     TextInput,
     Image,
     ScrollView,
-      Picker,
+    Picker,
     Modal,
     StyleSheet,
     TouchableHighlight,
@@ -20,6 +20,10 @@ import {styles} from '../style.js';
 var RNFS = require('react-native-fs');
 
 const color = '#349e9f';
+const ImageOptions = [
+  require('../asset/error.png'),
+  require('../asset/verified.png')
+]
 
 export default class AccountSetting extends Component {
 constructor(){
@@ -33,6 +37,7 @@ constructor(){
        isReady: false,
        error: false, 
        message: '',
+       iscompelet: false,
    };
    flagIsRepeat = true;
    this.user_id;  
@@ -51,17 +56,18 @@ init(){
       tx.executeSql('select user_id, phone_no, sending_setting, interval from TrackingUsers where user_id=? ', [this.user_id], (tx, results) => {
             console.log('Results', results.rows.length);
             if (results.rows.length > 0) {
-                console.log('Resultsss', JSON.stringify(results.rows.item(i)));
+                console.log('Resultsss', JSON.stringify(results.rows.item(0)));
                   this.setState({
-                    sendingType: results.rows.item(i).sending_setting,
-                    interval: results.rows.item(i).interval,
-                    showInputInterval: results.rows.item(i).sending_setting=='interval'?true: false,
-                    phone_no: results.rows.item(i).phone_no
+                    sendingType: results.rows.item(0).sending_setting,
+                    interval: results.rows.item(0).interval,
+                    showInputInterval: results.rows.item(0).sending_setting=='interval'?true: false,
+                    phone_no: results.rows.item(0).phone_no
                   })
-                  this.sendingType = results.rows.item(i).sending_setting
-                  this.interval= results.rows.item(i).interval,
-                  this.phone_no= results.rows.item(i).phone_no
-
+                  this.sendingType = results.rows.item(0).sending_setting
+                  this.interval= results.rows.item(0).interval,
+                  this.phone_no= results.rows.item(0).phone_no
+                  console.log(' in init : ', this.state.phone_no)
+                  this.setState({iscompelet : true})
               console.log('Success'+'\n'+'select users Successfully');
             } else {
               console.log('no user');
@@ -75,7 +81,7 @@ updateUserInterval(sending_type, interval, user_id){
     SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
       console.log("execute transaction");
-        tx.executeSql('update Users set sending_setting=?, interval=? where user_id=?',
+        tx.executeSql('update TrackingUsers set sending_setting=?, interval=? where user_id=?',
          [sending_type ,interval ,user_id], 
             (tx, results) => {
               console.log('Results', results.rowsAffected);
@@ -84,7 +90,7 @@ updateUserInterval(sending_type, interval, user_id){
                 this.setState({message: 'Success'+'\n'+'Your account update Successfully'}); 
                 this.setState({modalVisible: false})
                 this.setState({error: false});
-                this.setState({iscomplet: true});
+                this.setState({isReady: true});
               } else { console.log('can not find map type setting ') }  
         });
     });
@@ -113,12 +119,12 @@ SendButtonPress(){
     if(this.state.sendingType == this.sendingType && this.sendingType == 'speed'){
         this.setState({message: 'No change'}); 
         this.setState({error: false});
-        this.setState({iscomplet: true});
+        this.setState({isReady: true});
     } else if (this.state.sendingType == this.sendingType
          && this.sendingType == 'interval' && this.state.interval == this.interval){
         this.setState({message: 'No change'}); 
         this.setState({error: false});
-        this.setState({iscomplet: true});
+        this.setState({isReady: true});
     } else {
         this.setState({modalVisible: true})
         this.sendsms(this.state.phone_no)
@@ -126,15 +132,17 @@ SendButtonPress(){
 }
 
 parseMessage(message){ 
+    console.log('in parse message for interval')
     const res = message.body.split(' ');
+    console.log(' message', res)
     if (res[0] == 'hello' && res[1] == 'got' && res[2] == 'interval'){
       console.log(' interval setting ok');
       this.updateUserInterval(this.state.sendingType, this.state.interval, this.user_id)
-    }
+    } else console.log(' interval setting not ok')
 }
 
 sendsms(phoneNumber){ 
-    console.log('in send by sms in set interval' )
+    console.log('in send by sms in set interval', phoneNumber )
      message = 'hello update sendingType:' + this.state.sendingType + ' interval:' + this.state.interval;
      SmsAndroid.autoSend(phoneNumber, message, (fail) => {
          console.log("Failed with this error: " + fail)
@@ -146,8 +154,10 @@ sendsms(phoneNumber){
 render(){
 return (  
   <View style={styles.scrolStyle}>
+    {this.state.iscompelet ? 
     <ScrollView style={styles.scrolStyle} scrollEnabled contentContainerStyle={styles.scrollview}>
-        <View style={{flex: 1, flexDirection: 'row', marginRight: 20, marginLeft: 15}}>
+      
+        <View style={{flex: 1, flexDirection: 'row', marginRight: 20, marginLeft: 15, marginTop: 60}}>
         <View style={{flex: 1}}>
             <Text style={{height: 45, alignSelf: 'flex-start',
             paddingRight: 10, paddingLeft: 10, marginTop: 10, fontSize: 15}}>Send by </Text>
@@ -234,13 +244,14 @@ return (
                 </View>
 
                 <View style={{flex: 1}}>
-                  <TouchableOpacity style={[style.btn,{alignSelf:'center', width: 100, 
+                  <TouchableOpacity style={[styles.btn,{alignSelf:'center', width: 100, 
                     height: 40, marginTop: 10, marginRight: 20, backgroundColor: color}]}
                     onPress={this.SendButtonPress.bind(this)}>
                     <Text style={{color: '#ffffff'}}>save</Text>
                   </TouchableOpacity> 
                 </View>
         </ScrollView>
+        : null }
      </View>
     );
 }

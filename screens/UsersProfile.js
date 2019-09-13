@@ -7,7 +7,10 @@ import {
     TextInput,
     Image,
     ScrollView,
+    Modal,
     StyleSheet,
+    TouchableHighlight,
+    ActivityIndicator,
 } from "react-native"; 
 import SQLite from "react-native-sqlite-storage";
 import ImagePicker from 'react-native-image-picker';
@@ -31,11 +34,6 @@ const ImageOptions = [
   require('../asset/error.png'),
   require('../asset/verified.png')
 ]
-const imageOptions = [
-    require('../images/defaultMap.png'),
-    require('../images/sateliteMap.png'),
-    require('../images/terrianMap.png')
-];
 
 export default class AccountSetting extends Component {
 constructor(){
@@ -43,13 +41,15 @@ constructor(){
     this.state =  {
        first_name: '',
        last_name: '',
+       age: '',
+       phone_no: '',
        bordercolor: '#DBDBDB',
        bordercolor1: '#DBDBDB',
        bordercolor2: '#DBDBDB',
        bordercolor3: '#DBDBDB',
        FlatListItems: [],
        resizedImageUri: null,
-       avatarSource: require('../asset/defaultProfile.png'),
+       avatarSource: {uri: 'asset:/images/defaultProfile.png'},
        isReady: false,
        uriFlag: false,
        image: '',
@@ -57,6 +57,7 @@ constructor(){
        error: false, 
        message: '',
        color: 'red',
+       modalVisible: false,
    };
    imageUri = '';
    savedImageUri ='';
@@ -82,7 +83,7 @@ init(){
                       this.setState({uriFlag: true})
                       image = {uri : value}}
                     else if (key == 'require')
-                      image = require('../asset/defaultProfile.png')
+                      image = {uri: 'asset:/images/defaultProfile.png'}
                   });
                   this.setState({
                     user_id : results.rows.item(i).user_id,
@@ -96,6 +97,7 @@ init(){
                   if(results.rows.item(0).marker_image[0] == '.'){
                       this.saveImageForMarker = false;
                   } else this.saveImageForMarker = true;
+                  this.setState({modalVisible: false})
               }
               console.log('Success'+'\n'+'select users Successfully');
             } else {
@@ -112,7 +114,7 @@ updateAccount(phone_no,first_name,last_name,age,image, user_id){
    SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
       console.log("execute transaction");
-        tx.executeSql('update TrackingUsers set first_name=?, last_name=? age=? where user_id=?',
+        tx.executeSql('update TrackingUsers set first_name=?, last_name=?, age=? where user_id=?',
          [first_name,last_name,age,user_id], 
             (tx, results) => {
               console.log('Results', results.rowsAffected);
@@ -123,8 +125,8 @@ updateAccount(phone_no,first_name,last_name,age,image, user_id){
                 this.setState({isReady: true});
               } else { console.log('can not find map type setting ') }  
         });
-        tx.executeSql('update TrackingUsers set user_image=? where phone_no=?',
-        [JSON.stringify(image),phone_no], 
+        tx.executeSql('update TrackingUsers set user_image=? where user_id=?',
+        [JSON.stringify(image),user_id], 
            (tx, results) => {
             console.log('Results', results.rowsAffected);
             if (results.rowsAffected > 0) {
@@ -132,8 +134,8 @@ updateAccount(phone_no,first_name,last_name,age,image, user_id){
             } else { console.log('can not find image setting ') }  
         });
         if(this.saveImageForMarker)
-            tx.executeSql('update TrackingUsers set marker_image=? where phone_no=?',
-            [JSON.stringify(image),phone_no], 
+            tx.executeSql('update TrackingUsers set marker_image=? where user_id=?',
+            [JSON.stringify(image),user_id], 
             (tx, results) => {
                 console.log('Results', results.rowsAffected);
                 if (results.rowsAffected > 0) {
@@ -153,7 +155,7 @@ AddButtonPress() {
     if (this.state.last_name == ''){ 
       this.setState({bordercolor1 : '#B30000'}); flag = true}
     if (this.state.age == ''){ 
-      this.setState({bordercolor1 : '#B30000'}); flag = true}
+      this.setState({bordercolor3 : '#B30000'}); flag = true}
 
     if(flag){
       this.setState({message: 'Please fill in the blanks!'});
@@ -165,6 +167,7 @@ AddButtonPress() {
 }
 
 componentDidMount(){
+  this.setState({modalVisible: true})
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
       if(this.props.navigation.state.params != null){
@@ -208,10 +211,10 @@ getImage(){
 saveImageToDevice(name,data){
   var image;
   console.log('uri flag: '+this.state.uriFlag + JSON.stringify(data))
-  if(this.state.uriFlag == false) {image = {require : this.state.avatarSource}; }
-  else { image = data; }
+  // if(this.state.uriFlag == false) {image = {require : this.state.avatarSource}; }
+  // else { image = data; }
   console.log(JSON.stringify(image))
-  this.updateAccount(this.state.phone_no, this.state.first_name, this.state.last_name, this.state.age, image, this.user_id);
+  this.updateAccount(this.state.phone_no, this.state.first_name, this.state.last_name, this.state.age, this.state.avatarSource, this.user_id);
 }
 
 changePass(){
@@ -294,7 +297,7 @@ return (
                       defaultValue={String(this.state.age)}
                       keyboardType={'number-pad'}
                       onChangeText={txt => {
-                        this.setState({age: parseInt(txt)})}}/>
+                        this.setState({age: txt.split(' ')[0]})}}/>
                   </View>
                 </View>
               <View style={{flex: 1, marginBottom: 20}}>
@@ -308,7 +311,7 @@ return (
                         this.setState({bordercolor3 : "#DBDBDB"}); 
                         this.setState({isReady: false})}}
                       onBlur={() => {this.setState({bordercolor2 : "#DBDBDB"})}}
-                      placeholder={this.state.phone_no}
+                      placeholder={'phone number'}
                       placeholderTextColor={'#8D8D8D'}
                       defaultValue={this.state.phone_no}
                       underlineColorAndroid='transparent'
@@ -338,6 +341,31 @@ return (
                   </TouchableOpacity> 
                 </View>
             </View>
+            <Modal
+                    animationType="fade"
+                    transparent={true}
+                    presentationStyle={"overFullScreen"}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+                      alert('Modal has been closed.');
+                      this.setState({modalVisible: false})
+                    }}>
+                    <View style={{backgroundColor: "rgba(255,255,255,0.04)",
+                      justifyContent: "center",
+                      flex: 1, alignItems: 'center',}}>
+                      <View style={{marginTop: 150}}>
+                        <ActivityIndicator size="large" color="#0000ff" /> 
+                        <TouchableHighlight
+                          style={{margin: 30, backgroundColor: "rgba(255,255,255,0.4)",
+                          justifyContent: "center", alignItems: 'center',}}
+                          onPress={() => {
+                            this.setState({modalVisible: false})
+                          }}>
+                          <Text>cancel ?</Text>
+                        </TouchableHighlight>
+                      </View>
+                    </View>
+                  </Modal>
           {/* </ImageBackground> */}
         </ScrollView>
      </View>

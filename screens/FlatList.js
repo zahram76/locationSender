@@ -64,7 +64,7 @@ export default class FlatListComponent extends Component {
                         key : results.rows.item(i).phone_no,
                         first_name : results.rows.item(i).first_name,
                         last_name : results.rows.item(i).last_name,
-                        image: require('../images/defaultProfile.png')
+                        image: {uri: 'asset:/images/defaultProfile.png'}
                     });
                 } 
                 console.log('select users to flat list Successfully' + JSON.stringify(this.state.FlatListItems));
@@ -80,7 +80,7 @@ export default class FlatListComponent extends Component {
                 if(key == 'uri') 
                   image = {uri : value}
                 else if (key == 'require')
-                  image = require('../images/defaultProfile.png')
+                  image = {uri: 'asset:/images/defaultProfile.png'}
               });
               b[j].image = image; 
               console.log('select images to flat list Successfully ' + image);
@@ -95,14 +95,16 @@ export default class FlatListComponent extends Component {
 componentDidMount(){
   const { navigation } = this.props;
   this.focusListener = navigation.addListener('didFocus', () => {
+    this.init()
     if(this.props.navigation.state.params != null){
-      console.log('in flat list  navigation param : ' + JSON.stringify(this.props.navigation.state.params));
-      const str = JSON.stringify(this.props.navigation.state.params);
-      JSON.parse(str, (key,value) => {
-        if(key == 'name' && value == 'TrackingUserSettings'){ this.init();}
-        console.log(value);
-      })  
-    } else { console.log( ' is nul ')}
+    //   console.log('in flat list  navigation param : ' + JSON.stringify(this.props.navigation.state.params));
+    //   const str = JSON.stringify(this.props.navigation.state.params);
+    //   JSON.parse(str, (key,value) => {
+    //     if(key == 'name' && value == 'TrackingUserSettings'){ this.init();}
+    //     console.log(value);
+    //   })  
+     
+     } else { console.log( ' is nul ')}
   });
 }
 
@@ -193,7 +195,7 @@ title: {
     color: '#000',
 },
 container_text: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'column',
     marginLeft: 5,
     justifyContent: 'center',

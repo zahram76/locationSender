@@ -6,6 +6,43 @@ const {height : HEIGHT} = Dimensions.get('window');
 const color = '#349e9f';
 
 export const styles = StyleSheet.create({
+  callout: {
+    width: 140,
+    position: 'absolute'
+  },
+  arrow: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderTopColor: '#fff',
+    borderWidth: 10,
+    alignSelf: 'center',
+    marginTop: -21,
+  },
+  arrowBorder: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+    borderTopColor: '#ccc',
+    borderWidth: 10,
+    alignSelf: 'center',
+    marginTop: -2,
+  },
+  containerImageMarker: {
+    flexDirection: 'column',
+    alignSelf: 'flex-start',
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+  },
+  // Callout bubble
+  bubbleImageMarker: {
+    //flexDirection: 'row',
+    alignSelf: 'center',
+    backgroundColor: '#fff',
+    borderRadius: 50,
+    borderColor: '#ccc',
+    borderWidth: 0.5,
+    padding: 5,
+   // width: 150,
+  },
     headerStyle: {
       backgroundColor: '#16A085',
       tintColor: '#fff',

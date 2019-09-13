@@ -177,7 +177,7 @@ export default class AddNewPerson extends Component {
           DB.transaction((tx) => {
           console.log("execute transaction");
           tx.executeSql('insert into TrackingUsers(phone_no, first_name, last_name, age, marker_color, user_image, sending_setting, interval, marker_image) values (?,?,?,?,?,?,?,?,?)', 
-            [phone_no,first_name, last_name, age, color, JSON.stringify(image),sendigType,interval, image.uri],
+            [phone_no,first_name, last_name, age, color, JSON.stringify(image),sendigType, interval, image.uri],
                (tx, results) => {
                 console.log('Results', results.rowsAffected);
                 if (results.rowsAffected > 0) {

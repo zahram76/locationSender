@@ -1,5 +1,16 @@
 import React ,{ Component } from 'react';  
-import {Image, StyleSheet, Text, View, Animated, FlatList, TouchableOpacity, Dimensions} from 'react-native';  
+import {
+  Image, 
+  Text, 
+  View, 
+  Animated, 
+  FlatList, 
+  TouchableOpacity,
+  Modal,
+  StyleSheet,
+  TouchableHighlight,
+  ActivityIndicator,
+  Dimensions} from 'react-native';  
 import SQLite from "react-native-sqlite-storage";
 import {styles} from '../style.js';
 import { CheckBox } from 'react-native-elements';
@@ -39,9 +50,11 @@ constructor(){
             image: 'asset:/images/border-marker1.png'
         }],
         selectedImage : '',
-        showingImage : 'asset:/images/marker1.png',
+        showingImage : '',
         imageuri: '',
         lastImage: '',
+        modalVisible: false,
+        imageReady: false
     }
     this.user_id;
     
@@ -53,15 +66,24 @@ init(){
     SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
       console.log("execute transaction");
-        tx.executeSql('select marker_image from TrackingUsers where user_id=?', [this.user_id], (tx, results) => {
+        tx.executeSql('select user_image, marker_image from TrackingUsers where user_id=?', [this.user_id], (tx, results) => {
               console.log('Results', results.rows.length);
               if (results.rows.length > 0) {
-               this.setState({lastImage: results.rows.item(0).value})
-               this.setState({showingImage: results.rows.item(0).value})
-                console.log('marker image : ' + this.state.lastImage)
+                JSON.parse(JSON.stringify(results.rows.item(0).marker_image), (key,value) => {
+                  console.log('Results marker in marker setting ghable if first ', key, value);
+                 // if(key == 'uri') {
+                    this.setState({lastImage: value})
+                    this.setState({showingImage:value})
+                      console.log('marker image : ' + this.state.lastImage)
+                    if(this.state.showingImage[0] != 'a' && this.state.showingImage[0] != '.' )
+                      this.setState({checked: true})
+                    this.setState({modalVisible: false})
+                    this.setState({imageReady: true})
+                    
+                 // } else console.log('image is null')
+              }); 
               } else { console.log('can not find marker setting ') }  
-        });
-        tx.executeSql('select user_image from TrackingUsers', [], (tx, results) => {
+
           console.log('Results marker in marker setting', results.rows.item(0).user_image);
           if (results.rows.length > 0) {
             console.log('Results marker in marker setting', ' lentgh > 0');
@@ -70,8 +92,7 @@ init(){
               if(key == 'uri') {
                 console.log('Results marker in marker setting', key, value);
                 this.setState({imageuri : value}); }
-            });
- 
+            }); 
               console.log(' dddddddddddddddddddddddd11111111111111111111: ', JSON.stringify(this.state.imageuri))
               console.log('Success'+'\n'+'select users Successfully');
           } else {
@@ -81,10 +102,11 @@ init(){
           }  
       })
     });
-});
+  });
 }
 
 componentDidMount(){
+  this.setState({modalVisible: true})
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
       if(this.props.navigation.state.params != null){
@@ -148,12 +170,12 @@ return (
           containerStyle={styles.checkboxContainer}
           onIconPress={() => {
             this.ifChecked(this.state.showingImage, !this.state.checked)
-            console.log('checcccccccccccccccccccccck: ',this.state.checked)
+            console.log('checcccccccccccccccccccccck: ',!this.state.checked)
             this.setState({checked: !this.state.checked});
           }}
           onPress={() => {
             this.ifChecked(this.state.showingImage, !this.state.checked)
-            console.log('checcccccccccccccccccccccckaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ',this.state.checked)
+            console.log('checcccccccccccccccccccccckaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ',!this.state.checked)
             this.setState({checked: !this.state.checked});
           }}
         />
@@ -181,8 +203,33 @@ return (
       />
     </View> 
     <View style={{flex: 2, justifyContent : 'center', alignItems: 'center', alignSelf: 'center'}}>
-      <Image source={{uri : this.state.showingImage}} style={{width: 150, height: 150, borderRadius: 80}}  resizeMode={'cover'}/>
+      <Image source={this.state.imageReady? {uri : this.state.showingImage} : '../images/background.png'} style={{width: 150, height: 150, borderRadius: 80}}  resizeMode={'cover'}/>
     </View>
+    <Modal
+      animationType="fade"
+      transparent={true}
+      presentationStyle={"overFullScreen"}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+                      alert('Modal has been closed.');
+                      this.setState({modalVisible: false})
+                    }}>
+                    <View style={{backgroundColor: "rgba(255,255,255,0.04)",
+                      justifyContent: "center",
+                      flex: 1, alignItems: 'center',}}>
+                      <View style={{marginTop: 150}}>
+                        <ActivityIndicator size="large" color="#0000ff" /> 
+                        <TouchableHighlight
+                          style={{margin: 30, backgroundColor: "rgba(255,255,255,0.4)",
+                          justifyContent: "center", alignItems: 'center',}}
+                          onPress={() => {
+                            this.setState({modalVisible: false})
+                          }}>
+                          <Text>cancel ?</Text>
+                        </TouchableHighlight>
+                      </View>
+                    </View>
+                  </Modal>
   </View>   
     );
   }

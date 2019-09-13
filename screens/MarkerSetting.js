@@ -8,7 +8,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 const color = '#349e9f';
 SQLite.DEBUG(true);
 
-var DB = SQLite.openDatabase({name : "db", createFromLocation : "~db.sqlite"}); 
+var DB = SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}); 
 
 export default class MarkerSetting extends Component {
 constructor(){

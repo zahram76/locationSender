@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, TouchableOpacity, Image, StyleSheet, FlatList} from "react-native";
 import SQLite from "react-native-sqlite-storage";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import {deletHistoryByTime, deleteLacationByTime} from '../functions/deleteLocation.js';
+import {deleteLacationByTime} from '../functions/deleteLocation.js';
 
 const color = '#349e9f';
 
@@ -29,8 +29,8 @@ locationDataInit(){
   var a = []
   SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
-        console.log("execute transaction");
-          tx.executeSql('select datatime, latitude from Locations where user_id=?', [this.user_id], (tx, results) => {
+        console.log("execute transaction", this.user_id);
+          tx.executeSql('select * from Locations', [], (tx, results) => {
                 console.log('Results', results.rows.item(0).latitude);
                 if (results.rows.length > 0) {
                   for(let i=0; i<results.rows.length; ++i){  
@@ -90,6 +90,7 @@ deletHistoryByTime = (item) => {
       ItemSeparatorComponent = {this.FlatListItemSeparator}
       renderItem={({item}) => 
       <TouchableOpacity onPress={() => {
+        console.log('in history for user : nimired :((((')
           this.props.navigation.navigate('HistoryShowOnMap',{date: item.datetime, user_id: this.user_id})}}> 
         <View key={item.key} style={style.itemContainer}>
           <View style={{flex: 1}}>
@@ -100,7 +101,7 @@ deletHistoryByTime = (item) => {
           </View>
           <View style={{flex: 1, alignSelf: 'center'}}>
             <MaterialCommunityIcons name={'delete'} style={style.iconImage} 
-                color={'gray'} onPress={() => this.deletHistoryByTime(item)}/>
+                color={'gray'} size={25} onPress={() => this.deletHistoryByTime(item)}/>
           </View>
         </View>
       </TouchableOpacity>
@@ -110,25 +111,6 @@ deletHistoryByTime = (item) => {
   );
 }
 //-------------------------------------------------------------------------------------------
-//   static navigationOptions = ({ navigation }) => {
-//     return {
-//         title: 'History',
-//         headerStyle: {
-//           backgroundColor: color,
-//           barStyle: "light-content", // or directly
-//         },
-//         headerTintColor: '#fff',
-//         headerTitleStyle: {
-//           fontWeight: 'bold',
-//         },
-//         headerLeft: (
-//           <View style={{marginLeft: 15}}>
-//             <MaterialCommunityIcons name={'arrow-left'} size={25} style={{color: 'white'}}
-//               onPress={ () => { navigation.navigate('Profile') }} />
-//             </View>
-//         ),
-//       }
-//     }
 }
 
 const style = StyleSheet.create({

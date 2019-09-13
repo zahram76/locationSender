@@ -31,6 +31,7 @@ import UsersMarker from './screens/UsersMarker.js';
 import UsersInterval from './screens/UsersInterval.js';
 import UsersHistory from './screens/UsersHistory.js';
 import TrackingUserSettings from './screens/TrackingUserSettings.js';
+import HistoryShowOnMap from './screens/historyShowOnMap.js';
 import getDestPhone from './screens/getDestPhoneNumber';
 import ImageResizer from "react-native-image-resizer";
 
@@ -71,6 +72,19 @@ const AppStack = createStackNavigator({
   AccountSetting: {
     screen: AccountSetting,  
    },
+   HistoryShowOnMap:{
+    screen: HistoryShowOnMap,
+    navigationOptions: {
+      title: 'Map',
+      headerStyle: {
+        backgroundColor: color,
+      },
+      headerTintColor: '#fff',
+      headerTitleStyle: {
+        fontWeight: 'bold',
+      },
+    },
+  },
    TrackingUserSettings:{
     screen: TrackingUserSettings,
     navigationOptions: {

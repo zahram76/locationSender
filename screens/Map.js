@@ -14,9 +14,11 @@ import {MapTypeMenu} from './MapTypeMenu.js';
 import {requestPermission} from './GetPermissions.js';
 import {insertLocation} from './WriteLocation.js';
 import { deleteUser } from "./deleteUser.js";
+import AnimatingPolylineComponent from '../component/AnimatedPolyline.js';
 import {CurrentLocationButton} from '../component/CurrentLocationButton';
 import {FitAllMarker} from '../component/fitAllMarker';
 import {MyLocation} from '../component/MyLocation.js';
+import Callout from '../component/Callout.js';
 var RNFS = require('react-native-fs');
 
 const color = '#028687';
@@ -56,6 +58,7 @@ export default class Map  extends React.Component {
       TrackingUser: [],
       isReady: false,
     };    
+    this.lastLocations = []
     this.readTrackingUsers();
   }
 
@@ -74,48 +77,61 @@ export default class Map  extends React.Component {
               
               {this.state.Markers.map(poly => {
                 if(this.state.isReady == true){
-                  return (
-                    <Polyline key={`poly_${poly.index}`}
-                      coordinates={poly.routeCoordinates} 
-                      strokeWidth={5} strokeColor= {String(poly.color).split(' ')[0]} lineCap= {"square"} lineJoin= {"miter"}>
-                    </Polyline> );
+                  return(
+                  <AnimatingPolylineComponent 
+                    key={`poly_${poly.user_id}`}
+                    id={`poly_${poly.user_id}`}
+                    Direction={poly.routeCoordinates.reverse()} 
+                    strokeColor={String(poly.color).split(' ')[0]}
+                  />);
+                  // return (
+                  //   <Polyline key={`poly_${poly.user_id}`}
+                  //     coordinates={poly.routeCoordinates} 
+                  //     strokeWidth={6} strokeColor= {String(poly.color).split(' ')[0]} lineCap= {"square"} lineJoin= {"miter"}>
+                  //   </Polyline> );
                   }})}
 
+              
               {this.state.Markers.map(marker => {
                 if(this.state.isReady == true){
                   return (
                     <Marker.Animated
                         ref={ref => {this.marker = ref}}
-                        key={`marker_${marker.index}`}
+                        key={`marker_${marker.user_id}`}
                         tracksViewChanges={true}
                         coordinate={{
                         latitude: marker.latitude,
                         longitude: marker.longitude}}
-                       // pinColor={String(marker.color).split(' ')[0]}
-                        title={marker.title}
-                    >
-                      <View >
-                        <Text>{marker.index}</Text>
-                        <Image style={{width: 50, height: 50}}
-                          source={require('../images/marker1.png')}/>
+                        calloutOffset={{ x: -8, y: 28 }}
+                    >  
+                    <View style={[styles.containerImageMarker]}>
+                      <View style={styles.bubbleImageMarker}>
+                        <View>
+                          <Image style={{width: 50, height: 50, borderRadius: 50}}
+                              source={{uri: marker.marker_image}}/>
+                        </View>
                       </View>
-                      
+                      <View style={styles.arrowBorder} />
+                      <View style={styles.arrow} />
+                    </View>
+
+                      <MapView.Callout tooltip={true} style={styles.callout}>
+                        <Callout
+                          name={marker.name}
+                          batteryLevel={marker.batteryLevel}
+                          distanceTravelled={marker.distanceTravelled}
+                        />
+                      </MapView.Callout>                      
                     </Marker.Animated>);
                   }})}
                 {this.state.youAreReady ?
                     <Marker.Animated
                         ref={ref => {this.marker1 = ref}}
                         key={`my_marker`}
-                        tracksViewChanges={true}
                         coordinate={this.state.yourMarkers}
-                        title={'your marker'}
                     >
-                      <View >
-                        <Text>your marker</Text>
-                        <Image style={{width: 50, height: 50}}
-                          source={require('../images/marker2.png')}/>
-                      </View>
-                      
+                      <Image style={{width: 50, height: 50}}
+                        source={require('../images/marker2.png')}/>
                     </Marker.Animated> : null 
                   }
             </MapView>
@@ -131,8 +147,8 @@ export default class Map  extends React.Component {
             </View>
 
             <MyLocation cb ={() => {this.showCurrentLocation()}} />
-            {/* <FitAllMarker cb ={() => {this.fitAllMarkers()}} /> */}
-            <CurrentLocationButton cb ={() => {this.goToMrker(800)}}/> 
+            <FitAllMarker cb ={() => {this.goToMrker(800)}} />
+            {/* <CurrentLocationButton cb ={() =>  {this.fitAllMarkers()}/>  */}
 
             
         </View>
@@ -236,25 +252,17 @@ geolocationWatcher(){
 //----------------------------------------------------------------------------------------------
 initSetting(){
   console.log(' map for init setting');
-  DB.transaction((tx) => {
-    console.log("execute transaction");
-      tx.executeSql('select value from Settings where setting_name=?', ['mapType'], (tx, results) => {
-            console.log('map Results', results.rows.length);
-            if (results.rows.length > 0) {
-              this.state.mapType = results.rows.item(0).value
-              console.log('map inti setting : ' + this.state.mapType)
-            } else { console.log('can not find map type setting ') }
-      });
-      tx.executeSql('select value from Settings where setting_name=?', ['markerImage'], (tx, results) => {
-        console.log('marker Results', results.rows.length);
-        if (results.rows.length > 0) {
-          if (results.rows.item(0).value[0] != 'a')
-            this.setState({borderWidth: 5})
-          else if (results.rows.item(0).value[0] == 'a')
-            this.setState({borderWidth: 0})
-          this.setState({markerImage : {uri: results.rows.item(0).value}})
-          console.log('marker inti setting : ' + JSON.stringify(this.state.markerImage))
-        } else { console.log('can not find marker setting ') }
+  SQLite.openDatabase(
+    {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+    DB.transaction((tx) => {
+      console.log("execute transaction");
+        tx.executeSql('select value from Settings where setting_name=?', ['mapType'], (tx, results) => {
+              console.log('map Results', results.rows.length);
+              if (results.rows.length > 0) {
+                this.setState({mapType: results.rows.item(0).value})
+                console.log('map inti setting : ' + this.state.mapType)
+              } else { console.log('can not find map type setting ') }
+        });
     });
   });
 }
@@ -263,28 +271,27 @@ initSetting(){
     this.createDir()
     SmsListener.addListener(message => this.parseMessage(message));
     const { navigation } = this.props;
-    //Adding an event listner om focus
-    //So whenever the screen will have focus it will set the state to zero
     this.focusListener = navigation.addListener('didFocus', () => {
       if(this.props.navigation.state.params != null){
         console.log(' navigation param : ' + JSON.stringify(this.props.navigation.state.params));
         const str = JSON.stringify(this.props.navigation.state.params);
-        var phone_no;
-        var addRemove;
-        var flag;
-        JSON.parse(str, (key,value) => {
-          if(key == 'refresh' && value != ''){
-            phone_no = value;
-            flag = true;
-            console.log('in component did mount in map phone no is : ', value)
-          } else if(key == 'addRemove' && value != ''){
-            addRemove = value
-          }
-          if(flag)
-            this.afterNavigation(phone_no, addRemove)
-          console.log(value);
-        })  
-      } else { console.log( ' is nul ')}
+        this.afterNavigation()
+      //   var phone_no;
+      //   var addRemove;
+      //   var flag;
+      //   JSON.parse(str, (key,value) => {
+      //     if(key == 'refresh' && value != ''){
+      //       phone_no = value;
+      //       flag = true;
+      //       console.log('in component did mount in map phone no is : ', value)
+      //     } else if(key == 'addRemove' && value != ''){
+      //       addRemove = value
+      //     }
+      //     if(flag)
+      //       this.afterNavigation(phone_no, addRemove)
+      //     console.log(value);
+      //   })  
+       } else { console.log( ' is nul ')}
     });
 
     requestPermission();   
@@ -313,178 +320,81 @@ initSetting(){
       }
     } else { coordinate.timing(newCoordinate).start(); }
 
-    let a = this.state.Markers; //creates the clone of the state
+    let a = [...this.state.Markers]; //creates the clone of the state
     a[index] = {latitude, longitude,
                 routeCoordinates: routeCoordinates.concat([newCoordinate]),
                 distanceTravelled:
-                  distanceTravelled, //+ this.calcDistance(newCoordinate, index),
+                  distanceTravelled + this.calcDistance(newCoordinate, index),
                 prevLatLng: newCoordinate,
                 color: a[index].color,
-                title: a[index].title };
+                user_id: a[index].user_id,
+                user_image: a[index].user_image,
+                name: a[index].name,
+                marker_image: a[index].marker_image,
+                batteryLevel: a[index].batteryLevel};
     this.setState({Markers: a});
+    console.log(' in animated marker , distaceTraveled ', this.state.Markers[index].distanceTravelled)
   }
 //----------------------------------------------------------------------------------------------
   parseMessage(message){ 
-    const len = this.state.TrackingUser.length;
-    var i;
-    var index;
-    for(i=0; i<len; ++i){
-      var userPhoneNo = this.state.TrackingUser[i].phone_no.split(' '[0]);
-      var messagePhoneNo = message.originatingAddress.split(' ')[0];
-      var n = messagePhoneNo.localeCompare(userPhoneNo);
-      if(n == 0){
-        index = this.state.TrackingUser[i].index;
-        console.log(' receive message from ' + userPhoneNo + ' with index = ' + index);
-        const res = message.body.split(' ');
-        if (res[0] == 'hello' && res[1] == 'location'){
+    const index = this.state.TrackingUser.findIndex(
+      data => data.phone_no.split(' '[0]) == message.originatingAddress.split(' ')[0]
+    );
+    console.log(' in parse message ',index , this.state.TrackingUser[index].phone_no, message.originatingAddress)
+    if(index != -1)
+    {
+      console.log(' receive message from ' + this.state.TrackingUser[index].phone_no + ' with user_id = ' + index);
+      const res = message.body.split(' ');
+        if (res[0] == 'hello' && res[1] == 'location')
+        {
           const long = res[2].split('long:')[1];
           const lat = res[3].split('lat:')[1];
+          const batteryLevel = res[4].split('battery:')[1];
           const la = parseFloat( parseFloat(lat.split('.'[1])));
-          const lo =  parseFloat( parseFloat(long.split('.'[1])));
-
+          const lo = parseFloat( parseFloat(long.split('.'[1])));
           let coords = {latitude: la, longitude: lo};
           console.log('meghdar dehi region shod 1')
 
           this.setState({region: {latitude: la, longitude: lo, 
             latitudeDelta: this.state.region.latitudeDelta,
-            longitudeDelta: this.state.region.longitudxdeDelta,
+            longitudeDelta: this.state.region.longitudeDelta,
           }})
-
           console.log('meghdar dehi region shod 2')
 
           this.centerMap(100)
           console.log('meghdar dehi region shod 3')
           var a = [...this.state.coordinates];
           console.log(a)
+          this.lastLocations[index].latitude = a[index].latitude
+          this.lastLocations[index].longitude = a[index].longitude
+          console.log(' last location ', JSON.stringify(this.lastLocations))
           a[index] = coords;
           console.log('meghdar dehi region shod 4')
           this.setState({coordinates : a});
 
+          var b = [...this.state.Markers];
+          b[index].batteryLevel = batteryLevel;
+          this.setState({Markers: b})
+
           console.log('meghdar dehi region shod 5')
           var user_id = this.state.TrackingUser[index].user_id;
-          insertLocation(user_id, la, lo);
+          insertLocation(user_id, la, lo, this.lastLocations[index].latitude, this.lastLocations[index].longitude);
           this.animateMarker(index);
         }
       }
-    }
-    console.log(' end of parse message ' + message.originatingAddress);
+      console.log(' end of parse message ' + message.originatingAddress);
   }
 //----------------------------------------------------------------------------------------------
-  afterNavigation(phone_no, opration){
-    SQLite.openDatabase(
-      {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
-      DB.transaction((tx) => {
-        if(opration == 'add'){
-          this.setState({isReady: false});
-        tx.executeSql('select user_id, phone_no, marker_color from TrackingUsers where phone_no=?',
-         [phone_no], (tx, results) => {
-          console.log(' in after  navigion to add ' )
-          this.setState({isReady: false});
-          if(results.rows.length > 0){
-            var a = [...this.state.TrackingUser]
-            const TrackingUser = {
-              user_id: results.rows.item(0).user_id,
-              phone_no: results.rows.item(0).phone_no.split(' ')[0],
-              marker_color: results.rows.item(0).marker_color,
-              index: this.state.TrackingUser.length,
-            };
-            a.push(TrackingUser);
-            this.setState({TrackingUser: a})
-            console.log(' new user added :) ');
-
-            var b = [...this.state.Markers]
-            console.log(' after copy of markers:) ', results.rows.item(0).marker_color,);
-            const marker = {
-              latitude: LATITUDE,
-              longitude: LONGITUDE,
-              routeCoordinates: [],
-              distanceTravelled: 0,
-              prevLatLng: {},
-              coordinate: new AnimatedRegion({
-                latitude: LATITUDE,
-                longitude: LONGITUDE,
-                latitudeDelta : LATITUDE_DELTA,
-                longitudeDelta : LONGITUDE_DELTA, 
-              }),
-               color: results.rows.item(0).marker_color,
-               index: this.state.TrackingUser.length,
-            };
-            b.push(marker)
-            console.log(' after push to b :) ');
-            this.setState({Markers: b})
-            console.log(' new marker added :) ');
-            var c = [...this.state.coordinates]
-            c.push({latitude: LATITUDE, longitude: LONGITUDE});
-            this.setState({coordinates: c})
-            this.setState({isReady:true});
-          }
-        })}
-      else if(opration == 'remove') {
-        console.log(' in after  navigion to add ' )
-        var index;
-        for(let i=0; i<this.state.TrackingUser.length; ++i){
-          if(this.state.TrackingUser.phone_no == phone_no){
-            index = this.state.TrackingUser.index
-          }
-        }
-        if(index != null){
-          console.log('in remoev index in after navigaion ', index)
-         console.log(this.state.TrackingUser.slice(0,index).concat(this.state.TrackingUser.slice(index+1)))
-        }
-      }
-      })});
+  afterNavigation(){
+    this.initSetting();
+    this.AddNewUserToMap();
+    this.RemoveDeletedUserFromMap();
+    this.updateTrackingUsers();
   }
-//----------------------------------------------------------------------------------------------
-  readTrackingUsers(){
-    SQLite.openDatabase(
-      {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
-      DB.transaction((tx) => {
-        tx.executeSql('select t.user_id, phone_no, marker_color, loc_id, latitude, longitude from TrackingUsers as t left join (select l.user_id, loc_id, latitude, longitude from Locations as l join (select user_id, max(loc_id) as loc from Locations group by user_id ) as m on l.loc_id = m.loc ) as ml on t.user_id = ml.user_id', [], (tx, results) => {
-          if(results.rows.length > 0){
-            var i;
-            console.log(' reading tracking users please wait :) ' + results.rows.length ); 
-
-             for(i=0; i<results.rows.length; ++i){
-                console.log(JSON.stringify(results.rows.item(i))+'\n');
-                  const TrackingUser = {
-                    user_id: results.rows.item(i).user_id,
-                    phone_no: results.rows.item(i).phone_no.split(' ')[0].toString(),
-                    marker_color: results.rows.item(i).marker_color.split(' ')[0].toString(),
-                    index: i,
-                  };
-                  this.state.TrackingUser.push(TrackingUser);
-
-                  var a = this.state.Markers;
-                  console.log(' marker color = ' + results.rows.item(i).marker_color.split(' ')[0].toString())
-                  console.log(' initialize Markers for user with index = ' + i);
-
-                  this.state.Markers.push({
-                    latitude: LATITUDE,
-                    longitude: LONGITUDE,
-                    routeCoordinates: [],
-                    distanceTravelled: 0,
-                    prevLatLng: {},
-                    coordinate: new AnimatedRegion({
-                      latitude: LATITUDE,
-                      longitude: LONGITUDE,
-                      latitudeDelta : LATITUDE_DELTA,
-                      longitudeDelta : LONGITUDE_DELTA, 
-                    }),
-                    color: results.rows.item(i).marker_color.split(' ')[0].toString(),
-                    index: i,
-                  });
-                  console.log(' Markers color = ' + this.state.Markers[i].color);
-                  this.state.coordinates.push({latitude: LATITUDE, longitude: LONGITUDE});
-                }
-                this.setState({isReady:true});
-          } else { alert(' There are no users to track. ')}
-        });
-      });
-    });
-}     
 //----------------------------------------------------------------------------------------------
   calcDistance = (newLatLng, index) => {
-    const { prevLatLng } = this.state.Markers[index].prevLatLng;
+    const prevLatLng = this.state.Markers[index].prevLatLng;
+    console.log('in calc distance , newlatlang, index, prev latlang ',JSON.stringify(newLatLng), index, JSON.stringify(prevLatLng))
     return haversine(prevLatLng, newLatLng) || 0;
   };  
 //----------------------------------------------------------------------------------------------
@@ -556,5 +466,223 @@ createDir(){
       console.log('contents error mkdir' + err.message, err.code);
     });
   }
+//----------------------------------------------------------------------------------------------
+readTrackingUsers(){
+  SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+    DB.transaction((tx) => {
+      tx.executeSql('select t.user_id, phone_no, marker_color, loc_id, latitude, longitude, marker_image, user_image, first_name, last_name from TrackingUsers as t left join (select l.user_id, loc_id, latitude, longitude from Locations as l join (select user_id, max(loc_id) as loc from Locations group by user_id ) as m on l.loc_id = m.loc ) as ml on t.user_id = ml.user_id', [], (tx, results) => {
+        if(results.rows.length > 0){
+          console.log(' reading tracking users please wait :) ' + results.rows.length ); 
+
+           for(let i=0; i<results.rows.length; ++i){
+              console.log(JSON.stringify(results.rows.item(i))+'\n');
+                const TrackingUser = {
+                  user_id: results.rows.item(i).user_id,
+                  phone_no: results.rows.item(i).phone_no.split(' ')[0].toString(),
+                  marker_color: results.rows.item(i).marker_color.split(' ')[0].toString(),
+                  //index: i,
+                };
+                this.state.TrackingUser.push(TrackingUser);
+
+                var a = this.state.Markers;
+                console.log(' marker color = ' + results.rows.item(i).marker_color.split(' ')[0].toString())
+                console.log(' initialize Markers for user with index = ' + i);
+
+                var user_image, marker_image, latitude, longitude;
+                JSON.parse(results.rows.item(i).user_image, (key,value) =>{
+                  if(key == 'uri')
+                    user_image = value
+                })
+                JSON.parse(results.rows.item(i).marker_image, (key,value) =>{
+                  if(key == 'uri')
+                    marker_image = value
+                })
+                latitude =  parseFloat(results.rows.item(i).latitude==null ? LATITUDE :  results.rows.item(i).latitude)
+                longitude = parseFloat(results.rows.item(i).longitude==null ? LONGITUDE :  results.rows.item(i).longitude)
+                console.log('in init map , user image',user_image)
+                this.state.Markers.push({
+                  latitude: latitude,
+                  longitude: longitude,
+                  routeCoordinates: [],
+                  distanceTravelled: 0,
+                  prevLatLng: {},
+                  coordinate: new AnimatedRegion({
+                    latitude: latitude,
+                    longitude: longitude,
+                    latitudeDelta : LATITUDE_DELTA,
+                    longitudeDelta : LONGITUDE_DELTA, 
+                  }),
+                  color: results.rows.item(i).marker_color.split(' ')[0].toString(),
+                  //index: i,
+                  user_id: results.rows.item(i).user_id,
+                  image: user_image,
+                  name : results.rows.item(i).first_name +' '+results.rows.item(i).last_name,
+                  marker_image: marker_image,
+                  batteryLevel: 0.8
+                });
+                console.log(' Markers color = ' + this.state.Markers[i].marker_image);
+                this.state.coordinates.push({
+                  latitude: latitude, 
+                  longitude: longitude});
+                this.setState({region: {latitude: latitude, longitude: longitude, 
+                  latitudeDelta: this.state.region.latitudeDelta,
+                  longitudeDelta: this.state.region.longitudeDelta,
+                }})
+                this.centerMap(100)
+                this.lastLocations = [...this.state.coordinates]
+              }
+              this.setState({isReady:true});
+        } else { console.log(' There are no users to track. ')}
+      });
+    });
+  });
+}     
+//----------------------------------------------------------------------------------------------
+updateTrackingUsers(){
+  SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+    DB.transaction((tx) => {
+      tx.executeSql('select user_id, phone_no, marker_color, marker_image, user_image, first_name, last_name from TrackingUsers ', [], (tx, results) => {
+        if(results.rows.length > 0){
+          console.log(' reading tracking users please wait :) in update user' + results.rows.length ); 
+
+           for(let i=0; i<results.rows.length; ++i){
+              console.log(JSON.stringify(results.rows.item(i))+'\n');
+
+              const index = this.state.TrackingUser.findIndex(
+                data => data.user_id == results.rows.item(i).user_id
+              );
+
+              var a = [...this.state.TrackingUser]
+              a[index].marker_color =  results.rows.item(i).marker_color.split(' ')[0].toString()
+              this.setState({TrackingUser: a})
+               
+                console.log(' marker color = ' + results.rows.item(i).marker_color.split(' ')[0].toString())
+                console.log(' initialize Markers for user with index = ' + i);
+
+                var b = this.state.Markers;
+                var user_image, marker_image;
+                JSON.parse(results.rows.item(i).user_image, (key,value) =>{
+                  if(key == 'uri')
+                    user_image = value
+                })
+                JSON.parse(results.rows.item(i).marker_image, (key,value) =>{
+                  if(key == 'uri')
+                    marker_image = value
+                })
+                console.log('in init map , user image',user_image)
+                b[index].color = results.rows.item(i).marker_color.split(' ')[0].toString()
+                b[index].name = results.rows.item(i).first_name +' '+results.rows.item(i).last_name
+                b[index].user_image = user_image
+                b[index].marker_image = marker_image,
+               // b[index].batteryLevel = results.rows.item(i).batteryLevel.split(' ')[0].toString(),
+                this.setState({Markers : b})
+                console.log(' Markers color = ' + this.state.Markers[i].color);
+              }
+              this.setState({isReady:true});
+        } else { console.log(' There are no users to track. ')}
+      });
+    });
+  });
+}     
+//----------------------------------------------------------------------------------------------
+AddNewUserToMap(){
+  SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+    DB.transaction((tx) => {
+      tx.executeSql('select user_id, phone_no, marker_color, marker_image, user_image, first_name, last_name from TrackingUsers', [], (tx, results) => {
+        if(results.rows.length > 0){
+          console.log(' reading tracking users please wait :)  in add new user ' + results.rows.length ); 
+
+           for(let i=0; i<results.rows.length; ++i){
+              console.log(JSON.stringify(results.rows.item(i))+'\n');
+              const index = this.state.TrackingUser.findIndex(
+                data => data.user_id == results.rows.item(i).user_id
+              );
+              if(index == -1){
+                const TrackingUser = {
+                  user_id: results.rows.item(i).user_id,
+                  phone_no: results.rows.item(i).phone_no.split(' ')[0].toString(),
+                  marker_color: results.rows.item(i).marker_color.split(' ')[0].toString(),
+                 // index: i,
+                };
+                this.state.TrackingUser.push(TrackingUser);
+
+                console.log(' marker color = ' + results.rows.item(i).marker_color.split(' ')[0].toString())
+                console.log(' initialize Markers for user with index = ' + i);
+
+                var user_image, marker_image;
+                JSON.parse(results.rows.item(i).user_image, (key,value) =>{
+                  if(key == 'uri')
+                    user_image = value
+                })
+                JSON.parse(results.rows.item(i).marker_image, (key,value) =>{
+                  if(key == 'uri')
+                    marker_image = value
+                })
+                console.log('in init map , user image',user_image)
+                this.state.Markers.push({
+                  latitude: LATITUDE,
+                  longitude: LONGITUDE,
+                  routeCoordinates: [],
+                  distanceTravelled: 0,
+                  prevLatLng: {},
+                  coordinate: new AnimatedRegion({
+                    latitude: LATITUDE,
+                    longitude: LONGITUDE,
+                    latitudeDelta : LATITUDE_DELTA,
+                    longitudeDelta : LONGITUDE_DELTA, 
+                  }),
+                  color: results.rows.item(i).marker_color.split(' ')[0].toString(),
+                  //index: i,
+                  user_id: results.rows.item(i).user_id,
+                  image: user_image,
+                  name : results.rows.item(i).first_name +' '+results.rows.item(i).last_name,
+                  marker_image: marker_image,
+                  batteryLevel: 0.8
+                });
+                console.log(' Markers color = ' + this.state.Markers[i].color);
+                this.state.coordinates.push({latitude: LATITUDE, longitude: LONGITUDE});
+                this.lastLocations = [...this.state.coordinates]
+              } else { console.log(' in add new user to map index is ', index)}
+              this.setState({isReady:true});
+           }
+        } else { console.log(' There are  no users to track. ')}
+      });
+    });
+  });
 }
 //----------------------------------------------------------------------------------------------
+RemoveDeletedUserFromMap(){
+  SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
+    DB.transaction((tx) => {
+      tx.executeSql('select user_id, phone_no, marker_color, marker_image, user_image, first_name, last_name from TrackingUsers', [], (tx, results) => {
+        if(results.rows.length > 0){
+          console.log(' reading tracking users please wait :) in remove user' , 
+            results.rows.length, JSON.stringify(results.rows) ); 
+
+          var resultsCopy = results.rows
+          for(let i=0; i<this.state.TrackingUser.length; ++i){
+            const index = resultsCopy.findIndex(
+              data => data.user_id == resultsCopy.user_id
+            );
+            if(index == -1) // if a user is in tracking user array but not in database // removed
+            {
+              console.log(' in remove user form map , index', index)
+              var a = this.state.TrackingUser.slice(0,i).concat(this.state.TrackingUser.slice(i+1))
+              this.setState({TrackingUser: a})
+              console.log(' in remove user form map after init tracking user , i', i)
+              var b = this.state.Markers.slice(0,i).concat(this.state.Markers.slice(i+1))
+              this.setState({Markers: b})
+              console.log(' in remove user form map after init marker, i', i)
+              var c = this.state.coordinates.slice(0,i).concat(this.state.coordinates.slice(i+1))
+              this.setState({coordinates: c})
+              console.log(' in remove user form map after init coordinates, i', i)
+              this.lastLocations = [...this.state.coordinates]
+            }
+          }
+            this.setState({isReady:true});
+        } else { console.log(' There are no users to track. ')}
+      });
+    });
+  });
+}
+}

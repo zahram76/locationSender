@@ -44,7 +44,7 @@ locationDataInit(value){
           tx.executeSql('select loc_id, latitude, longitude from Locations where substr(datatime,1,10)=? and user_id=?', [ value.split(' ')[0], this.user_id ], (tx, results) => {
                 console.log('Resultsssssssss', results.rows.length ,value.split(' ')[0]);
                 if (results.rows.length > 0) {
-                    console.log('lennnnnnnn : ' , JSON.stringify(results.rows.item(0)))
+                    console.log('lennnnnnnn : ' , JSON.stringify(results.rows.length))
                   for(let i=0; i<results.rows.length; ++i){  
                     newCoordinate = {  
                         latitude: parseFloat(results.rows.item(i).latitude),
@@ -139,7 +139,11 @@ locationDataInit(value){
                   coordinate={marker.coordinates}
                   onPress={()=> alert('afajkl')}
                   image={require('../asset/TrackingDot.png')}
+                  style={{zIndex: 9}}
+                  calloutOffset={{ x: -8, y: 28 }}
+                  calloutAnchor={{ x: 0.5, y: 10 }}
                   >
+                    
                </Marker> );
             })}
          </MapView>
@@ -168,7 +172,7 @@ locationDataInit(value){
         headerLeft: (
           <View style={{marginLeft: 15}}>
             <MaterialCommunityIcons name={'arrow-left'} size={25} style={{color: 'white'}}
-              onPress={ () => { navigation.navigate('History') }} />
+              onPress={ () => { navigation.navigate('UsersHistory') }} />
             </View>
         ),
       }

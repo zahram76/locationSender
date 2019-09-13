@@ -41,7 +41,7 @@ constructor(){
     }
     this.user_id;
 }
-
+//-------------------------------------------------------------------------------------------
 FlatListItemSeparator = () => {
     return (
       <View
@@ -50,7 +50,7 @@ FlatListItemSeparator = () => {
           width: "100%",
           backgroundColor: "#DBDBDB"}}/>);
   }
-
+//-------------------------------------------------------------------------------------------
 changeType(name){
    this.setState({maptype: name}); 
    console.log(' update map type setting');
@@ -67,7 +67,7 @@ changeType(name){
     });
    });
 }
-
+//-------------------------------------------------------------------------------------------
 componentDidMount(){
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
@@ -81,7 +81,7 @@ componentDidMount(){
       } else { console.log( ' is nul ')}
     });
 }
-
+//-------------------------------------------------------------------------------------------
 render(){
 return (  
   <View style={style.MainContainer}>
@@ -107,7 +107,8 @@ return (
     /> 
   </View>   
     );
-}
+  }
+  //-------------------------------------------------------------------------------------------
 }
     
 const style = StyleSheet.create({
