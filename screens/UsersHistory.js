@@ -30,7 +30,7 @@ locationDataInit(){
   SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
         console.log("execute transaction", this.user_id);
-          tx.executeSql('select * from Locations', [], (tx, results) => {
+          tx.executeSql('select * from Locations where user_id=?', [this.user_id], (tx, results) => {
                 console.log('Results', results.rows.item(0).latitude);
                 if (results.rows.length > 0) {
                   for(let i=0; i<results.rows.length; ++i){  

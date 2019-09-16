@@ -1,10 +1,15 @@
 import React, {Component, Fragment} from 'react';
-import {Dimensions, View, Text, AppRegistry, TouchableOpacity, Image} from "react-native";
+import {Dimensions, View, Text, AppRegistry, TouchableOpacity, Image,  Modal,
+  StyleSheet,
+  TouchableHighlight,
+  ActivityIndicator,} from "react-native";
 import MapView, {Marker, AnimatedRegion, Polyline, Circle} from "react-native-maps";
 import SQLite from "react-native-sqlite-storage";
 import haversine from "haversine";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from 'react-native-vector-icons/FontAwesome'
 import {deleteLacation} from '../functions/deleteLocation.js';
+import {FitAllMarker} from '../component/fitAllMarker';
 
 const color = '#349e9f';
 const LATITUDE =  0;
@@ -18,7 +23,10 @@ export default class HistoryShowOnMap extends Component {
   constructor(){
     super();
     this.state = {
+      modalVisible: false,
+      first: true,
       mapType: "standard",
+      markerImage: require('../asset/start.png'),
       Markers:[],
       region:{
         latitude: 0,
@@ -62,6 +70,7 @@ locationDataInit(value){
                     //console.log('New data : '+JSON.stringify(this.state.data))
                       console.log('Result 4'+ i);
                   }
+                  this.first = true
                   this.setState({Markers : a})
                   this.setState({region:{
                     latitude: newCoordinate.latitude,
@@ -72,7 +81,7 @@ locationDataInit(value){
                  // console.log('result 1 : ', JSON.stringify(this.state.data) + 'result 2 : '+ JSON.stringify(this.state.Markers));
                   //var len = this.data.routeCoordinates.length
                   //console.log('Result 3'+ "len");
-                  this.centerMap(10)
+                  this.centerMap(250)
                   console.log('select location to flat list Successfully');
                 } else { console.log('no location'); }  
           });
@@ -80,16 +89,39 @@ locationDataInit(value){
       });  
 }
 //-------------------------------------------------------------------------------------------
+goToMrker(d){ // mire be ye region ke goftim
+  const latitude = this.state.region.latitude;
+  const longitude = this.state.region.longitude;
+  const latitudeDelta = this.state.region.latitudeDelta;
+  const longitudeDelta = this.state.region.longitudeDelta;
+  console.log(latitudeDelta+' '+longitudeDelta)
+
+  this.map.fitToElements(true);
+  // this.map.animateToRegion({
+  //   latitude,longitude,latitudeDelta,longitudeDelta
+  // }, d);
+  // console.log(latitude+' '+longitude+' '+
+  //   latitudeDelta+' '+longitudeDelta)
+}
+//-------------------------------------------------------------------------------------------
   centerMap(d){
     const {
       latitude,longitude,
       latitudeDelta,longitudeDelta
     } = this.state.region
+
+    // this.map.fitToCoordinates(this.state.data.routeCoordinates, {
+    //   edgePadding: DEFAULT_PADDING,
+    //   animated: true,
+    // });
+
     this.map.animateToRegion({
       latitude,longitude,latitudeDelta,longitudeDelta}, d);
+      this.setState({modalVisible: false})
   }
 //-------------------------------------------------------------------------------------------
   componentDidMount(){
+    this.setState({modalVisible: true})
     const { navigation } = this.props;
     this.focusListener = navigation.addListener('didFocus', () => {
       if(this.props.navigation.state.params != null){
@@ -128,7 +160,7 @@ locationDataInit(value){
           >
           <Polyline
             coordinates={this.state.data.routeCoordinates}
-            strokeWidth={5} strokeColor= {'purple'}>
+            strokeWidth={5}  strokeColor = { 'blue' }>
           </Polyline> 
           {this.state.Markers.map(marker => {
               console.log('markers : '+JSON.stringify(marker))
@@ -137,16 +169,52 @@ locationDataInit(value){
                   key ={`marker_${marker.key}`}
                   tracksViewChanges={true}
                   coordinate={marker.coordinates}
-                  onPress={()=> alert('afajkl')}
-                  image={require('../asset/TrackingDot.png')}
-                  style={{zIndex: 9}}
-                  calloutOffset={{ x: -8, y: 28 }}
-                  calloutAnchor={{ x: 0.5, y: 10 }}
+                  //onPress={()=> alert('afajkl')}
+                  //image={require('../asset/bubble.png')}
+                  centerOffset={{x: 5, y: -5}}
                   >
-                    
                </Marker> );
             })}
+
+            {this.state.Markers.map(marker => {
+               return (
+              <Circle
+                  key ={`circle_${marker.key}`}
+                  center = { marker.coordinates }
+                  radius = { 30 }
+                  strokeWidth = { 1 }
+                  strokeColor = { '#1a66ff' }
+                  fillColor = { 'rgba(230,238,255,0.5)' }
+                  >
+            </Circle>  )})}
+
          </MapView>
+         <Modal
+            animationType="fade"
+            transparent={true}
+            presentationStyle={"overFullScreen"}
+                    visible={this.state.modalVisible}
+                    onRequestClose={() => {
+                      alert('Modal has been closed.');
+                      this.setState({modalVisible: false})
+                    }}>
+                    <View style={{backgroundColor: "rgba(255,255,255,0.04)",
+                      justifyContent: "center",
+                      flex: 1, alignItems: 'center',}}>
+                      <View style={{marginTop: 150}}>
+                        <ActivityIndicator size="large" color="#0000ff" /> 
+                        <TouchableHighlight
+                          style={{margin: 30, backgroundColor: "rgba(255,255,255,0.4)",
+                          justifyContent: "center", alignItems: 'center',}}
+                          onPress={() => {
+                            this.setState({modalVisible: false})
+                          }}>
+                          <Text>cancel ?</Text>
+                        </TouchableHighlight>
+                      </View>
+                    </View>
+                  </Modal>
+                  <FitAllMarker cb ={() => {this.goToMrker(800)}} />
       </Fragment>
   );
 }

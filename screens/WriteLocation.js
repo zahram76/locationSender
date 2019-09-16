@@ -2,15 +2,15 @@ import SQLite from "react-native-sqlite-storage";
 import Geohash from 'latlon-geohash';
 
 export function insertLocation(user_id, latitude, longitude, lastlat, lastlong){
-  var geo = Geohash.encode(latitude, longitude, 8);
-  var lastgeo = Geohash.encode(lastlat, lastlong, 8);
+  var geo = Geohash.encode(latitude, longitude, 7);
+  var lastgeo = Geohash.encode(lastlat, lastlong, 7);
   console.log('location are not equl then is save: ' , geo, lastgeo,latitude, lastlat, longitude, lastlong )
   if(geo != lastgeo){
     console.log('location are not equl then is save: ' , geo, lastgeo,latitude, lastlat, longitude, lastlong )
 
     var today = new Date();
     var date = today.getFullYear()+'-'+(today.getMonth()+1<10? '0'+(today.getMonth()+1) : today.getMonth()+1)+
-      '-'+(today.getDate()<10? '0'+today.getDate() : today.getDate());
+      '-'+(today.getDate()<10? '0'+(today.getDate()) : today.getDate());
     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var dateTime = date+' '+time;
 

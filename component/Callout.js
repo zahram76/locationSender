@@ -27,7 +27,7 @@ export default class Callout extends Component {
           <View>
             <Text style={styles.name}>{name}</Text>
             <View style={{ flex: 1, flexDirection : 'row'}}> 
-                <Text style={styles.name}>Distance : {distanceTravelled} Km</Text>
+                <Text style={styles.name}>Dist: {distanceTravelled} Km</Text>
             </View>
             <View style={{ flex: 1, flexDirection : 'row'}}> 
                 <Text style={{paddingBottom: 10, flex: 1}}  > 

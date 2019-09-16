@@ -14,7 +14,7 @@ import {
 import SQLite from "react-native-sqlite-storage";
 import {styles} from '../style.js';
 import { CheckBox } from 'react-native-elements';
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import Icon from "react-native-vector-icons/AntDesign";
 
 const color = '#349e9f';
 SQLite.DEBUG(true);
@@ -26,35 +26,45 @@ constructor(){
         checked: false,
         FlatListItems: [{
             key: 'Marker_1',
-            value: true, 
-            image: 'asset:/images/marker1.png'
+            value: false, 
+            color: 'green',
         },{
             key: 'MapType_2',
             value: false,
-            image: 'asset:/images/marker2.png'
+            color: 'yellow',
         },{
             key: 'Marker_3',
             value: false,
-            image: 'asset:/images/marker3.png'
+            color: 'red',
         },{
           key: 'Marker_4',
-          value: true, 
-          image: 'asset:/images/marker4.png'
+          value: false, 
+          color: 'black',
         },{
             key: 'MapType_5',
             value: false,
-            image: 'asset:/images/border-marker.png'
+            color: 'purple',
         },{
             key: 'Marker_6',
             value: false,
-            image: 'asset:/images/border-marker1.png'
-        }],
+            color: 'blue',
+        },{
+          key: 'Marker_7',
+          value: false,
+          color: 'orange',
+      },{
+        key: 'Marker_8',
+        value: false,
+        color: 'gray',
+    }],
         selectedImage : '',
         showingImage : '',
         imageuri: '',
         lastImage: '',
         modalVisible: false,
-        imageReady: false
+        imageReady: false,
+        borderColor: 'gray',
+        marker_color: 'blue'
     }
     this.user_id;
     
@@ -66,41 +76,14 @@ init(){
     SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
       console.log("execute transaction");
-        tx.executeSql('select user_image, marker_image from TrackingUsers where user_id=?', [this.user_id], (tx, results) => {
+        tx.executeSql('select marker_color from TrackingUsers where user_id=?', [this.user_id], (tx, results) => {
               console.log('Results', results.rows.length);
               if (results.rows.length > 0) {
-                JSON.parse(JSON.stringify(results.rows.item(0).marker_image), (key,value) => {
-                  console.log('Results marker in marker setting ghable if first ', key, value);
-                 // if(key == 'uri') {
-                    this.setState({lastImage: value})
-                    this.setState({showingImage:value})
-                      console.log('marker image : ' + this.state.lastImage)
-                    if(this.state.showingImage[0] != 'a' && this.state.showingImage[0] != '.' )
-                      this.setState({checked: true})
+                    this.setState({marker_color: results.rows.item(0).marker_color})
+                    console.log(' marker color : ', this.state.marker_color)
                     this.setState({modalVisible: false})
-                    this.setState({imageReady: true})
-                    
-                 // } else console.log('image is null')
-              }); 
-              } else { console.log('can not find marker setting ') }  
-
-          console.log('Results marker in marker setting', results.rows.item(0).user_image);
-          if (results.rows.length > 0) {
-            console.log('Results marker in marker setting', ' lentgh > 0');
-            JSON.parse(results.rows.item(0).user_image, (key,value) => {
-              console.log('Results marker in marker setting ghable if', key, value);
-              if(key == 'uri') {
-                console.log('Results marker in marker setting', key, value);
-                this.setState({imageuri : value}); }
-            }); 
-              console.log(' dddddddddddddddddddddddd11111111111111111111: ', JSON.stringify(this.state.imageuri))
-              console.log('Success'+'\n'+'select users Successfully');
-          } else {
-            this.setState({imageuri : 'asset:/images/defaultProfile.png'})
-            console.log(' dddddddddddddddddddddddd: ', JSON.stringify(this.state.imageuri))
-            console.log('no user');
-          }  
-      })
+              } else { console.log('can not find marker color ') }  
+       })
     });
   });
 }
@@ -132,13 +115,13 @@ FlatListItemSeparator = () => {
           backgroundColor: "#ffffff"}}/>);
   }
 
-  changeMarkerImage(name){
-   console.log(' update markerImage setting');
+  changeMarkerImage(){
+   console.log(' update marker_color setting');
    SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
       console.log("execute transaction");
-        tx.executeSql('update TrackingUsers set marker_image=? where user_id=?', 
-            [this.state.showingImage, this.user_id], 
+        tx.executeSql('update TrackingUsers set marker_color=? where user_id=?', 
+            [this.state.marker_color, this.user_id], 
             (tx, results) => {
               console.log('Results', results.rowsAffected);
               if (results.rowsAffected > 0) {
@@ -149,41 +132,25 @@ FlatListItemSeparator = () => {
 });
 }
 
-
-ifChecked(ItemImage, checked){
-  console.log(' dddddddddddddddddddddddd2222: ', JSON.stringify(this.state.imageuri))
-  var image = checked ? this.state.imageuri : ItemImage 
-  this.setState({showingImage : image})
-  console.log('in if checked : ' + checked + this.state.imageuri + JSON.stringify(image))
-  this.changeMarkerImage(this.state.showingImage)
+onSelect = (item) => {
+  var a = [...this.state.FlatListItems]
+  for(let i=0; i<this.state.FlatListItems.length; ++i){
+    if(a[i].key != item.key)
+      a[i].value = false
+    else a[i].value = true
+  }
+  this.state.FlatListItems = a;
+  this.setState({
+   FlatListItems: this.state.FlatListItems
+  });
+  this.changeMarkerImage()
 }
 
 render(){
 return (  
   <View style={style.MainContainer}>
-    <View style={{flex: 1, marginTop: 50, marginBottom: 30}}>    
-      <View style={styles.checkboxContainer}>
-        <CheckBox
-          title='Do you want to use your image insted ?'
-          checked={this.state.checked}
-          checkedColor='#16A085'
-          containerStyle={styles.checkboxContainer}
-          onIconPress={() => {
-            this.ifChecked(this.state.showingImage, !this.state.checked)
-            console.log('checcccccccccccccccccccccck: ',!this.state.checked)
-            this.setState({checked: !this.state.checked});
-          }}
-          onPress={() => {
-            this.ifChecked(this.state.showingImage, !this.state.checked)
-            console.log('checcccccccccccccccccccccckaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa: ',!this.state.checked)
-            this.setState({checked: !this.state.checked});
-          }}
-        />
-      </View> 
-    </View>   
-    
-    <View style={{flex: 4}}>
-      <Text> Select image : </Text>
+    <View style={{flex: 1, marginTop: 50}}>
+      <Text style={{fontSize : 15, marginBottom: 25}}> Select line color : </Text>
       <FlatList
         data={ this.state.FlatListItems }   
         ItemSeparatorComponent = {this.FlatListItemSeparator}
@@ -191,20 +158,22 @@ return (
         renderItem={({item}) => 
         <View key={item.key} style={style.container}>
           <TouchableOpacity onPress={()=> {
-            this.setState({checked: false});
-            this.ifChecked(item.image, false);
+            console.log('pressed')
+           this.onSelect(item)
           }}>
-            <View style={{flex: 1}}>
-                <Image source={{uri: item.image}} style={style.photo} resizeMode={'contain'}/>
-            </View>
+              <View style={[{backgroundColor : item.color, justifyContent: 'center'},style.photo]}>
+                {item.value == true ? 
+                  <View style= {style.overlay}>
+                    <Icon name={'check'} color={'green'} size={40}/> 
+                  </View> : null
+                    }
+              </View>
           </TouchableOpacity>
         </View>
         }
+        extraData={this.state}  
       />
     </View> 
-    <View style={{flex: 2, justifyContent : 'center', alignItems: 'center', alignSelf: 'center'}}>
-      <Image source={this.state.imageReady? {uri : this.state.showingImage} : '../images/background.png'} style={{width: 150, height: 150, borderRadius: 80}}  resizeMode={'cover'}/>
-    </View>
     <Modal
       animationType="fade"
       transparent={true}
@@ -256,7 +225,7 @@ const style = StyleSheet.create({
       justifyContent: 'center',
       alignSelf: 'center',
       alignItems: 'center',
-      borderWidth: 1,
+      borderWidth: 0,
   },
   title: {
       fontSize: 16,
@@ -275,8 +244,15 @@ const style = StyleSheet.create({
   photo: {
       height: 50,
       width: 50,
-      borderRadius: 30,
+      //borderRadius: 30,
       alignSelf: 'center'
   },
-  iconImage: {alignSelf: 'center', alignContent: 'center'}
+  iconImage: {alignSelf: 'center', alignContent: 'center'},
+  overlay:{
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: 'rgba(0,0,0,0.5)'}
 });

@@ -145,9 +145,14 @@ export default class AddNewPerson extends Component {
             if(res[2] == 'yes'){
               this.setState({answer: res[2]})
               console.log('yes ');
-          
+              var image;
+              JSON.parse(JSON.stringify(this.state.avatarSource), (key, value) =>{
+                if (key == 'uri')
+                  image = value
+              })
+              console.log(' image in insert new user : ',image)
               this.InsertUser(this.state.phone_no,this.state.first_name,this.state.last_name,this.state.age,
-                this.state.color, this.state.avatarSource, this.state.sendigType, this.state.interval);
+                this.state.color, this.state.avatarSource, this.state.sendigType, this.state.interval, image);
                 console.log('pa color ine dige ', this.state.color)
               this.setState({message: 'Success'+'\n'+'You are Registered Successfully'});
               this.setState({error: false});
@@ -170,14 +175,14 @@ export default class AddNewPerson extends Component {
       this.setState({canceled: true});
   }
 
-  InsertUser(phone_no,first_name,last_name,age,color,image,sendigType,interval){
+  InsertUser(phone_no,first_name,last_name,age,color,image,sendigType,interval,marker_image){
     console.log('image : '+ image)
         SQLite.openDatabase(
           {name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
           DB.transaction((tx) => {
           console.log("execute transaction");
           tx.executeSql('insert into TrackingUsers(phone_no, first_name, last_name, age, marker_color, user_image, sending_setting, interval, marker_image) values (?,?,?,?,?,?,?,?,?)', 
-            [phone_no,first_name, last_name, age, color, JSON.stringify(image),sendigType, interval, image.uri],
+            [phone_no,first_name, last_name, age, color, JSON.stringify(image),sendigType, interval, marker_image],
                (tx, results) => {
                 console.log('Results', results.rowsAffected);
                 if (results.rowsAffected > 0) {

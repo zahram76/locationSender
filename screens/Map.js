@@ -19,16 +19,17 @@ import {CurrentLocationButton} from '../component/CurrentLocationButton';
 import {FitAllMarker} from '../component/fitAllMarker';
 import {MyLocation} from '../component/MyLocation.js';
 import Callout from '../component/Callout.js';
+import AnimatedPolyline from 'react-native-maps-animated-polyline';
 var RNFS = require('react-native-fs');
 
 const color = '#028687';
 let { width, height } = Dimensions.get('window')
 const ASPECT_RATIO = width / height
-var LATITUDE_DELTA = 0.09 
+var LATITUDE_DELTA = 0.009
 var LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
 const LATITUDE = 35.7006177
 const LONGITUDE = 51.4013785
-const DEFAULT_PADDING = { top: 40000, right: 40000, bottom: 40000, left: 40000 };
+const DEFAULT_PADDING = { top: 100, right: 100, bottom: 100, left: 100 };
 
 export default class Map  extends React.Component {
   constructor(props) {
@@ -57,8 +58,11 @@ export default class Map  extends React.Component {
       markerImage: '',
       TrackingUser: [],
       isReady: false,
+      nouser: false
     };    
+    this.time = []
     this.lastLocations = []
+    this.marker = []
     this.readTrackingUsers();
   }
 
@@ -72,31 +76,33 @@ export default class Map  extends React.Component {
               style={{flex:1, height: '100%', width: '100%'}}
               mapType={this.state.mapType}
               initialRegion={this.state.region}
-              showsCompass={true}
-              onRegionChangeComplete={r => {LATITUDE_DELTA=r.latitudeDelta; LONGITUDE_DELTA=r.longitudeDelta;}}>
+              //showsCompass={true}
+              // onRegionChangeComplete={r => {this.setState({region: {
+              //   latitude: this.state.region.latitude,
+              //   longitude: this.state.region.longitude,
+              //   latitudeDelta: r.latitudeDelta,
+              //   longitudeDelta: r.longitudeDelta,
+              // }})}}
+              >
               
-              {this.state.Markers.map(poly => {
+              {this.state.nouser==false ? this.state.Markers.map(poly => {
                 if(this.state.isReady == true){
-                  return(
-                  <AnimatingPolylineComponent 
-                    key={`poly_${poly.user_id}`}
-                    id={`poly_${poly.user_id}`}
-                    Direction={poly.routeCoordinates.reverse()} 
-                    strokeColor={String(poly.color).split(' ')[0]}
-                  />);
-                  // return (
-                  //   <Polyline key={`poly_${poly.user_id}`}
-                  //     coordinates={poly.routeCoordinates} 
-                  //     strokeWidth={6} strokeColor= {String(poly.color).split(' ')[0]} lineCap= {"square"} lineJoin= {"miter"}>
-                  //   </Polyline> );
-                  }})}
+                  return (
+                    <Polyline key={`poly_${poly.user_id}`}
+                      coordinates={poly.routeCoordinates} 
+                      strokeWidth={6} strokeColor= {String(poly.color).split(' ')[0]} lineCap= {"square"} lineJoin= {"miter"}>
+                    </Polyline> );
+                  }}) : null}
 
               
-              {this.state.Markers.map(marker => {
+              {this.state.nouser==false ? this.state.Markers.map(marker => {
+                this.index = this.state.TrackingUser.findIndex(
+                  data => data.user_id == marker.user_id
+                );
                 if(this.state.isReady == true){
                   return (
                     <Marker.Animated
-                        ref={ref => {this.marker = ref}}
+                       // ref={ref => {this.marker[this.index] = ref}}
                         key={`marker_${marker.user_id}`}
                         tracksViewChanges={true}
                         coordinate={{
@@ -119,11 +125,11 @@ export default class Map  extends React.Component {
                         <Callout
                           name={marker.name}
                           batteryLevel={marker.batteryLevel}
-                          distanceTravelled={marker.distanceTravelled}
+                          distanceTravelled={Math.round(marker.distanceTravelled * 100) / 100}
                         />
                       </MapView.Callout>                      
                     </Marker.Animated>);
-                  }})}
+                  }}): null}
                 {this.state.youAreReady ?
                     <Marker.Animated
                         ref={ref => {this.marker1 = ref}}
@@ -169,8 +175,9 @@ export default class Map  extends React.Component {
   }
 //----------------------------------------------------------------------------------------------
   fitAllMarkers() {
-    console.log('fit : '+JSON.stringify(this.state.coordinates))
-    this.map.fitToCoordinates(this.state.coordinates, {
+    var coordinateCopy = [...this.state.coordinates]
+    console.log('fit : '+JSON.stringify(coordinateCopy))
+    this.map.fitToCoordinates(coordinateCopy, {
       edgePadding: DEFAULT_PADDING,
       animated: true,
     });
@@ -183,11 +190,12 @@ export default class Map  extends React.Component {
     const longitudeDelta = this.state.region.longitudeDelta;
     console.log(latitudeDelta+' '+longitudeDelta)
 
-    this.map.animateToRegion({
-      latitude,longitude,latitudeDelta,longitudeDelta
-    }, d);
-    console.log(latitude+' '+longitude+' '+
-      latitudeDelta+' '+longitudeDelta)
+    this.map.fitToElements(true);
+    // this.map.animateToRegion({
+    //   latitude,longitude,latitudeDelta,longitudeDelta
+    // }, d);
+    // console.log(latitude+' '+longitude+' '+
+    //   latitudeDelta+' '+longitudeDelta)
   }
 //----------------------------------------------------------------------------------------------
   centerMap(d){ // mire be ye region ke goftim
@@ -240,7 +248,7 @@ geolocationWatcher(){
       const newCoordinate = { latitude, longitude };
       if (Platform.OS === "android") {
         if (this.marker1) {
-          this.marker1._component.animateMarkerToCoordinate(newCoordinate, 2000);
+          this.marker1._component.animateMarkerToCoordinate(newCoordinate, 100);
         }
       } else { coordinate.timing(newCoordinate).start(); }
 
@@ -268,6 +276,7 @@ initSetting(){
 }
 //----------------------------------------------------------------------------------------------
   componentDidMount() {
+    this.map.fitToElements(true);
     this.createDir()
     SmsListener.addListener(message => this.parseMessage(message));
     const { navigation } = this.props;
@@ -276,21 +285,6 @@ initSetting(){
         console.log(' navigation param : ' + JSON.stringify(this.props.navigation.state.params));
         const str = JSON.stringify(this.props.navigation.state.params);
         this.afterNavigation()
-      //   var phone_no;
-      //   var addRemove;
-      //   var flag;
-      //   JSON.parse(str, (key,value) => {
-      //     if(key == 'refresh' && value != ''){
-      //       phone_no = value;
-      //       flag = true;
-      //       console.log('in component did mount in map phone no is : ', value)
-      //     } else if(key == 'addRemove' && value != ''){
-      //       addRemove = value
-      //     }
-      //     if(flag)
-      //       this.afterNavigation(phone_no, addRemove)
-      //     console.log(value);
-      //   })  
        } else { console.log( ' is nul ')}
     });
 
@@ -305,20 +299,22 @@ initSetting(){
  componentWillUnmount(){
    // Remove the event listener before removing the screen from the stack
    this.focusListener.remove();
+   clearInterval(this.interval);
  }
  //----------------------------------------------------------------------------------------------
   animateMarker (index){
-    console.log(' in animated marker for index = ' + index);
+    
     const routeCoordinates = this.state.Markers[index].routeCoordinates;
     const distanceTravelled = this.state.Markers[index].distanceTravelled;
     const { latitude, longitude } = this.state.coordinates[index];
     const newCoordinate = { latitude, longitude };
+    console.log(' in animated marker for index = ' + index, routeCoordinates);
 
-    if (Platform.OS === "android") {
-      if (this.marker) {
-        this.marker._component.animateMarkerToCoordinate(newCoordinate, 2000);
-      }
-    } else { coordinate.timing(newCoordinate).start(); }
+    // if (Platform.OS === "android") {
+    //   if (this.marker) {
+    //     this.marker[index]._component.animateMarkerToCoordinate(newCoordinate, 2000);
+    //   }
+    // } else { coordinate.timing(newCoordinate).start(); }
 
     let a = [...this.state.Markers]; //creates the clone of the state
     a[index] = {latitude, longitude,
@@ -337,6 +333,7 @@ initSetting(){
   }
 //----------------------------------------------------------------------------------------------
   parseMessage(message){ 
+    if(this.state.nouser == false){
     const index = this.state.TrackingUser.findIndex(
       data => data.phone_no.split(' '[0]) == message.originatingAddress.split(' ')[0]
     );
@@ -350,10 +347,17 @@ initSetting(){
           const long = res[2].split('long:')[1];
           const lat = res[3].split('lat:')[1];
           const batteryLevel = res[4].split('battery:')[1];
+
+          var d2 = new Date(res[5].split('lat:')[1]);
+          var d1 = new Date(this.state.TrackingUser[index].datatime);
+          var same = d1.getTime() < d2.getTime();
+          console.log(' in parse message compare of two date ', same, d1, d2)
+          //var notSame = d1.getTime() !== d2.getTime(); 
+
           const la = parseFloat( parseFloat(lat.split('.'[1])));
           const lo = parseFloat( parseFloat(long.split('.'[1])));
           let coords = {latitude: la, longitude: lo};
-          console.log('meghdar dehi region shod 1')
+          console.log('meghdar dehi region shod 1', la,lo)
 
           this.setState({region: {latitude: la, longitude: lo, 
             latitudeDelta: this.state.region.latitudeDelta,
@@ -361,7 +365,6 @@ initSetting(){
           }})
           console.log('meghdar dehi region shod 2')
 
-          this.centerMap(100)
           console.log('meghdar dehi region shod 3')
           var a = [...this.state.coordinates];
           console.log(a)
@@ -376,6 +379,12 @@ initSetting(){
           b[index].batteryLevel = batteryLevel;
           this.setState({Markers: b})
 
+          var c = [...this.state.TrackingUser];
+          c[index].datatime = d2;
+          this.setState({TrackingUser: c})
+
+          this.centerMap(1500)
+
           console.log('meghdar dehi region shod 5')
           var user_id = this.state.TrackingUser[index].user_id;
           insertLocation(user_id, la, lo, this.lastLocations[index].latitude, this.lastLocations[index].longitude);
@@ -383,13 +392,19 @@ initSetting(){
         }
       }
       console.log(' end of parse message ' + message.originatingAddress);
+    }
   }
 //----------------------------------------------------------------------------------------------
   afterNavigation(){
-    this.initSetting();
-    this.AddNewUserToMap();
-    this.RemoveDeletedUserFromMap();
-    this.updateTrackingUsers();
+    if(this.state.nouser == true){
+      this.readTrackingUsers()
+    }
+    else{
+      this.initSetting();
+      this.AddNewUserToMap();
+      this.RemoveDeletedUserFromMap();
+      this.updateTrackingUsers();
+    }
   }
 //----------------------------------------------------------------------------------------------
   calcDistance = (newLatLng, index) => {
@@ -424,15 +439,7 @@ initSetting(){
                 <MenuItem onPress={() => {
                   this._menu.hide()
                   navigation.navigate('Profile')
-                  }} textStyle={{color: '#000', fontSize: 16}}>Setting</MenuItem>
-                <MenuItem  onPress={() =>{
-                  this._menu.hide()
-                  navigation.navigate('FlatListComponent')
-                  }} textStyle={{color: '#000',fontSize: 16}}>flat list</MenuItem>
-                <MenuItem  onPress={() =>{
-                  this._menu.hide()
-                  navigation.navigate('database')
-                  }} textStyle={{color: '#000',fontSize: 16}}>Database</MenuItem>
+                  }} textStyle={{color: '#000', fontSize: 16}}>Profile</MenuItem>
                 <MenuItem onPress={() =>{
                   this._menu.hide()
                   AsyncStorage.clear();
@@ -470,7 +477,7 @@ createDir(){
 readTrackingUsers(){
   SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
     DB.transaction((tx) => {
-      tx.executeSql('select t.user_id, phone_no, marker_color, loc_id, latitude, longitude, marker_image, user_image, first_name, last_name from TrackingUsers as t left join (select l.user_id, loc_id, latitude, longitude from Locations as l join (select user_id, max(loc_id) as loc from Locations group by user_id ) as m on l.loc_id = m.loc ) as ml on t.user_id = ml.user_id', [], (tx, results) => {
+      tx.executeSql('select t.user_id, phone_no, marker_color, loc_id, latitude, longitude, datatime, marker_image, user_image, first_name, last_name from TrackingUsers as t left join (select l.user_id, loc_id, latitude, longitude, datatime from Locations as l join (select user_id, max(loc_id) as loc from Locations group by user_id ) as m on l.loc_id = m.loc ) as ml on t.user_id = ml.user_id', [], (tx, results) => {
         if(results.rows.length > 0){
           console.log(' reading tracking users please wait :) ' + results.rows.length ); 
 
@@ -480,7 +487,7 @@ readTrackingUsers(){
                   user_id: results.rows.item(i).user_id,
                   phone_no: results.rows.item(i).phone_no.split(' ')[0].toString(),
                   marker_color: results.rows.item(i).marker_color.split(' ')[0].toString(),
-                  //index: i,
+                  datatime: results.rows.item(i).datatime,
                 };
                 this.state.TrackingUser.push(TrackingUser);
 
@@ -489,17 +496,17 @@ readTrackingUsers(){
                 console.log(' initialize Markers for user with index = ' + i);
 
                 var user_image, marker_image, latitude, longitude;
-                JSON.parse(results.rows.item(i).user_image, (key,value) =>{
+                JSON.parse(results.rows.item(i).user_image, (key,value) =>{   
                   if(key == 'uri')
                     user_image = value
                 })
-                JSON.parse(results.rows.item(i).marker_image, (key,value) =>{
-                  if(key == 'uri')
-                    marker_image = value
-                })
+                console.log('in init map , user image',user_image)
+                marker_image = results.rows.item(i).marker_image;
+
+                console.log('in init map , marker image', marker_image)
                 latitude =  parseFloat(results.rows.item(i).latitude==null ? LATITUDE :  results.rows.item(i).latitude)
                 longitude = parseFloat(results.rows.item(i).longitude==null ? LONGITUDE :  results.rows.item(i).longitude)
-                console.log('in init map , user image',user_image)
+                console.log('in init map , lat , long', latitude, longitude)
                 this.state.Markers.push({
                   latitude: latitude,
                   longitude: longitude,
@@ -507,7 +514,7 @@ readTrackingUsers(){
                   distanceTravelled: 0,
                   prevLatLng: {},
                   coordinate: new AnimatedRegion({
-                    latitude: latitude,
+                    latitude: latitude, 
                     longitude: longitude,
                     latitudeDelta : LATITUDE_DELTA,
                     longitudeDelta : LONGITUDE_DELTA, 
@@ -528,11 +535,15 @@ readTrackingUsers(){
                   latitudeDelta: this.state.region.latitudeDelta,
                   longitudeDelta: this.state.region.longitudeDelta,
                 }})
-                this.centerMap(100)
+                //this.centerMap(100)
+               
                 this.lastLocations = [...this.state.coordinates]
               }
               this.setState({isReady:true});
-        } else { console.log(' There are no users to track. ')}
+              this.setState({nouser: false})
+               this.goToMrker(100)
+        } else { this.setState({nouser: true})
+          console.log(' There are no users to track. ')}
       });
     });
   });
@@ -565,10 +576,11 @@ updateTrackingUsers(){
                   if(key == 'uri')
                     user_image = value
                 })
-                JSON.parse(results.rows.item(i).marker_image, (key,value) =>{
-                  if(key == 'uri')
-                    marker_image = value
-                })
+                marker_image = results.rows.item(i).marker_image;
+                // JSON.parse(results.rows.item(i).marker_image, (key,value) =>{
+                //   if(key == 'uri')
+                //     marker_image = value
+                // })
                 console.log('in init map , user image',user_image)
                 b[index].color = results.rows.item(i).marker_color.split(' ')[0].toString()
                 b[index].name = results.rows.item(i).first_name +' '+results.rows.item(i).last_name
@@ -614,10 +626,11 @@ AddNewUserToMap(){
                   if(key == 'uri')
                     user_image = value
                 })
-                JSON.parse(results.rows.item(i).marker_image, (key,value) =>{
-                  if(key == 'uri')
-                    marker_image = value
-                })
+                marker_image = results.rows.item(i).marker_image;
+                // JSON.parse(results.rows.item(i).marker_image, (key,value) =>{
+                //   if(key == 'uri')
+                //     marker_image = value
+                // })
                 console.log('in init map , user image',user_image)
                 this.state.Markers.push({
                   latitude: LATITUDE,
@@ -637,7 +650,7 @@ AddNewUserToMap(){
                   image: user_image,
                   name : results.rows.item(i).first_name +' '+results.rows.item(i).last_name,
                   marker_image: marker_image,
-                  batteryLevel: 0.8
+                  batteryLevel: 0
                 });
                 console.log(' Markers color = ' + this.state.Markers[i].color);
                 this.state.coordinates.push({latitude: LATITUDE, longitude: LONGITUDE});
@@ -680,9 +693,49 @@ RemoveDeletedUserFromMap(){
             }
           }
             this.setState({isReady:true});
-        } else { console.log(' There are no users to track. ')}
+        } else { 
+          this.setState({TrackingUser: []})
+          this.setState({Markers: []})
+          this.setState({coordinates: []})
+          this.lastLocations = []
+          this.setState({nouser:true});
+          console.log(' There are no users to track. ')
+        }
       });
     });
   });
 }
+animatePolyline = () => {
+  this.interval = setInterval(() => this.animatePolylineStart(), 70);
+};
+
+// animatePolylineStart = (index) => {
+//    console.log(' in animated component , state', JSON.stringify(this.state))
+//    var Directions = [...this.state.Markers[index].routeCoordinates]
+//   if (this.state.polylinePath.length < Directions.length) {
+//      const Direction = this.props.Direction;
+//      const polylinePath = [
+//         ...Direction.slice(0, this.state.polylinePath.length - 1)
+//      ];
+//      this.setState({polylinePath});
+//   } else {
+//      this.setState({polylinePath: []})
+//   }
+// };
+
+// render() {
+//   return (
+//      <Fragment>
+//         {
+//            (this.state.polylinePath.length > 0) && <Polyline
+//               key={this.state.key}
+//               coordinates={this.state.polylinePath}
+//               strokeColor={this.state.strokeColor}
+//               strokeWidth={6}
+//            />
+//         }
+//      </Fragment>
+//   )
+// }
+// }
 }

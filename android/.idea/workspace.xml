@@ -5,31 +5,25 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3b525ec8-2289-4d62-8aa6-644da8e12e02" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../App.js" beforeDir="false" afterPath="$PROJECT_DIR$/../App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/5.4.1/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/mergeDebugAssets/merger.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/intermediates/incremental/packageDebug/tmp/debug/dex-renamer-state.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" beforeDir="false" afterPath="$PROJECT_DIR$/app/build/outputs/apk/debug/app-debug.apk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../functions/deleteLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../functions/deleteLocation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../component/AnimatedPolyline.js" beforeDir="false" afterPath="$PROJECT_DIR$/../component/AnimatedPolyline.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../component/Callout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../component/Callout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" afterPath="$PROJECT_DIR$/../package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../screens/AddNewPerson.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/AddNewPerson.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/FlatList.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/FlatList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../screens/AuthLoading.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/AuthLoading.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../screens/Map.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/Map.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/TrackingUserSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/TrackingUserSettings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/UsersHistory.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/UsersHistory.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../screens/UsersInterval.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/UsersInterval.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../screens/UsersMarker.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/UsersMarker.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../screens/UsersProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/UsersProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../screens/WriteLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/WriteLocation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../screens/historyShowOnMap.js" beforeDir="false" afterPath="$PROJECT_DIR$/../screens/historyShowOnMap.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../style.js" beforeDir="false" afterPath="$PROJECT_DIR$/../style.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,12 +49,12 @@
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
-          <provider editor-type-id="android-manifest" />
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
               <caret line="10" column="70" selection-start-line="10" selection-start-column="70" selection-end-line="10" selection-end-column="70" />
             </state>
           </provider>
+          <provider editor-type-id="android-manifest" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
@@ -135,12 +129,17 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-      <pane id="AndroidView" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
+            <path>
+              <item name="sender" type="b2602c69:ProjectViewProjectNode" />
+              <item name="android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+            </path>
             <path>
               <item name="sender" type="b2602c69:ProjectViewProjectNode" />
               <item name="android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
@@ -174,6 +173,9 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">

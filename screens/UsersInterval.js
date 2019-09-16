@@ -135,7 +135,7 @@ parseMessage(message){
     console.log('in parse message for interval')
     const res = message.body.split(' ');
     console.log(' message', res)
-    if (res[0] == 'hello' && res[1] == 'got' && res[2] == 'interval'){
+    if (res[0] == 'hello' && res[1] == 'get' && res[2] == 'interval'){
       console.log(' interval setting ok');
       this.updateUserInterval(this.state.sendingType, this.state.interval, this.user_id)
     } else console.log(' interval setting not ok')

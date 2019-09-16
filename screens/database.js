@@ -23,8 +23,8 @@ export default class database extends Component {
         number: 0,
     }
 
-    this.timer = null;
-    this.addOne = this.addOne.bind(this);
+      this.timer = null;
+      this.addOne = this.addOne.bind(this);
     this.stopTimer = this.stopTimer.bind(this);
 
     ToastAndroid.show('Hello!!', ToastAndroid.SHORT);

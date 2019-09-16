@@ -23,7 +23,7 @@ export default class AnimatingPolylineComponent extends Component {
     }
     
     animatePolylineStart = () => {
-        console.log(' in animated component , state', JSON.stringify(this.state))
+        
        if (this.state.polylinePath.length < this.props.Direction.length) {
           const Direction = this.props.Direction;
           const polylinePath = [

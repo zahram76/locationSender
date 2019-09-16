@@ -81,9 +81,14 @@ init(){
                   JSON.parse(results.rows.item(i).user_image, (key,value) => {
                     if(key == 'uri') {
                       this.setState({uriFlag: true})
-                      image = {uri : value}}
-                    else if (key == 'require')
+                      image = {uri : value}
+                      this.imageUri = value
+                    }
+                    else if (key == 'require'){
                       image = {uri: 'asset:/images/defaultProfile.png'}
+                      this.imageUri = 'asset:/images/defaultProfile.png'
+                    }
+                      
                   });
                   this.setState({
                     user_id : results.rows.item(i).user_id,
@@ -109,6 +114,7 @@ init(){
 }
 
 updateAccount(phone_no,first_name,last_name,age,image, user_id){
+  var marker_image;
    console.log(' update user account setting');
    console.log(phone_no+ first_name+ last_name+ JSON.stringify(image));
    SQLite.openDatabase({name : "database", createFromLocation : "~database.sqlite"}).then(DB => {
@@ -125,17 +131,22 @@ updateAccount(phone_no,first_name,last_name,age,image, user_id){
                 this.setState({isReady: true});
               } else { console.log('can not find map type setting ') }  
         });
+       
         tx.executeSql('update TrackingUsers set user_image=? where user_id=?',
-        [JSON.stringify(image),user_id], 
+        [image,user_id], 
            (tx, results) => {
             console.log('Results', results.rowsAffected);
             if (results.rowsAffected > 0) {
               console.log('image update : ' + results.rowsAffected)
             } else { console.log('can not find image setting ') }  
         });
+         JSON.parse(JSON.stringify(this.state.avatarSource), (key, value) =>{
+          if (key == 'uri')
+            marker_image = value
+        })
         if(this.saveImageForMarker)
             tx.executeSql('update TrackingUsers set marker_image=? where user_id=?',
-            [JSON.stringify(image),user_id], 
+            [marker_image,user_id], 
             (tx, results) => {
                 console.log('Results', results.rowsAffected);
                 if (results.rowsAffected > 0) {
