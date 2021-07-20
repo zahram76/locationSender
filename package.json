@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "react": "16.8.6",
-    "react-native": "^0.60.4",
+    "react-native": "^0.62.3",
     "react-native-android-location-enabler": "^1.2.0",
     "react-native-android-sms-listener": "^0.7.0",
     "react-native-geolocation-service": "^3.0.0",
